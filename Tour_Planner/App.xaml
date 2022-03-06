@@ -4,10 +4,7 @@
              xmlns:local="clr-namespace:Tour_Planner"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+    
+
     </Application.Resources>
 </Application>

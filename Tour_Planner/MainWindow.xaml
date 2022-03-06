@@ -5,17 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tour_Planner"
         mc:Ignorable="d"
-        Height="600" Width="920"  
+        Height="600" Width="970"  
         Background="Transparent"
         AllowsTransparency="True"
-        WindowStyle="None">
+        WindowStyle="None"
+        >
 
-    <Border Background="#3d1223"
+    <!--Background="#3d1223"-->
+    <Border Background="White"
             CornerRadius="20">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="205"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="252"/>
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -23,22 +26,160 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
+            
+            
             <TextBlock Text="TourPlanner"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
-                   Foreground="White"
-                   FontSize="30"/>
+                   Foreground="#571c39"
+                   FontSize="30" Height="39" Width="157"/>
 
             <StackPanel Grid.Row="1">
-                <RadioButton Content="File"
+                <Button Content="File"
                              Height="45"
+                         Background="#571c39"
                              Foreground="white"
                              FontSize="20"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                        Margin=" 10,30,10,0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="Edit"
+                             Height="45"
+                        Background="#571c39"
+                             Foreground="white"
+                             FontSize="20"
+                        Margin=" 10,30,10,0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="Options"
+                             Height="45"
+                        Background="#571c39"
+                             Foreground="white"
+                             FontSize="20"
+                        Margin=" 10,30,10,0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="Help"
+                             Height="45"
+                         Background="#571c39" 
+                             Foreground="white"
+                             FontSize="20"
+                        Margin=" 10,30,10,0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
+
+            <!--
+            <TextBox Width="250"
+                     Height="40"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Left"
+                     Margin="5"
+                     Grid.Column="1"
+                     Background="DarkGray"
+            
+            <Border BorderThickness="1" BorderBrush="Black" CornerRadius="10" Padding="2"
+        HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBox Text="Search" BorderThickness="0" Background="Transparent"/>
+            </Border>
+                     />
+             -->
+
+            <TextBox Text="Search"
+                     Width="208"
+                     Height="40"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"                    
+                     Grid.Column="1"
+                     Background="White"
+                     FontSize="22">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+
+            <StackPanel  Grid.Column="1" 
+                    Grid.Row="1" Orientation="Horizontal">
+                <!--<TextBox   
+                    Text="Tours" 
+                    BorderThickness="0" 
+                    Background="Transparent" 
+                    Foreground="White"
+                    HorizontalAlignment="Left" 
+                    FontSize="25"
+                
+                Margin="21,18,0,0" Width="78"
+                /> -->
+                <ListView 
+                    Margin="10" 
+                    Name="lvUsers" 
+                    Width="120"
+                    HorizontalAlignment="Left"
+                    FontSize="25">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn  
+                                Header="Tours"  
+                                Width="80"  
+                                DisplayMemberBinding="{Binding Tour}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+                <StackPanel Orientation="Horizontal"
+                             VerticalAlignment="Top"
+                     HorizontalAlignment="Center"
+                            Margin="10">
+                    <Button                                                                                                                                                                                                              
+                        Background="#571c39"
+                             Foreground="white"
+                             FontSize="40" Height="61"
+                    Width="53">
+                        <Image Width="43" Source="pack://application:,,,/Images/icons8-plus-64.png" />
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+
+                    <Button                                                                                                                                                                                                                
+                        Background="#571c39"
+                             Foreground="white"
+                             FontSize="40" Height="61"      
+                    Width="50">
+                        <Image Width="50" Source="pack://application:,,,/Images/icons8-minus-48.png" />
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+                
+            </StackPanel >
+
         </Grid>
-
-        
-
     </Border>
 </Window>
