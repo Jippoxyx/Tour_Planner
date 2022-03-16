@@ -7,8 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\icons8-delete-64.png" />
     <None Remove="Images\icons8-minus-48.png" />
+    <None Remove="Images\icons8-plus-24.png" />
     <None Remove="Images\icons8-plus-64.png" />
+    <None Remove="Images\icons8-search-49.png" />
+    <None Remove="Images\lupe.png" />
+    <None Remove="Images\minus_2.png" />
+    <None Remove="Images\suche.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\icons8-delete-64.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +29,12 @@
 
   <ItemGroup>
     <Resource Include="Images\icons8-minus-48.png" />
+    <Resource Include="Images\icons8-plus-24.png" />
     <Resource Include="Images\icons8-plus-64.png" />
+    <Resource Include="Images\icons8-search-49.png" />
+    <Resource Include="Images\lupe.png" />
+    <Resource Include="Images\minus_2.png" />
+    <Resource Include="Images\suche.png" />
   </ItemGroup>
 
 </Project>

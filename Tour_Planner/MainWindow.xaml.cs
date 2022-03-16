@@ -24,5 +24,10 @@ namespace Tour_Planner
         {
             InitializeComponent();
         }
+
+        private void lvUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
