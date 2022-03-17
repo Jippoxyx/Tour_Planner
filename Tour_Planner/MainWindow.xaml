@@ -74,11 +74,143 @@
                      />
              -->
 
+            <WrapPanel  Grid.Column="2" 
+                    Grid.Row="0" 
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <TextBox 
+                     Width="200"
+                     Height="40"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"                    
+                     Background="White"
+                     FontSize="22" Text="">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="3"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+
+                <Button                                                                                                                                                                                                                
+                        Background="White"
+                             Foreground="white"
+                             FontSize="40" Height="39"
+                    Width="37"
+                    BorderBrush="White">
+                    <Image Width="29" Source="pack://application:,,,/Images/icons8-search-49.png" />
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </WrapPanel>
+
+
+            <WrapPanel Grid.Column="2" 
+                    Grid.Row="2" Orientation="Horizontal"
+                             VerticalAlignment="Top"
+                     HorizontalAlignment="Center"
+                            Margin="10">
+
+                <!--<ListView 
+                    Margin="10" 
+                    Name="lvUsers" 
+                    Width="120"
+                    HorizontalAlignment="Left"
+                    FontSize="25">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn  
+                                Header="Tours"  
+                                Width="80"  
+                                DisplayMemberBinding="{Binding Tour}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView> -->
+                <DataGrid 
+                          FontSize="20"
+                    ItemsSource="{Binding Data}" 
+                  AutoGenerateColumns="False" 
+                  AlternatingRowBackground="HotPink"
+                  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Username}" Header="Tours" Width="100" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                
+                <Button                                                                                                                                                                                                              
+                        Background="White"
+                             Foreground="white"
+                             FontSize="40" Height="36"
+                    Width="30"
+                      >
+                    <Image Width="23" Source="pack://application:,,,/Images/icons8-plus-24.png" />
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button                                                                                                                                                                                                                
+                        Background="White"
+                             Foreground="white"
+                             FontSize="40" Height="36"
+                    Width="30">
+                    <Image Width="20" Source="pack://application:,,,/Images/minus_2.png" />
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button                                                                                                                                                                                                                
+                        Background="White"
+                             Foreground="white"
+                             FontSize="40" Height="36"
+                    Width="30">
+                    <Image Width="24" Source="pack://application:,,,/Images/icons8-delete-64.png" />
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </WrapPanel>
             
+            
+            <!-- Details -->
+            <WrapPanel Grid.Column="5" 
+                    Grid.Row="1" Orientation="Horizontal"
+                             VerticalAlignment="Top"
+                     HorizontalAlignment="Center"
+                            Margin="10">
             <local:SearchBarView x:Name="SearchBar" Grid.Column="4" Grid.Row="0"/>
 
+                <TextBlock Text="Title:"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Foreground="#571c39"
+                   FontSize="22" Width="50"/>
             <local:TourView x:Name="Tour" Grid.Column="2" Grid.Row="1"/>
 
+                <TextBox 
+                     Width="200"
+                     Height="40"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"                    
+                     Background="White"
+                     FontSize="22" Text="">
+                    <TextBox.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="3"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+            </WrapPanel>
 
             <!-- Details -->
             <local:ResultView x:Name="ResultView" Grid.Column="5" Grid.Row="1" />

@@ -22,12 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="MVVM\Model\" />
-    <Folder Include="MVVM\ViewModel\" />
-    <Folder Include="MVVM\View\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Images\icons8-minus-48.png" />
     <Resource Include="Images\icons8-plus-24.png" />
     <Resource Include="Images\icons8-plus-64.png" />
