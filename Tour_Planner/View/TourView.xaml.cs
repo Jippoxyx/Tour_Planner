@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Tour_Planner
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaktionslogik für TourView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TourView : UserControl
     {
-        public MainWindow()
+        public TourView()
         {
             InitializeComponent();
         }
