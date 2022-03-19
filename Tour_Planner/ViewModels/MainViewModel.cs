@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tour_Planner
+namespace Tour_Planner.ViewModels
+
 {
-    public class MainViewModel : BaseViewModel
+    public class MainViewModels : BaseViewModel
     {
         public readonly ResultViewModel resultView;
         public readonly ISearchEngine searchEngine;
 
-        public MainViewModel(SearchBarViewModel searchBar, ResultViewModel resultV, ISearchEngine searchEngine)
+        public MainViewModels(SearchBarViewModel searchBar, ResultViewModel resultV, ISearchEngine searchEngine)
         {
             searchBar.SearchTextChanged += (_, searchText) =>
             {

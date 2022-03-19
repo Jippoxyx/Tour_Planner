@@ -6,34 +6,45 @@
              xmlns:local="clr-namespace:Tour_Planner"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
-    <WrapPanel  
-        Orientation="Horizontal"
-        VerticalAlignment="Top"
-        HorizontalAlignment="Center"
-        Margin="10">
 
-        <ListView 
-            Margin="10" 
-            Name="lvUsers" 
-            Width="120"
-            HorizontalAlignment="Left"
-            FontSize="25">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn  
-                        Header="Tours"  
-                        Width="80"  
-                        DisplayMemberBinding="{Binding Tour}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button                                                                                                                                                                                                              
-            Background="White"
-            Foreground="white"
-            FontSize="40" Height="36"
-            Width="30">
-            
+    <WrapPanel 
+                    Orientation="Horizontal"
+                             VerticalAlignment="Top"
+                     HorizontalAlignment="Center"
+                            Margin="10">
+
+        <!--<ListView 
+                    Margin="10" 
+                    Name="lvUsers" 
+                    Width="120"
+                    HorizontalAlignment="Left"
+                    FontSize="25">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn  
+                                Header="Tours"  
+                                Width="80"  
+                                DisplayMemberBinding="{Binding Tour}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView> -->
+        <DataGrid 
+                          FontSize="20"
+                    ItemsSource="{Binding Data}" 
+                  AutoGenerateColumns="False" 
+                  AlternatingRowBackground="HotPink"
+                  CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Username}" Header="Tours" Width="100" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button           
+                        Background="White"
+                             Foreground="white"
+                             FontSize="40" Height="36"
+                    Width="30"
+                      >
             <Image Width="23" Source="pack://application:,,,/Images/icons8-plus-24.png" />
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -42,12 +53,11 @@
             </Button.Resources>
         </Button>
 
-        <Button                                                                                                                                                                                                                
-            Background="White"
-            Foreground="white"
-            FontSize="40" Height="36"
-            Width="30">
-            
+        <Button                                                                                                                                                                                                           
+                        Background="White"
+                             Foreground="white"
+                             FontSize="40" Height="36"
+                    Width="30">
             <Image Width="20" Source="pack://application:,,,/Images/minus_2.png" />
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -56,12 +66,11 @@
             </Button.Resources>
         </Button>
 
-        <Button                                                                                                                                                                                                                
-            Background="White"
-            Foreground="white"
-            FontSize="40" Height="36"
-            Width="30">
-            
+        <Button                      
+                        Background="White"
+                             Foreground="white"
+                             FontSize="40" Height="36"
+                    Width="30">
             <Image Width="24" Source="pack://application:,,,/Images/icons8-delete-64.png" />
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">

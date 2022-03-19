@@ -31,4 +31,8 @@
     <Resource Include="Images\suche.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\Abstract\" />
+  </ItemGroup>
+
 </Project>

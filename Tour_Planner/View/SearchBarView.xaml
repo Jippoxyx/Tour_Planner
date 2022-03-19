@@ -35,7 +35,7 @@
             BorderBrush="White"
             Command="{Binding SearchCommand}">
             
-            <Image Source="/Images/lupe.png" />
+            <Image Source="/Images/icons8-search-49.png" />
 
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">

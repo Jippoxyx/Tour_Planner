@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Tour_Planner.ViewModels;
+
 
 namespace Tour_Planner
 {
@@ -20,17 +22,17 @@ namespace Tour_Planner
             var resultViewModel = new ResultViewModel();
             var menu = new MenuView();
             var tour = new TourView();
-            var log = new LogView();
+            var tourDetails = new TourDetailsView();
             
 
             var window = new MainWindow
             {
-                DataContext = new MainViewModel(searchBarViewModel, resultViewModel, searchEngine),
+                DataContext = new MainViewModels(searchBarViewModel, resultViewModel, searchEngine),
                 Menu = { DataContext = menu },
                 SearchBar = { DataContext = searchBarViewModel },
                 ResultView = { DataContext = resultViewModel },
                 Tour = {DataContext = tour},
-                Log = {DataContext = log }
+                TourDetails = {DataContext = tourDetails}
             };
             window.Show();
         }

@@ -5,13 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tour_Planner.Models
+namespace Tour_Planner.ViewModels
 {
-    public class Tours : INotifyPropertyChanged
+    class TourDetailsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
-    
-
     }
 }
