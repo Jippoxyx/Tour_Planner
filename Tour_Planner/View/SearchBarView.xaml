@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Tour_Planner.SearchBarView"
+﻿<UserControl x:Class="Tour_Planner.View.SearchBarView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -18,7 +18,7 @@
             HorizontalAlignment="Center"                    
             Background="White"
             FontSize="22"
-            Text="{Binding SearchText}">
+           >
             
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -33,7 +33,7 @@
             FontSize="40" Height="39"
             Width="37"
             BorderBrush="White"
-            Command="{Binding SearchCommand}">
+           >
             
             <Image Source="/Images/icons8-search-49.png" />
 

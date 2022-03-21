@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using Tour_Planner.ViewModels;
-
 
 namespace Tour_Planner
 {
@@ -17,25 +10,25 @@ namespace Tour_Planner
     {
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            var searchBarViewModel = new SearchBarViewModel();
-            var searchEngine = new SearchEngine();
+            //
+            /*var searchEngine = new SearchEngine();
             var resultViewModel = new ResultViewModel();
-            var menu = new MenuView();
-            var tour = new TourView();
-            var tourDetails = new TourDetailsView();
-            
+            */
+            var menu = new MenuViewModel();
+            var tour = new TourViewModel();
+            var tourDetails = new TourDetailsViewModel();
+            var searchBar = new SearchBarViewModel();
 
-            var window = new MainWindow
+
+            var window = new MainWindow()
             {
-                DataContext = new MainViewModels(searchBarViewModel, resultViewModel, searchEngine),
-                Menu = { DataContext = menu },
-                SearchBar = { DataContext = searchBarViewModel },
-                ResultView = { DataContext = resultViewModel },
-                Tour = {DataContext = tour},
-                TourDetails = {DataContext = tourDetails}
+               DataContext = new MainViewModel(menu, tour, tourDetails, searchBar),
+               Menu = { DataContext = menu },
+               SearchBar = { DataContext = searchBar},
+               Tour = {DataContext = tour},
+               TourDetails = {DataContext = tourDetails}
             };
             window.Show();
         }
-
     }
 }

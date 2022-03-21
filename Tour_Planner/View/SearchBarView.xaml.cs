@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Tour_Planner
+namespace Tour_Planner.View
 {
     /// <summary>
     /// Interaktionslogik für SearchBarView.xaml

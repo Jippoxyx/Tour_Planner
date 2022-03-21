@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tour_Planner.ViewModels.Utility;
 
-namespace Tour_Planner.ViewModels
+namespace Tour_Planner.Model
 {
-    class SearchBarViewModel : ViewModelBase
+    class Log
     {
+        public TimeSpan Duration { get; set; }
     }
 }

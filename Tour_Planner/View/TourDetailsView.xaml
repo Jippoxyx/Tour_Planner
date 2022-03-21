@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Tour_Planner.TourDetailsView"
+﻿<UserControl x:Class="Tour_Planner.View.TourDetailsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -23,11 +23,34 @@
                        VerticalAlignment="Center"
                       >
             </TextBlock>
+            
             <TabControl Grid.Row="1"
                         FontSize="20">
                 <TabItem Header="Route"/>
                 <TabItem Header="Description">
-                    <TextBlock Text="Describe ur tour"/>
+
+                    <DataGrid      
+                  ScrollViewer.CanContentScroll="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                  FontSize="20"
+                 
+                  AutoGenerateColumns="True" 
+                  AlternatingRowBackground="HotPink"
+                  CanUserAddRows="True" 
+                  CanUserDeleteRows="True" 
+                  IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding }" Header="Name"/>
+                            <DataGridTextColumn Binding="{Binding }" Header="Tour Description" Width="auto"/>
+                            <DataGridTextColumn Binding="{Binding}" Header="From"/>
+                            <DataGridTextColumn Binding="{Binding }" Header="To"/>
+                            <DataGridTextColumn Binding="{Binding}" Header="Transport type" />
+                            <DataGridTextColumn Binding="{Binding }" Header="Tour distance"/>
+                            <DataGridTextColumn Binding="{Binding }" Header="Estimated time"/>
+                            <DataGridTextColumn Binding="{Binding }" Header="Route information"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
             </TabControl>
                           
@@ -94,22 +117,22 @@
                             Margin="10"
             Grid.Row="3">
 
+                <!-- ItemsSource="{Binding D}" -->
                 <DataGrid      
                   ScrollViewer.VerticalScrollBarVisibility="Auto"                          
                   FontSize="20"
-                  ItemsSource="{Binding Data}" 
+                 
                   AutoGenerateColumns="False" 
                   AlternatingRowBackground="HotPink"
                   CanUserAddRows="False" 
                   CanUserDeleteRows="True" 
                   IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding }" Header="Date"/>
-                        <DataGridTextColumn Binding="{Binding }" Header="From" Width="auto"/>
-                        <DataGridTextColumn Binding="{Binding}" Header="To"/>
-                        <DataGridTextColumn Binding="{Binding }" Header="Duration"/>
-                        <DataGridTextColumn Binding="{Binding}" Header="Distance"/>
-                        <DataGridTextColumn Binding="{Binding }" Header="TransportType"/>
+                        <DataGridTextColumn Binding="{Binding }" Header="Date/Time"/>
+                        <DataGridTextColumn Binding="{Binding }" Header="Comment" Width="auto"/>
+                        <DataGridTextColumn Binding="{Binding}" Header="Difficulty"/>
+                        <DataGridTextColumn Binding="{Binding }" Header="Total time"/>
+                        <DataGridTextColumn Binding="{Binding}" Header="Rating" Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </WrapPanel>

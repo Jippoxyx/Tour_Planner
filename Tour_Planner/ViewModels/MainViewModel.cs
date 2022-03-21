@@ -1,31 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Tour_Planner.Model;
+using Tour_Planner.ViewModels.Utility;
 
 namespace Tour_Planner.ViewModels
-
 {
-    public class MainViewModels : BaseViewModel
+    class MainViewModel : ViewModelBase
     {
-        public readonly ResultViewModel resultView;
-        public readonly ISearchEngine searchEngine;
-
-        public MainViewModels(SearchBarViewModel searchBar, ResultViewModel resultV, ISearchEngine searchEngine)
-        {
-            searchBar.SearchTextChanged += (_, searchText) =>
-            {
-                SearchTour(searchText);
-            };
-            this.resultView = resultV;
-            this.searchEngine = searchEngine;
-        }
-
-        public void SearchTour(string searchText)
-        {
-            var result = String.Join("\n", this.searchEngine.SearchFor(searchText));
-            this.resultView.DisplayResult(result);
-        }
+        public MainViewModel(MenuViewModel menu, TourViewModel tour, TourDetailsViewModel tourDetails, SearchBarViewModel search) { }         
     }
 }

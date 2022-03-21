@@ -22,17 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\icons8-minus-48.png" />
     <Resource Include="Images\icons8-plus-24.png" />
-    <Resource Include="Images\icons8-plus-64.png" />
     <Resource Include="Images\icons8-search-49.png" />
-    <Resource Include="Images\lupe.png" />
     <Resource Include="Images\minus_2.png" />
-    <Resource Include="Images\suche.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\Abstract\" />
   </ItemGroup>
 
 </Project>

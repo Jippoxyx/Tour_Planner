@@ -3,73 +3,64 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Tour_Planner"
-        xmlns:vm="clr-namespace:Tour_Planner.ViewModels"
+        xmlns:local="clr-namespace:Tour_Planner.View"
+        xmlns:view="clr-namespace:Tour_Planner.View"
         mc:Ignorable="d"
-        Height="600" Width="990"  
+        Height="600" 
+        Width="990"  
         Background="Transparent"
         AllowsTransparency="True"
-        WindowStyle="None"
-        >
-
-    <!--Background="#3d1223"
-    <Window.DataContext>
-        <vm:MainViewModel/> 
-    </Window.DataContext> -->
-    <Border Background="White"
+        WindowStyle="None">
+    
+    <Grid>
+        <!--Background="#3d1223"-->
+        <Border Background="White"
             CornerRadius="20">
-        <Grid Margin="-10,10,10,-10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="205"/>
-                <ColumnDefinition Width="2"/>
-                <ColumnDefinition Width="252"/>
-                <ColumnDefinition Width="2"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="75"/>
-                <RowDefinition Height="2"/>  
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            <Grid Margin="-10,10,10,-10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="205"/>
+                    <ColumnDefinition Width="2"/>
+                    <ColumnDefinition Width="252"/>
+                    <ColumnDefinition Width="2"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="75"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-            <!--Vertical Splitter-->
-            <GridSplitter Grid.Column="1"
+                <!--Vertical Splitter-->
+                <GridSplitter Grid.Column="1"
                           Grid.Row="0"
                           Grid.RowSpan="4"
                           Width="5" 
                           HorizontalAlignment="Stretch" />
-            <GridSplitter Grid.Column="3"
+                <GridSplitter Grid.Column="3"
                           Grid.Row="0"
                           Grid.RowSpan="4"
                           Width="5" 
                           HorizontalAlignment="Stretch" />
 
-            <!--Horizontal Splitter
-            <GridSplitter Grid.Column="0"
-                          Grid.Row="1"
-                          Grid.ColumnSpan="5"
-                          Width="5" 
-                          VerticalAlignment="Stretch" />  -->
-
-            <!--Logo-->
-            <WrapPanel HorizontalAlignment="Center"
+                <!--Logo-->
+                <WrapPanel HorizontalAlignment="Center"
                        VerticalAlignment="Center">
-                <TextBlock Text="TourPlanner"
+                    <TextBlock Text="TourPlanner"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    Foreground="#571c39"
                    FontSize="30" Height="39" Width="157"/>
-            </WrapPanel>
-            <!--Menu-->
-            <local:MenuView x:Name="Menu" Grid.Row="2" />
-            <!--Search-->
-            <local:SearchBarView x:Name="SearchBar" Grid.Column="4" Grid.Row="0"/>
-            <local:ResultView x:Name="ResultView" Grid.Column="5" Grid.Row="2" />
-            <!--All Tours-->
-            <local:TourView x:Name="Tour" Grid.Column="2" Grid.Row="2"/>
-            <!--Tour Details -->
-            <local:TourDetailsView x:Name="TourDetails" Grid.Column="4" Grid.Row="2"/> 
-        </Grid>
-    </Border>
-</Window>
+                </WrapPanel>
 
+                <!--Menu-->
+                <local:MenuView x:Name="Menu" Grid.Row="2" />
+                <!--Search-->
+                <local:SearchBarView x:Name="SearchBar" Grid.Column="4" Grid.Row="0"/> 
+                <!--All Tours-->
+                <local:TourView x:Name="Tour" Grid.Column="2" Grid.Row="2"/>
+                <!--Tour Details--> 
+                <local:TourDetailsView x:Name="TourDetails" Grid.Column="4" Grid.Row="2"/>  
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
