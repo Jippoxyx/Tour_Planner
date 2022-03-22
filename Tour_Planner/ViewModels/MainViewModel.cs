@@ -12,6 +12,28 @@ namespace Tour_Planner.ViewModels
 {
     class MainViewModel : ViewModelBase
     {
-        public MainViewModel(MenuViewModel menu, TourViewModel tour, TourDetailsViewModel tourDetails, SearchBarViewModel search) { }         
+        TourViewModel tour;
+
+        public MainViewModel(MenuViewModel menu, 
+            TourViewModel tour, 
+            TourDetailsViewModel tourDetails, 
+            SearchBarViewModel search) 
+        {
+            this.tour = tour;
+            tour.tours += (_, t) =>
+            {
+                AddTourExecute(t);
+            };
+        }
+
+        private void DeleteTourExecute()
+        {
+            tour.TourData.Clear();
+        }
+
+        private void AddTourExecute(Tour t)
+        {
+            tour.TourData.Add(t);
+        }
     }
 }
