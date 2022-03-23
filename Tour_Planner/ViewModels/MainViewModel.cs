@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-//using Tour_Planner.Models;
 using Tour_Planner.Model;
 using Tour_Planner.ViewModels.Utility;
 
@@ -27,11 +21,11 @@ namespace Tour_Planner.ViewModels
         private void SetUpTourView()
         {
             Add_AddTourEvent();
-            //Add_DeleteTourEvent();
+            Add_DeleteTourEvent();
             Add_DeleteAllEvent();           
         }
 
-        /*
+        
         private void Add_DeleteTourEvent()
         {
             tour.deleteTourEvent += (_, t) =>
@@ -39,7 +33,7 @@ namespace Tour_Planner.ViewModels
                 DeleteTourExecute(t);
             };
         }
-        */
+        
 
         private void Add_DeleteAllEvent()
         {
@@ -61,17 +55,18 @@ namespace Tour_Planner.ViewModels
         {
             tour.TourData.Clear();
         }
-
-        /*
+        
         private void DeleteTourExecute(Tour t)
         {
-            List<Tour> items = tour.TourData.Where(x => x.Id == t.Id).ToList();
-            foreach(Tour tou in items)
+            if(t != null)
             {
-                tour.TourData.Remove(tou);
-            }
+                List<Tour> items = tour.TourData.Where(x => x.Id == t.Id).ToList();
+                foreach (Tour tou in items)
+                {
+                    tour.TourData.Remove(tou);
+                }
+            }           
         }
-        */
 
         private void AddTourExecute(Tour t)
         {                   

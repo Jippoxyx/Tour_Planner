@@ -29,6 +29,17 @@ namespace Tour_Planner.ViewModels
             }
         }
 
+        private Tour _selectedItem;
+        public Tour SelectedItem
+        {
+            get { return _tour; }
+            set
+            {
+                _tour = value;
+                OnPropertyChanged();
+            }
+        }
+
         public TourViewModel()
         {
             //AddTourCommand = new RelayCommand(x => AddTourExecute(), x => true);
@@ -46,7 +57,7 @@ namespace Tour_Planner.ViewModels
 
             DeleteTourCommand = new RelayCommand((_) =>
             {
-                this.deleteTourEvent?.Invoke(this, Tour);
+                this.deleteTourEvent?.Invoke(this, SelectedItem);
             });
 
             DeleteAllToursCommand = new RelayCommand((_) =>

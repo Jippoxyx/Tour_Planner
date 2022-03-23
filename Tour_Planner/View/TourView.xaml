@@ -21,7 +21,7 @@
                             >
                 <ListView Margin="10"
                   FontSize="20"
-                  ItemsSource="{Binding TourData}">
+                  ItemsSource="{Binding TourData}" SelectedItem="{Binding SelectedItem}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Tours" Width="90" DisplayMemberBinding="{Binding Title}" />
@@ -58,7 +58,7 @@
                              Foreground="white"
                              FontSize="40" Height="36"
                     Width="30"
- Command="{Binding DeleteTourCommand}"
+ Command="{Binding DeleteTourCommand}"                   
             >
                     <Image Width="20" Source="pack://application:,,,/Images/minus_2.png" />
                     <Button.Resources>
