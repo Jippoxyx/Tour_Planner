@@ -7,7 +7,7 @@ using Tour_Planner.ViewModels.Utility;
 
 namespace Tour_Planner.ViewModels
 {
-    class TourDetailsViewModel : ViewModelBase
+    public class TourDetailsViewModel : ViewModelBase
     {
     }
 }

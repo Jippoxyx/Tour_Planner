@@ -6,13 +6,17 @@ using Tour_Planner.ViewModels.Utility;
 
 namespace Tour_Planner.ViewModels
 {
-    class TourViewModel : ViewModelBase
+    public class TourViewModel : ViewModelBase
     {
         public ObservableCollection<Tour> TourData { get; }
             = new ObservableCollection<Tour>();
         public ICommand AddTourCommand { get; set; }
-        public ICommand DeleteAllToursCommand { get; set; }
-        public event EventHandler<Tour> tours;
+        public ICommand DeleteTourCommand { get; set; }
+        public ICommand DeleteAllToursCommand { get; }
+
+        public event EventHandler<Tour> addTourEvent;
+        public event EventHandler<Tour> deleteTourEvent;
+        public event EventHandler<Tour> deleteAllToursEvent;
 
         private Tour _tour;
         public Tour Tour
@@ -36,11 +40,19 @@ namespace Tour_Planner.ViewModels
                 t.Id = Guid.NewGuid();
                 t.Title = "Tour";
                 t.Desciption = "pretty cool!";
-                this.tours?.Invoke(this, t);
+                this.addTourEvent?.Invoke(this, t);
             }
                 );
-        }
 
-        
+            DeleteTourCommand = new RelayCommand((_) =>
+            {
+                this.deleteTourEvent?.Invoke(this, Tour);
+            });
+
+            DeleteAllToursCommand = new RelayCommand((_) =>
+            {
+                this.deleteAllToursEvent?.Invoke(this, Tour);
+            });
+        }  
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tour_Planner.Model
 {
-    class Log
+    public class TourLog
     {
         public TimeSpan Duration { get; set; }
     }
