@@ -21,7 +21,7 @@ namespace Tour_Planner.PL
 
         public static NpgsqlConnection Connect()
         {
-            var file = File.ReadAllText("C:\\Users\\Hawryluk\\Desktop\\Tour_Planner-main\\Tour_Planner-main\\Tour_Planner\\config.json");           // pfad anpassen -> wohin mim config?
+            var file = File.ReadAllText($"..\\..\\..\\config.json");           // pfad anpassen -> wohin mim config?
 
             JObject text = JsonConvert.DeserializeObject<JObject>(file);    // JObject oder dynamic(ohne ToString())
             string connect = text["database"]["connection"].ToString();
