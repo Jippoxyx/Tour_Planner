@@ -32,7 +32,7 @@ namespace Tour_Planner.PL
 
         public void Test(NpgsqlConnection con)
         {
-            con.Open();
+           /* con.Open();
 
             string query = $"INSERT INTO public.\"TestDB_TP\" (name, alter) values('Test', 31);";
 
@@ -44,8 +44,8 @@ namespace Tour_Planner.PL
             {
                 Console.WriteLine($"\nTest SQL: {read[0]}\t{read[1]}\n");
 
-            }*/
-            con.Close();
+            } 
+            con.Close(); */
 
         }
     }

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Tour_Planner"
+             xmlns:local="clr-namespace:Tour_Planner" xmlns:viewmodels="clr-namespace:Tour_Planner.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:TourDetailsViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -29,28 +29,13 @@
                 <TabItem Header="Route"/>
                 <TabItem Header="Description">
 
-                    <DataGrid      
-                  ScrollViewer.CanContentScroll="True"
-                  ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                  FontSize="20"
-                 
-                  AutoGenerateColumns="True" 
-                  AlternatingRowBackground="HotPink"
-                  CanUserAddRows="True" 
-                  CanUserDeleteRows="True" 
-                  IsReadOnly="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding }" Header="Name"/>
-                            <DataGridTextColumn Binding="{Binding }" Header="Tour Description" Width="auto"/>
-                            <DataGridTextColumn Binding="{Binding}" Header="From"/>
-                            <DataGridTextColumn Binding="{Binding }" Header="To"/>
-                            <DataGridTextColumn Binding="{Binding}" Header="Transport type" />
-                            <DataGridTextColumn Binding="{Binding }" Header="Tour distance"/>
-                            <DataGridTextColumn Binding="{Binding }" Header="Estimated time"/>
-                            <DataGridTextColumn Binding="{Binding }" Header="Route information"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <StackPanel Orientation="Vertical">
+                        <Label
+                        Content = "Title">
+                        </Label>
+                        <TextBox Text ="{Binding Tour.Title}"  />
+                    </StackPanel>
+
                 </TabItem>
             </TabControl>
                           

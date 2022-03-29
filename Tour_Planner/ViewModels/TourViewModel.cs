@@ -17,6 +17,7 @@ namespace Tour_Planner.ViewModels
         public event EventHandler<Tour> addTourEvent;
         public event EventHandler<Tour> deleteTourEvent;
         public event EventHandler<Tour> deleteAllToursEvent;
+        public event EventHandler<Tour> displayTourDetails;
 
         private Tour _tour;
         public Tour Tour
@@ -37,6 +38,7 @@ namespace Tour_Planner.ViewModels
             {
                 _tour = value;
                 OnPropertyChanged();
+                displayTourDetails?.Invoke(this, Tour);
             }
         }
 
@@ -63,7 +65,7 @@ namespace Tour_Planner.ViewModels
             DeleteAllToursCommand = new RelayCommand((_) =>
             {
                 this.deleteAllToursEvent?.Invoke(this, Tour);
-            });
+            });           
         }  
     }
 }

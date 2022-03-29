@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Tour_Planner.Model;
 using Tour_Planner.ViewModels.Utility;
@@ -8,6 +9,7 @@ namespace Tour_Planner.ViewModels
     public class MainViewModel : ViewModelBase
     {
         TourViewModel tour;
+        TourDetailsViewModel tourDetailsViewModel;
 
         public MainViewModel(MenuViewModel menu, 
             TourViewModel tour, 
@@ -15,6 +17,7 @@ namespace Tour_Planner.ViewModels
             SearchBarViewModel search)
         {
             this.tour = tour;
+            this.tourDetailsViewModel = tourDetails;
             SetUpTourView();
         }
 
@@ -22,10 +25,19 @@ namespace Tour_Planner.ViewModels
         {
             Add_AddTourEvent();
             Add_DeleteTourEvent();
-            Add_DeleteAllEvent();           
+            Add_DeleteAllEvent();
+            Add_DisplayTourDetails();
         }
 
-        
+        private void Add_DisplayTourDetails()
+        {
+            tour.displayTourDetails += (_, t) =>
+            {
+                tourDetailsViewModel.Tour = tour.SelectedItem;
+            };
+          
+        }
+
         private void Add_DeleteTourEvent()
         {
             tour.deleteTourEvent += (_, t) =>
