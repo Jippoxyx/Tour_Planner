@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Tour_Planner.Model;
+using Tour_Planner.Models;
 using Tour_Planner.ViewModels.Utility;
 
 namespace Tour_Planner.ViewModels

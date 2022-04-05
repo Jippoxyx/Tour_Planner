@@ -121,7 +121,6 @@
                      >
                 </TextBlock>
 
-
             <WrapPanel 
                            HorizontalAlignment="Right"
                 Grid.Row="2">
@@ -153,30 +152,31 @@
                 </Button>
             </WrapPanel>
 
-
-            <WrapPanel 
-                    Orientation="Horizontal"
+            
+            <WrapPanel             
+                Orientation ="Horizontal"
+                
                              VerticalAlignment="Top"
-                     HorizontalAlignment="Center"
+                     HorizontalAlignment="Left"
                             Margin="10"
             Grid.Row="3">
                 <DataGrid      
                   ScrollViewer.VerticalScrollBarVisibility="Auto"                          
-                  FontSize="20" 
+                  FontSize="13" 
                   AlternatingRowBackground="#a59499"
-                    AutoGenerateColumns="True"
+                  AutoGenerateColumns="False"
                 
                     ItemsSource="{Binding TourLogData}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Date}" Header="Date"/>
-                        <DataGridTextColumn Binding="{Binding Time}" Header="Time"/>
-                        <DataGridTextColumn Binding="{Binding Comment}" Header="Comment" Width="auto"/>
-                        <DataGridTextColumn Binding="{Binding Difficulty}" Header="Difficulty"/>
-                        <DataGridTextColumn Binding="{Binding TotalTime}" Header="Total time"/>
-                        <DataGridTextColumn Binding="{Binding Rating}" Header="Rating" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding Path=Date}" Header="Date"/>
+                        <DataGridTextColumn Binding="{Binding Path=Time}" Header="Time"/>
+                        <DataGridTextColumn Binding="{Binding Path=Comment}" Header="Comment" />
+                        <DataGridTextColumn Binding="{Binding Path=Difficulty}" Header="Difficulty"/>
+                        <DataGridTextColumn Binding="{Binding Path=TotalTime}" Header="Total time"/>
+                        <DataGridTextColumn Binding="{Binding Path=Rating}" Header="Rating"/>
                     </DataGrid.Columns>
                 </DataGrid>
-            </WrapPanel>
+            </WrapPanel> 
         </Grid>
     </Grid>
 </UserControl>

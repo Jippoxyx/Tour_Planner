@@ -11,6 +11,12 @@ namespace Tour_Planner.Models
         public Guid Id { get; set; }
         public string Title { get; set; }
         public string Desciption { get; set; }
+        public string From { get; set; }
+        public string To { get; set; }
+        public string TransportType { get; set; }
+        public string TourDistance { get; set; }
+        public string EstimatedTime { get; set; }
+        public string RouteInformation{ get; set; }
 
         public List<TourLog> Logs { get; set; }
     }
