@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tour_Planner.Model
+namespace Tour_Planner.BL.Service
 {
-    public class TourLog
+    class TourService
     {
-        public TimeSpan Duration { get; set; }
     }
 }

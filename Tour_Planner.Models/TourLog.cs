@@ -8,6 +8,11 @@ namespace Tour_Planner.Models
 {
     public class TourLog
     {
-        public TimeSpan Duration { get; set; }
+        public int Date { get; set; }
+        public TimeSpan Time { get; set; }
+        public string Comment { get; set; }
+        public int Difficulty { get; set; }
+        public int TotalTime { get; set; }
+        public int Rating { get; set; }
     }
 }

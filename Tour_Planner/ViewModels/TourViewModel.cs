@@ -44,9 +44,6 @@ namespace Tour_Planner.ViewModels
 
         public TourViewModel()
         {
-            //AddTourCommand = new RelayCommand(x => AddTourExecute(), x => true);
-            //DeleteAllToursCommand = new RelayCommand(x => DeleteTourExecute(), x => true);
-
             AddTourCommand = new RelayCommand((_) =>
             {
                 Tour t = new Tour();

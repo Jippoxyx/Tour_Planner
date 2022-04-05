@@ -24,7 +24,7 @@
                   ItemsSource="{Binding TourData}" SelectedItem="{Binding SelectedItem}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Tours" Width="90" DisplayMemberBinding="{Binding Title}" />
+                            <GridViewColumn Header="Tours" Width="150" DisplayMemberBinding="{Binding Title}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -73,7 +73,7 @@
                              Foreground="white"
                              FontSize="40" Height="36"
                     Width="30"
-             Command="{Binding DeleteAllToursCommand}">
+             Command="{Binding EditTourCommand}">
                     <Image Width="24" Source="pack://application:,,,/Images/icons8-delete-64.png" />
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
