@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tour_Planner.Model
+namespace Tour_Planner.BL
 {
-    public class TourLog
+    class OpenMapAPI
     {
-        public TimeSpan Duration { get; set; }
     }
 }

@@ -29,13 +29,85 @@
                 <TabItem Header="Route"/>
                 <TabItem Header="Description">
 
-                    <StackPanel Orientation="Vertical">
-                        <Label
-                        Content = "Title">
-                        </Label>
-                        <TextBox Text ="{Binding Tour.Title}"  />
-                    </StackPanel>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  >
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label
+                        Content = "Title"
+                                Width="175">
+                                </Label>
+                                <TextBox Text ="{Binding Tour.Title}" Width="298" Margin="20,0,0,0"
+                         />
+                            </StackPanel>
 
+                            <StackPanel Orientation="Horizontal">
+                                <Label
+                        Content = "Description"
+                                Width="175">
+                                </Label>
+                                <TextBox Text ="{Binding Tour.Desciption}" Width="298" Margin="20,0,0,0"
+                         />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label
+                        Content = "From"
+                                Width="175">
+                                </Label>
+                                <TextBox Text ="{Binding Tour.From}" Width="298" Margin="20,0,0,0"
+                         />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label
+                        Content = "To"
+                                Width="175">
+                                </Label>
+                                <TextBox Text ="{Binding Tour.To}" Width="298" Margin="20,0,0,0"
+                         />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label
+                        Content = "Transport Type"
+                                Width="175">
+                                </Label>
+                                <TextBox Text ="{Binding Tour.TransportType}" Width="298" Margin="20,0,0,0"
+                         />
+                            </StackPanel>
+
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label
+                        Content = "Tour Distance"
+                                Width="175">
+                                </Label>
+                                <TextBox Text ="{Binding Tour.TourDistance}" Width="298" Margin="20,0,0,0"
+                         />
+                            </StackPanel>
+
+                            
+                            <StackPanel Orientation="Horizontal">
+                                <Label
+                        Content = "Estimated Time"
+                                Width="175">
+                                </Label>
+                                <TextBox Text ="{Binding Tour.EstimatedTime}" Width="298" Margin="20,0,0,0"
+                         />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label
+                        Content = "Route Information"
+                                Width="175">
+                                </Label>
+                                <TextBox Text ="{Binding Tour.RouteInformation}" Width="298" Margin="20,0,0,0"
+                         />
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+                    
                 </TabItem>
             </TabControl>
                           
@@ -48,24 +120,10 @@
                        VerticalAlignment="Center"
                      >
                 </TextBlock>
-          
 
             <WrapPanel 
                            HorizontalAlignment="Right"
                 Grid.Row="2">
-                <Button           
-                        Background="White"
-                             Foreground="white"
-                             FontSize="40" Height="36"
-                    Width="30"                 
-                      >
-                    <Image Width="23" Source="pack://application:,,,/Images/icons8-plus-24.png" />
-                    <Button.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
 
                 <Button                                                                                                                                                                                                           
                         Background="White"
@@ -94,33 +152,31 @@
                 </Button>
             </WrapPanel>
 
-
-            <WrapPanel 
-                    Orientation="Horizontal"
+            
+            <WrapPanel             
+                Orientation ="Horizontal"
+                
                              VerticalAlignment="Top"
-                     HorizontalAlignment="Center"
+                     HorizontalAlignment="Left"
                             Margin="10"
             Grid.Row="3">
-
-                <!-- ItemsSource="{Binding D}" -->
                 <DataGrid      
                   ScrollViewer.VerticalScrollBarVisibility="Auto"                          
-                  FontSize="20"
-                 
-                  AutoGenerateColumns="False" 
-                  AlternatingRowBackground="HotPink"
-                  CanUserAddRows="False" 
-                  CanUserDeleteRows="True" 
-                  IsReadOnly="True">
+                  FontSize="13" 
+                  AlternatingRowBackground="#a59499"
+                  AutoGenerateColumns="False"
+                
+                    ItemsSource="{Binding TourLogData}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding }" Header="Date/Time"/>
-                        <DataGridTextColumn Binding="{Binding }" Header="Comment" Width="auto"/>
-                        <DataGridTextColumn Binding="{Binding}" Header="Difficulty"/>
-                        <DataGridTextColumn Binding="{Binding }" Header="Total time"/>
-                        <DataGridTextColumn Binding="{Binding}" Header="Rating" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding Path=Date}" Header="Date"/>
+                        <DataGridTextColumn Binding="{Binding Path=Time}" Header="Time"/>
+                        <DataGridTextColumn Binding="{Binding Path=Comment}" Header="Comment" />
+                        <DataGridTextColumn Binding="{Binding Path=Difficulty}" Header="Difficulty"/>
+                        <DataGridTextColumn Binding="{Binding Path=TotalTime}" Header="Total time"/>
+                        <DataGridTextColumn Binding="{Binding Path=Rating}" Header="Rating"/>
                     </DataGrid.Columns>
                 </DataGrid>
-            </WrapPanel>
+            </WrapPanel> 
         </Grid>
     </Grid>
 </UserControl>

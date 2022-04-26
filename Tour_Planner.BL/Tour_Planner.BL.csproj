@@ -7,4 +7,13 @@
     <StartupObject />
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tour_Planner.DAL\Tour_Planner.DAL.csproj" />
+    <ProjectReference Include="..\Tour_Planner.Models\Tour_Planner.Models.csproj" />
+  </ItemGroup>
+
 </Project>
