@@ -25,6 +25,11 @@ namespace Tour_Planner.DAL
             _tourData.Add(new Tour() { Title = "8_Tour" });
         }
 
+        public List<Tour> GetTourData()
+        {
+            return _tourData;
+        }
+
         public void AddTour(Tour tour)
         {
             _tourData.Add(tour);
@@ -38,6 +43,6 @@ namespace Tour_Planner.DAL
         public void UpdateTours(Tour tour)
         {
             throw new NotImplementedException();
-        }
+        }       
     }
 }

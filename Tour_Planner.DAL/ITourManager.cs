@@ -12,6 +12,7 @@ namespace Tour_Planner.DAL
         void AddTour(Tour tour);
         void DeleteTour(Tour tour);
         void UpdateTours(Tour tour);
+        List<Tour> GetTourData();
 
     }
 }

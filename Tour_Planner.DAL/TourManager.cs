@@ -14,8 +14,12 @@ namespace Tour_Planner.DAL
             throw new NotImplementedException();
         }
 
-
         public void DeleteTour(Tour tour)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Tour> GetTourData()
         {
             throw new NotImplementedException();
         }
