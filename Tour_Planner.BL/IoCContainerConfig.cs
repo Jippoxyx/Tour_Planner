@@ -24,8 +24,6 @@ namespace Tour_Planner.BL
             // it will always provide the same CommandLineArgumentHandler instance, because we register it as a singleton
             services.AddSingleton<ITourManager, TourManager_Mock>();
 
-          
-
             // register, the ServiceProvider will provide the constructor parameters
             // based on the configuration above
             services.AddSingleton<TourService>();

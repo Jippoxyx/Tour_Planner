@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Tour_Planner.Models;
 using Tour_Planner.ViewModels.Utility;
+using Tour_Planner.BL.Service;
+using Tour_Planner.Bl;
 
 namespace Tour_Planner.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        TourViewModel tour;
-        TourDetailsViewModel tourDetailsViewModel;
-        SearchBarViewModel searchVM;
+        TourService _tourService;
+        TourViewModel _tour;
+        TourDetailsViewModel _tourDetailsViewModel;
 
 
         public MainViewModel(MenuViewModel menu, 
@@ -18,8 +20,9 @@ namespace Tour_Planner.ViewModels
             TourDetailsViewModel tourDetails, 
             SearchBarViewModel search)
         {
-            this.tour = tour;
-            this.tourDetailsViewModel = tourDetails;
+            _tourService = new IoCContainerConfig().tourService;           
+            this._tour = tour;
+            this._tourDetailsViewModel = tourDetails;
             SetUpTourView();
 
             search.SearchBoxChanged += (_, searchTours) =>
@@ -35,26 +38,35 @@ namespace Tour_Planner.ViewModels
             this.searchVM.DisplayResult(result);
         }
 
+        private void loadData()
+        {
+            foreach (var tour in _tourService.GetData())
+            {
+                _tour.TourData.Add(tour);
+            }          
+        }
+
         private void SetUpTourView()
         {
             Add_AddTourEvent();
             Add_DeleteTourEvent();
             Add_DeleteAllEvent();
             Add_DisplayTourDetails();
+            loadData();
         }
 
         private void Add_DisplayTourDetails()
         {
-            tour.displayTourDetails += (_, t) =>
+            _tour.displayTourDetails += (_, t) =>
             {
-                tourDetailsViewModel.Tour = tour.SelectedItem;
+                _tourDetailsViewModel.Tour = _tour.SelectedItem;
             };
           
         }
 
         private void Add_DeleteTourEvent()
         {
-            tour.deleteTourEvent += (_, t) =>
+            _tour.deleteTourEvent += (_, t) =>
             {
                 DeleteTourExecute(t);
             };
@@ -63,7 +75,7 @@ namespace Tour_Planner.ViewModels
 
         private void Add_DeleteAllEvent()
         {
-            tour.deleteAllToursEvent += (_, t) =>
+            _tour.deleteAllToursEvent += (_, t) =>
             {
                 DeleteAllToursExecute();
             };
@@ -71,7 +83,7 @@ namespace Tour_Planner.ViewModels
 
         private void Add_AddTourEvent()
         {
-            tour.addTourEvent += (_, t) =>
+            _tour.addTourEvent += (_, t) =>
             {
                 AddTourExecute(t);
             };
@@ -79,24 +91,24 @@ namespace Tour_Planner.ViewModels
 
         private void DeleteAllToursExecute()
         {
-            tour.TourData.Clear();
+            _tour.TourData.Clear();
         }
         
         private void DeleteTourExecute(Tour t)
         {
             if(t != null)
             {
-                List<Tour> items = tour.TourData.Where(x => x.Id == t.Id).ToList();
+                List<Tour> items = _tour.TourData.Where(x => x.Id == t.Id).ToList();
                 foreach (Tour tou in items)
                 {
-                    tour.TourData.Remove(tou);
+                    _tour.TourData.Remove(tou);
                 }
             }           
         }
 
         private void AddTourExecute(Tour t)
         {                   
-            tour.TourData.Add(t);
+            _tour.TourData.Add(t);
         }
     }
 }
