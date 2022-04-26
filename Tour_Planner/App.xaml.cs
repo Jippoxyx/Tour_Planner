@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using Tour_Planner.PL;                  // löschen nach verschiebung des DB aufrufs
 using Tour_Planner.ViewModels;
 
 namespace Tour_Planner
@@ -19,10 +18,6 @@ namespace Tour_Planner
             var tour = new TourViewModel();
             var tourDetails = new TourDetailsViewModel();
             var searchBar = new SearchBarViewModel();
-
-            //-------------DB-Dummy-Connection------------------
-            var db = new ConfigAccess();                        // verschieben zu den Buttons
-            //-------------DB-Dummy-Connection------------------
 
             var window = new MainWindow()
             {

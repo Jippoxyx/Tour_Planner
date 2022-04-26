@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Tour_Planner.BL.Service;
 using Tour_Planner.DAL;
 
-namespace Tour_Planner.Bl
+namespace Tour_Planner.BL
 {
     public class IoCContainerConfig
     {

@@ -10,6 +10,8 @@ namespace Tour_Planner.ViewModels
     {
         TourViewModel tour;
         TourDetailsViewModel tourDetailsViewModel;
+        SearchBarViewModel searchVM;
+
 
         public MainViewModel(MenuViewModel menu, 
             TourViewModel tour, 
@@ -19,6 +21,18 @@ namespace Tour_Planner.ViewModels
             this.tour = tour;
             this.tourDetailsViewModel = tourDetails;
             SetUpTourView();
+
+            search.SearchBoxChanged += (_, searchTours) =>
+            {
+                SearchTours(searchTours);
+            };
+            this.searchVM = search;
+        }
+
+        private void SearchTours(string searchTours)
+        {
+            var result = string.Join("\n", $"Dummy: {searchTours}");
+            this.searchVM.DisplayResult(result);
         }
 
         private void SetUpTourView()

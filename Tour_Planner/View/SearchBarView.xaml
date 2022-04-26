@@ -10,19 +10,40 @@
     <WrapPanel   
         HorizontalAlignment="Right"
         VerticalAlignment="Center">
-        
+
+        <Label
+            Width="270"
+            Height="40"
+            Margin="0,0,5,0"
+            FontSize="23"
+            Content="{Binding ResultBox}"
+            />
+
         <TextBox 
             Width="208"
             Height="40"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"                    
             Background="White"
-            FontSize="22"
-           >
-            
+            FontSize="23"
+            Text="{Binding SearchBox}"
+            >
+
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+                <Style TargetType="TextBox">
+                    <Style.Triggers>
+                        <Trigger Property="IsFocused" Value="False">
+                            <Setter Property="Text" Value="search for..." />
+                            <Setter Property="Foreground" Value="Gray" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Text" Value="" />
+                            <Setter Property="Foreground" Value="Black" />
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </TextBox.Resources>
         </TextBox>
@@ -33,6 +54,7 @@
             FontSize="40" Height="39"
             Width="37"
             BorderBrush="White"
+            Command="{Binding SearchBtn}"
            >
             
             <Image Source="/Images/icons8-search-49.png" />

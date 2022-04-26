@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Tour_Planner.BL;
 using Tour_Planner.Models;
 using Tour_Planner.ViewModels.Utility;
 
@@ -13,6 +14,8 @@ namespace Tour_Planner.ViewModels
         public ICommand AddTourCommand { get; set; }
         public ICommand DeleteTourCommand { get; set; }
         public ICommand DeleteAllToursCommand { get; }
+
+        private readonly ITourFactory tourFactory = new TourFactory();
 
         public event EventHandler<Tour> addTourEvent;
         public event EventHandler<Tour> deleteTourEvent;
@@ -51,6 +54,7 @@ namespace Tour_Planner.ViewModels
                 t.Title = "Tour";
                 t.Desciption = "pretty cool!";
                 this.addTourEvent?.Invoke(this, t);
+                tourFactory.AddTour(t);
             }
                 );
 
