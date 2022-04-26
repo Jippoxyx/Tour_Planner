@@ -13,6 +13,7 @@ namespace Tour_Planner.ViewModels
         TourService _tourService;
         TourViewModel _tour;
         TourDetailsViewModel _tourDetailsViewModel;
+        SearchBarViewModel searchVM;
 
 
         public MainViewModel(MenuViewModel menu, 
