@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Tour_Planner.Models;
-using Tour_Planner.Models;
 using Tour_Planner.ViewModels.Utility;
 
 namespace Tour_Planner.ViewModels

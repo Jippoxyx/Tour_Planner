@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tour_Planner.BL.Service
 {
-    class LogService
+    class LogService 
     {
     }
 }
