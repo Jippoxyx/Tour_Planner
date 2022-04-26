@@ -4,7 +4,7 @@ using System.Linq;
 using Tour_Planner.Models;
 using Tour_Planner.ViewModels.Utility;
 using Tour_Planner.BL.Service;
-using Tour_Planner.Bl;
+using Tour_Planner.BL;
 
 namespace Tour_Planner.ViewModels
 {
