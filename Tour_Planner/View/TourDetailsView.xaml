@@ -163,8 +163,7 @@
             Grid.Row="3">
                 <ListView
                     FontSize="17"
-                    VerticalContentAlignment="Top"
-                   
+                    VerticalContentAlignment="Top"                  
                     ItemsSource="{Binding TourLogData}"
                     SelectedItem="{Binding SelectedLog}">
                     <ListView.View>
@@ -180,5 +179,7 @@
                 </ListView>
             </WrapPanel> 
         </Grid>
+        
+        
     </Grid>
 </UserControl>

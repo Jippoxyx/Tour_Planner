@@ -54,8 +54,7 @@ namespace Tour_Planner.ViewModels
             Add_AddTourEvent();
             Add_DeleteTourEvent();
             Add_DisplayTourDetails();
-            loadData();
-            loadLogData();
+            loadData();           
         }
 
         private void loadLogData()
@@ -108,6 +107,8 @@ namespace Tour_Planner.ViewModels
                 _tourService.DeleteSelectedTour(t);
                 _tour.TourData.Clear();
                 loadData();
+                _tourDetailsViewModel.TourLogData.Clear();
+                loadLogData();
             };
         }      
 
@@ -122,6 +123,7 @@ namespace Tour_Planner.ViewModels
 
         private void SetUpLogs()
         {
+            loadLogData();
             Add_AddLogEvent();
             Add_DeleteLogEvent();
         }
