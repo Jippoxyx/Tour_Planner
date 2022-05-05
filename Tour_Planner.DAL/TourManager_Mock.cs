@@ -11,7 +11,6 @@ namespace Tour_Planner.DAL
     {
 
         List<Tour> _tourData = new List<Tour>();
-        List<TourLog> _logData = new List<TourLog>();
 
         public TourManager_Mock()
         {
@@ -19,67 +18,69 @@ namespace Tour_Planner.DAL
         }
 
         private void CreateTours()
-        {
-            Tour first_Tour = new Tour()
-            {
-                Title = "0_Tour",
-                Id = new(" 0f8fad5b-d9cb-469f-a165-70967728950e")
-            };
-            first_Tour.Logs = new List<TourLog>() { new TourLog() { Comment = "0 Log" } };          
-
+        {        
             _tourData.Add(new Tour()
             {
                 Title = "0_Tour",
                 Id = new(" 0f8fad5b-d9cb-469f-a165-70967728950e"),
-                Logs = new List<TourLog>() { new TourLog() { Comment = "0 Log" } },
+                Logs = new List<TourLog>() { new TourLog() { Comment = "0 Log",
+                    Id = new(" 0f8fad5b-d9cb-469f-a165-70967728950e") } },
             });
             _tourData.Add(new Tour()
             {
                 Title = "1_Tour",
                 Id = new(" 0f8fad5b-d9cb-469f-a165-70667728950e"),
-                Logs = new List<TourLog>() { new TourLog() { Comment = "1 Log" } }
+                Logs = new List<TourLog>() { new TourLog() { Comment = "1 Log",
+                    Id = new(" 0f1fad5b-d9cb-469f-a165-70967728950e") } }
             });
             _tourData.Add(new Tour()
             {
                 Title = "2_Tour",
                 Id = new(" 0f8fad5b-d9cb-469f-a165-70867728950e"),
-                Logs = new List<TourLog>() { new TourLog() { Comment = "2 Log" } }
+                Logs = new List<TourLog>() { new TourLog() { Comment = "2 Log",
+                    Id = new(" 0f3fad5b-d9cb-469f-a165-70967728950e") } }
             });
             _tourData.Add(new Tour()
             {
                 Title = "3_Tour",
                 Id = new(" 0f8fad5b-d9cb-469f-a165-70767728950e"),
-                Logs = new List<TourLog>() { new TourLog() { Comment = "3 Log" } }
+                Logs = new List<TourLog>() { new TourLog() { Comment = "3 Log",
+                    Id = new(" 0f4fad5b-d9cb-469f-a165-70967728950e") } }
             });
             _tourData.Add(new Tour()
             {
                 Title = "4_Tour",
                 Id = new(" 0f8fad5b-d9cb-469f-a165-70567728950e"),
-                Logs = new List<TourLog>() { new TourLog() { Comment = "4 Log" } }
+                Logs = new List<TourLog>() { new TourLog() { Comment = "4 Log",
+                    Id = new(" 0f5fad5b-d9cb-469f-a165-70967728950e") } }
             });
             _tourData.Add(new Tour()
             {
                 Title = "5_Tour",
                 Id = new(" 0f8fad5b-d9cb-469f-a165-70467728950e"),
-                Logs = new List<TourLog>() { new TourLog() { Comment = "5 Log" } }
+                Logs = new List<TourLog>() { new TourLog() { Comment = "5 Log" ,
+                    Id = new(" 0f6fad5b-d9cb-469f-a165-70967728950e")} }
             });
             _tourData.Add(new Tour()
             {
                 Title = "6_Tour",
                 Id = new(" 0f8fad5b-d9cb-469f-a165-70367728950e"),
-                Logs = new List<TourLog>() { new TourLog() { Comment = "6 Log" } }
+                Logs = new List<TourLog>() { new TourLog() { Comment = "6 Log",
+                    Id = new(" 0f7fad5b-d9cb-469f-a165-70967728950e")} }
             });
             _tourData.Add(new Tour()
             {
                 Title = "7_Tour",
                 Id = new(" 0f8fad5b-d9cb-469f-a165-72867728950e"),
-                Logs = new List<TourLog>() { new TourLog() { Comment = "7 Log" } }
+                Logs = new List<TourLog>() { new TourLog() { Comment = "7 Log",
+                    Id = new(" 0f9fad5b-d9cb-469f-a165-70967728950e") } }
             });
             _tourData.Add(new Tour()
             {
                 Title = "8_Tour",
                 Id = new(" 0f8fad5b-d9cb-469f-a165-70167728950e"),
-                Logs = new List<TourLog>() { new TourLog() { Comment = "8 Log" } }
+                Logs = new List<TourLog>() { new TourLog() { Comment = "8 Log",
+                    Id = new(" 0f8fad4b-d9cb-469f-a165-70967728950e") } }
             });
         }
 
@@ -107,24 +108,36 @@ namespace Tour_Planner.DAL
             }
         }
         
-        public TourLog CreateLog()
+        public TourLog CreateLog(Tour tour)
         {
             TourLog log = new TourLog() { Comment = "new_Tour", Id = Guid.NewGuid() };
-            _logData.Add(log);
+            tour.Logs.Add(log);
             return log;
 
         }
 
-        public void DeleteTourLog(TourLog log)
+        public void DeleteTourLog(Tour tour, TourLog log)
         {
-            if(log != null)
+            try
             {
-                List<TourLog> items = _logData.Where(x => x.Id == log.Id).ToList();
-                foreach (TourLog lo in items)
+                foreach (Tour tou in _tourData)
                 {
-                    _logData.Remove(lo);
+                    if (tour.Id == tou.Id)
+                    {
+                        foreach (TourLog losss in tou.Logs)
+                        {
+                            if (log.Id == losss.Id)
+                            {
+                                tou.Logs.Remove(losss);
+                            }
+                        }
+                    }
                 }
             }
+            catch (InvalidOperationException) 
+            {
+                return;
+            }                  
         }
 
         public List<TourLog> GetTourLogData(Tour tour)

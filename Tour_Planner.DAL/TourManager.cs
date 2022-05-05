@@ -9,7 +9,7 @@ namespace Tour_Planner.DAL
 {
     class TourManager : ITourManager
     {
-        public TourLog CreateLog()
+        public TourLog CreateLog(Tour tour)
         {
             throw new NotImplementedException();
         }
@@ -29,7 +29,7 @@ namespace Tour_Planner.DAL
             throw new NotImplementedException();
         }
 
-        public void DeleteTourLog(TourLog log)
+        public void DeleteTourLog(Tour tour, TourLog log)
         {
             throw new NotImplementedException();
         }

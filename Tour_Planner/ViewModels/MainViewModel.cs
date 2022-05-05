@@ -45,6 +45,8 @@ namespace Tour_Planner.ViewModels
                 _tourService.DeleteAllTours();
                _tour.TourData.Clear();
                 loadData();
+                _tourDetailsViewModel.TourLogData.Clear();
+                loadLogData();
             };
         }
         private void SetUpTourView()
@@ -130,7 +132,7 @@ namespace Tour_Planner.ViewModels
             {
                 if(_tour.SelectedItem != null)
                 {
-                    l = _tourService.AddLog();
+                    l = _tourService.AddLog(_tour.SelectedItem);
                     _tourDetailsViewModel.TourLogData.Add(l);
                 }              
             };
@@ -142,7 +144,7 @@ namespace Tour_Planner.ViewModels
             {
                 if(_tourDetailsViewModel.SelectedLog != null)
                 {
-                    _tourService.DeleteSelectedTourLog(l);
+                    _tourService.DeleteSelectedTourLog(_tour.SelectedItem ,l);
                     _tourDetailsViewModel.TourLogData.Clear();
                     loadLogData();
                 }               
