@@ -24,7 +24,7 @@
                   ItemsSource="{Binding TourData}" SelectedItem="{Binding SelectedItem}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Tours" Width="150" DisplayMemberBinding="{Binding Title}" />
+                            <GridViewColumn Header="Tours" Width="100" DisplayMemberBinding="{Binding Title}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -61,20 +61,6 @@
  Command="{Binding DeleteTourCommand}"                   
             >
                     <Image Width="20" Source="pack://application:,,,/Images/minus_2.png" />
-                    <Button.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="5"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-
-                <Button                      
-                        Background="White"
-                             Foreground="white"
-                             FontSize="40" Height="36"
-                    Width="30"
-             Command="{Binding DeleteAllToursCommand}">
-                    <Image Width="24" Source="pack://application:,,,/Images/icons8-delete-64.png" />
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="5"/>

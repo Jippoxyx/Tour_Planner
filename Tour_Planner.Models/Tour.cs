@@ -18,6 +18,6 @@ namespace Tour_Planner.Models
         public string EstimatedTime { get; set; }
         public string RouteInformation{ get; set; }
 
-        public List<TourLog> Logs { get; set; }
+        public List<TourLog> Logs { get; set; } = new List<TourLog>();
     }
 }

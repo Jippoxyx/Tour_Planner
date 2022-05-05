@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Tour_Planner" xmlns:viewmodels="clr-namespace:Tour_Planner.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:TourDetailsViewModel}"
+             xmlns:local="clr-namespace:Tour_Planner" xmlns:viewmodels="clr-namespace:Tour_Planner.ViewModels" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <!-- d:DataContext="{d:DesignInstance Type=viewmodels:TourDetailsViewModel}"-->
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
-                <RowDefinition Height="200"/>
+                <RowDefinition Height="270"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -125,25 +126,26 @@
                            HorizontalAlignment="Right"
                 Grid.Row="2">
 
-                <Button                                                                                                                                                                                                           
+                <Button                      
                         Background="White"
                              Foreground="white"
                              FontSize="40" Height="36"
-                    Width="30">
-                    <Image Width="20" Source="pack://application:,,,/Images/minus_2.png" />
+                    Width="30"
+                    Command="{Binding AddLogCommand}">
+                    <Image Width="24" Source="pack://application:,,,/Images/icons8-plus-24.png" />
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </Button.Resources>
                 </Button>
-
-                <Button                      
+                <Button                                                                                                                                                                                                           
                         Background="White"
                              Foreground="white"
                              FontSize="40" Height="36"
-                    Width="30">
-                    <Image Width="24" Source="pack://application:,,,/Images/icons8-delete-64.png" />
+                    Width="30"
+                    Command="{Binding DeleteLogCommand}">
+                    <Image Width="20" Source="pack://application:,,,/Images/minus_2.png" />
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -152,7 +154,6 @@
                 </Button>
             </WrapPanel>
 
-            
             <WrapPanel             
                 Orientation ="Horizontal"
                 
@@ -160,22 +161,23 @@
                      HorizontalAlignment="Left"
                             Margin="10"
             Grid.Row="3">
-                <DataGrid      
-                  ScrollViewer.VerticalScrollBarVisibility="Auto"                          
-                  FontSize="13" 
-                  AlternatingRowBackground="#a59499"
-                  AutoGenerateColumns="False"
-                
-                    ItemsSource="{Binding TourLogData}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Path=Date}" Header="Date"/>
-                        <DataGridTextColumn Binding="{Binding Path=Time}" Header="Time"/>
-                        <DataGridTextColumn Binding="{Binding Path=Comment}" Header="Comment" />
-                        <DataGridTextColumn Binding="{Binding Path=Difficulty}" Header="Difficulty"/>
-                        <DataGridTextColumn Binding="{Binding Path=TotalTime}" Header="Total time"/>
-                        <DataGridTextColumn Binding="{Binding Path=Rating}" Header="Rating"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <ListView
+                    FontSize="17"
+                    VerticalContentAlignment="Top"
+                   
+                    ItemsSource="{Binding TourLogData}"
+                    SelectedItem="{Binding SelectedLog}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Date"  DisplayMemberBinding="{Binding Date}"/>
+                            <GridViewColumn Header="Time"  DisplayMemberBinding="{Binding Time}" />
+                            <GridViewColumn Header="Comment"  DisplayMemberBinding="{Binding Comment}" />
+                            <GridViewColumn Header="Difficulty" DisplayMemberBinding="{Binding Difficulty}" />
+                            <GridViewColumn Header="Total time"  DisplayMemberBinding="{Binding TotalTime}" />
+                            <GridViewColumn Header="Rating" DisplayMemberBinding="{Binding Rating}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </WrapPanel> 
         </Grid>
     </Grid>

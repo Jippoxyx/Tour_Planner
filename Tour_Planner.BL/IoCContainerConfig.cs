@@ -26,7 +26,7 @@ namespace Tour_Planner.BL
 
             // register, the ServiceProvider will provide the constructor parameters
             // based on the configuration above
-            services.AddSingleton<TourService>();
+            services.AddSingleton<Service.TourService>();
 
             // finish configuration and build the provider
             _serviceProvider = services.BuildServiceProvider();          
@@ -34,8 +34,8 @@ namespace Tour_Planner.BL
         /// <summary>
         /// Getter for retrieving and binding the MainViewModel in MainWindow.xaml as its DataContext
         /// </summary>
-        public TourService tourService
-            => _serviceProvider.GetService<TourService>(); 
+        public Service.TourService tourService
+            => _serviceProvider.GetService<Service.TourService>(); 
     }
 }
 

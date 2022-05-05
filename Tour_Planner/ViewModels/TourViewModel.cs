@@ -9,20 +9,16 @@ namespace Tour_Planner.ViewModels
 {
     public class TourViewModel : ViewModelBase
     {
-        public ObservableCollection<Tour> TourData { get; }
+        public ObservableCollection<Tour> TourData { get; set; }
             = new ObservableCollection<Tour>();
         public ICommand AddTourCommand { get; set; }
         public ICommand DeleteTourCommand { get; set; }
-        public ICommand DeleteAllToursCommand { get; }
-
-        private readonly ITourFactory tourFactory = new TourFactory();
 
         public event EventHandler<Tour> addTourEvent;
         public event EventHandler<Tour> deleteTourEvent;
-        public event EventHandler<Tour> deleteAllToursEvent;
         public event EventHandler<Tour> displayTourDetails;
 
-        private Tour _tour;
+        private Tour _tour = new Tour();
         public Tour Tour
         {
             get { return _tour; }
@@ -33,15 +29,15 @@ namespace Tour_Planner.ViewModels
             }
         }
 
-        private Tour _selectedItem;
+        private  Tour _selectedItem;
         public Tour SelectedItem
         {
-            get { return _tour; }
+            get { return _selectedItem; }
             set
             {
-                _tour = value;
+                _selectedItem = value;
                 OnPropertyChanged();
-                displayTourDetails?.Invoke(this, Tour);
+                displayTourDetails?.Invoke(this, _selectedItem);
             }
         }
 
@@ -50,23 +46,14 @@ namespace Tour_Planner.ViewModels
             AddTourCommand = new RelayCommand((_) =>
             {
                 Tour t = new Tour();
-                t.Id = Guid.NewGuid();
-                t.Title = "Tour";
-                t.Desciption = "pretty cool!";
                 this.addTourEvent?.Invoke(this, t);
-                tourFactory.AddTour(t);
             }
                 );
 
             DeleteTourCommand = new RelayCommand((_) =>
             {
                 this.deleteTourEvent?.Invoke(this, SelectedItem);
-            });
-
-            DeleteAllToursCommand = new RelayCommand((_) =>
-            {
-                this.deleteAllToursEvent?.Invoke(this, Tour);
-            });           
+            });               
         }  
     }
 }

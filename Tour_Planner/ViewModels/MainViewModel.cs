@@ -5,16 +5,17 @@ using Tour_Planner.Models;
 using Tour_Planner.ViewModels.Utility;
 using Tour_Planner.BL.Service;
 using Tour_Planner.BL;
+using System.Collections.ObjectModel;
 
 namespace Tour_Planner.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        TourService _tourService;
+        BL.Service.TourService _tourService;
         TourViewModel _tour;
         TourDetailsViewModel _tourDetailsViewModel;
-        SearchBarViewModel searchVM;
-
+        SearchBarViewModel _searchVM;
+        MenuViewModel _menu;
 
         public MainViewModel(MenuViewModel menu, 
             TourViewModel tour, 
@@ -23,20 +24,44 @@ namespace Tour_Planner.ViewModels
         {
             _tourService = new IoCContainerConfig().tourService;           
             this._tour = tour;
-            this._tourDetailsViewModel = tourDetails;
             SetUpTourView();
-
-            search.SearchBoxChanged += (_, searchTours) =>
-            {
-                SearchTours(searchTours);
-            };
-            this.searchVM = search;
+            this._tourDetailsViewModel = tourDetails;
+            SetUpLogs();
+            this._searchVM = search;
+            SetUpSearch();
+            this._menu = menu;
+            SetUpMenu();
         }
 
-        private void SearchTours(string searchTours)
+        private void SetUpMenu()
         {
-            var result = string.Join("\n", $"Dummy: {searchTours}");
-            this.searchVM.DisplayResult(result);
+            Add_DeleteAllButton();
+        }
+
+        private void Add_DeleteAllButton()
+        {
+            _menu.deleteAllToursEvent += (_, t) =>
+            {              
+                _tourService.DeleteAllTours();
+               _tour.TourData.Clear();
+                loadData();
+            };
+        }
+        private void SetUpTourView()
+        {
+            Add_AddTourEvent();
+            Add_DeleteTourEvent();
+            Add_DisplayTourDetails();
+            loadData();
+            loadLogData();
+        }
+
+        private void loadLogData()
+        {
+            foreach (var log in _tourService.GetLogData(_tour.SelectedItem))
+            {
+                _tourDetailsViewModel._tourLogData.Add(log);
+            }
         }
 
         private void loadData()
@@ -44,16 +69,21 @@ namespace Tour_Planner.ViewModels
             foreach (var tour in _tourService.GetData())
             {
                 _tour.TourData.Add(tour);
-            }          
+            }
         }
 
-        private void SetUpTourView()
+        private void SetUpSearch()
         {
-            Add_AddTourEvent();
-            Add_DeleteTourEvent();
-            Add_DeleteAllEvent();
-            Add_DisplayTourDetails();
-            loadData();
+            Add_SearchTours();
+        }
+
+        void Add_SearchTours()
+        {
+            _searchVM.SearchBoxChanged += (_, searchTours) =>
+            {
+                var result = string.Join("\n", $"Dummy: {searchTours}");
+                this._searchVM.DisplayResult(result);
+            };
         }
 
         private void Add_DisplayTourDetails()
@@ -61,55 +91,62 @@ namespace Tour_Planner.ViewModels
             _tour.displayTourDetails += (_, t) =>
             {
                 _tourDetailsViewModel.Tour = _tour.SelectedItem;
-            };
-          
+                if (_tour.SelectedItem != null)
+                {
+                    _tourDetailsViewModel.TourLogData
+                = new ObservableCollection<TourLog>(_tour.SelectedItem.Logs);
+                }                            
+            };         
         }
 
         private void Add_DeleteTourEvent()
         {
             _tour.deleteTourEvent += (_, t) =>
             {
-                DeleteTourExecute(t);
+                _tourService.DeleteSelectedTour(t);
+                _tour.TourData.Clear();
+                loadData();
             };
-        }
-        
-
-        private void Add_DeleteAllEvent()
-        {
-            _tour.deleteAllToursEvent += (_, t) =>
-            {
-                DeleteAllToursExecute();
-            };
-        }
+        }      
 
         private void Add_AddTourEvent()
         {
             _tour.addTourEvent += (_, t) =>
             {
-                AddTourExecute(t);
+                t = _tourService.AddTour();
+                _tour.TourData.Add(t);
             };
         }
 
-        private void DeleteAllToursExecute()
+        private void SetUpLogs()
         {
-            _tour.TourData.Clear();
-        }
-        
-        private void DeleteTourExecute(Tour t)
-        {
-            if(t != null)
-            {
-                List<Tour> items = _tour.TourData.Where(x => x.Id == t.Id).ToList();
-                foreach (Tour tou in items)
-                {
-                    _tour.TourData.Remove(tou);
-                }
-            }           
+            Add_AddLogEvent();
+            Add_DeleteLogEvent();
         }
 
-        private void AddTourExecute(Tour t)
-        {                   
-            _tour.TourData.Add(t);
+        private void Add_AddLogEvent()
+        {
+            _tourDetailsViewModel.addLogEvent += (_, l) =>
+            {
+                if(_tour.SelectedItem != null)
+                {
+                    l = _tourService.AddLog();
+                    _tourDetailsViewModel.TourLogData.Add(l);
+                }              
+            };
         }
+
+        private void Add_DeleteLogEvent()
+        {
+            _tourDetailsViewModel.deleteLogEvent += (_, l) =>
+            {
+                if(_tourDetailsViewModel.SelectedLog != null)
+                {
+                    _tourService.DeleteSelectedTourLog(l);
+                    _tourDetailsViewModel.TourLogData.Clear();
+                    loadLogData();
+                }               
+            };
+        }      
     }
 }

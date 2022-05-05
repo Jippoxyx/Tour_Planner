@@ -21,5 +21,34 @@ namespace Tour_Planner.BL.Service
         {
             return _tourManager.GetTourData();
         }
+
+        public Tour AddTour()
+        {
+            return _tourManager.CreateTour();
+        }
+
+        public void DeleteSelectedTour(Tour tour)
+        {
+            _tourManager.DeleteTour(tour);
+        }
+        public void DeleteSelectedTourLog(TourLog log)
+        {
+            _tourManager.DeleteTourLog(log);
+        }
+
+        public List<TourLog> GetLogData(Tour tour)
+        {
+            return _tourManager.GetTourLogData(tour);
+        }
+
+        public TourLog AddLog()
+        {
+            return _tourManager.CreateLog();
+        }       
+
+        public void DeleteAllTours()
+        {
+            _tourManager.DeleteAllTours();
+        }
     }
 }

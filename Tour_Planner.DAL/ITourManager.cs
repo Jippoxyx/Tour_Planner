@@ -9,10 +9,15 @@ namespace Tour_Planner.DAL
 {
     public interface ITourManager
     {
-        void AddTour(Tour tour);
-        void DeleteTour(Tour tour);
-        void UpdateTours(Tour tour);
+
         List<Tour> GetTourData();
+        List<TourLog> GetTourLogData(Tour tour);
+        Tour CreateTour();
+        void DeleteAllTours();
+        void DeleteTour(Tour tour);
+        TourLog CreateLog();
+        void DeleteTourLog(TourLog tourLog);
+
 
     }
 }
