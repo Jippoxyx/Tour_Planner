@@ -8,5 +8,7 @@ namespace Tour_Planner.BL
 {
     class ParseResponse
     {
+
+
     }
 }

@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\car.png" />
     <None Remove="Images\icons8-delete-64.png" />
     <None Remove="Images\icons8-minus-48.png" />
     <None Remove="Images\icons8-plus-24.png" />
@@ -31,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\car.png" />
     <Resource Include="Images\icons8-delete-64.png" />
   </ItemGroup>
 
