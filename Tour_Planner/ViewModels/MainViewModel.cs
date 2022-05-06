@@ -43,7 +43,7 @@ namespace Tour_Planner.ViewModels
             _menu.deleteAllToursEvent += (_, t) =>
             {              
                 _tourService.DeleteAllTours();
-               _tour.TourData.Clear();
+                _tour.TourData.Clear();
                 loadData();
                 _tourDetailsViewModel.TourLogData.Clear();
                 loadLogData();
@@ -96,8 +96,8 @@ namespace Tour_Planner.ViewModels
                 {
                     _tourDetailsViewModel.TourLogData
                 = new ObservableCollection<TourLog>(_tour.SelectedItem.Logs);
-                }                            
-            };         
+                }    
+            };
         }
 
         private void Add_DeleteTourEvent()
@@ -124,8 +124,20 @@ namespace Tour_Planner.ViewModels
         private void SetUpLogs()
         {
             loadLogData();
+            Add_DisplayTourLogDetails();
             Add_AddLogEvent();
             Add_DeleteLogEvent();
+        }
+
+        private void Add_DisplayTourLogDetails()
+        {
+            _tourDetailsViewModel.displayTourLogDetails += (_, t) =>
+            {            
+                if (_tour.SelectedItem != null  && _tourDetailsViewModel.SelectedLog != null)
+                {         
+                   _tourDetailsViewModel.TourLog = _tourDetailsViewModel.SelectedLog;                                  
+                }
+            };
         }
 
         private void Add_AddLogEvent()

@@ -11,8 +11,9 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
-                <RowDefinition Height="270"/>
+                <RowDefinition Height="250"/>
                 <RowDefinition Height="40"/>
+                <RowDefinition Height="55"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -24,7 +25,7 @@
                        VerticalAlignment="Center"
                       >
             </TextBlock>
-            
+
             <TabControl Grid.Row="1"
                         FontSize="20">
                 <TabItem Header="Route"/>
@@ -88,7 +89,7 @@
                          />
                             </StackPanel>
 
-                            
+
                             <StackPanel Orientation="Horizontal">
                                 <Label
                         Content = "Estimated Time"
@@ -108,11 +109,11 @@
                             </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
-                    
+
                 </TabItem>
             </TabControl>
-                          
-                <TextBlock 
+
+            <TextBlock 
                        Text="Logs"                      
                        FontSize="20"
                        Foreground="White"   
@@ -120,7 +121,7 @@
                        Background="#3d1223"
                        VerticalAlignment="Center"
                      >
-                </TextBlock>
+            </TextBlock>
 
             <WrapPanel 
                            HorizontalAlignment="Right"
@@ -159,13 +160,14 @@
                 
                              VerticalAlignment="Top"
                      HorizontalAlignment="Left"
-                            Margin="10"
-            Grid.Row="3">
+                            
+            Grid.Row="4">
                 <ListView
                     FontSize="17"
                     VerticalContentAlignment="Top"                  
                     ItemsSource="{Binding TourLogData}"
-                    SelectedItem="{Binding SelectedLog}">
+                    SelectedItem="{Binding SelectedLog}"
+                    Margin="0,0,0,0">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Date"  DisplayMemberBinding="{Binding Date}"/>
@@ -177,9 +179,30 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </WrapPanel> 
+            </WrapPanel>
+
+            <!--edit logs-->
+            <StackPanel
+                Grid.Row="3"
+                Margin="0,0,0,0">
+                <StackPanel>
+                    <TextBlock
+                         Text="Edit Log"                      
+                       FontSize="17"   >
+                    </TextBlock>
+                </StackPanel>
+                <ScrollViewer HorizontalScrollBarVisibility="Visible"
+                              VerticalScrollBarVisibility="Hidden">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Text ="{Binding TourLog.Date}"  FontSize="17"/>
+                        <TextBox Text ="{Binding TourLog.Time}"  FontSize="17"/>
+                        <TextBox Text ="{Binding TourLog.Comment}"  FontSize="17"/>
+                        <TextBox Text ="{Binding TourLog.Difficulty}"  FontSize="17"/>
+                        <TextBox Text ="{Binding TourLog.TotalTime}"  FontSize="17"/>
+                        <TextBox Text ="{Binding TourLog.Rating}"  FontSize="17"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
         </Grid>
-        
-        
     </Grid>
 </UserControl>

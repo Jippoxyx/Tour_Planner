@@ -15,7 +15,8 @@ namespace Tour_Planner.ViewModels
         public ICommand AddLogCommand { get; set; }
         public ICommand DeleteLogCommand { get; set; }
         public event EventHandler<TourLog> addLogEvent;
-        public event EventHandler<TourLog> deleteLogEvent;       
+        public event EventHandler<TourLog> deleteLogEvent;
+        public event EventHandler<TourLog> displayTourLogDetails;
 
         public TourViewModel _tourViewModel;
 
@@ -48,6 +49,18 @@ namespace Tour_Planner.ViewModels
             }
         }
 
+        public TourLog _tourLogDetail;
+
+        public TourLog TourLog
+        {
+            get { return _tourLogDetail; }
+            set
+            {
+                _tourLogDetail = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<TourLog> TourLogData
         {
             get { return _tourLogData; }
@@ -66,6 +79,7 @@ namespace Tour_Planner.ViewModels
             {
                 _selectedLogItem = value;
                 OnPropertyChanged();
+                displayTourLogDetails?.Invoke(this, _selectedLogItem);
             }
         }
     }
