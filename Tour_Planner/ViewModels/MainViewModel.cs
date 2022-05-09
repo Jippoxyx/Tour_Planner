@@ -6,6 +6,8 @@ using Tour_Planner.ViewModels.Utility;
 using Tour_Planner.BL.Service;
 using Tour_Planner.BL;
 using System.Collections.ObjectModel;
+using Tour_Planner.PL.View;
+using System.ComponentModel;
 
 namespace Tour_Planner.ViewModels
 {
@@ -16,6 +18,9 @@ namespace Tour_Planner.ViewModels
         TourDetailsViewModel _tourDetailsViewModel;
         SearchBarViewModel _searchVM;
         MenuViewModel _menu;
+
+        TourInfoViewModel _tourInfoViewModel = new TourInfoViewModel();
+        TourInfoView _tourInfoView = new TourInfoView();
 
         public MainViewModel(MenuViewModel menu, 
             TourViewModel tour, 
@@ -40,7 +45,7 @@ namespace Tour_Planner.ViewModels
 
         private void Add_DeleteAllButton()
         {
-            _menu.deleteAllToursEvent += (_, t) =>
+            _menu.deleteAllToursEvent += (_, e) =>
             {              
                 _tourService.DeleteAllTours();
                 _tour.TourData.Clear();
@@ -51,12 +56,15 @@ namespace Tour_Planner.ViewModels
         }
         private void SetUpTourView()
         {
-            Add_AddTourEvent();
+            Add_AddTourEvent();            
             Add_DeleteTourEvent();
             Add_DisplayTourDetails();
-            loadData();           
-        }
+            loadData();
 
+            //Add_AddTourFromServer();
+            Add_DisplayFromToWindow();
+        }
+      
         private void loadLogData()
         {
             foreach (var log in _tourService.GetLogData(_tour.SelectedItem))
@@ -120,6 +128,15 @@ namespace Tour_Planner.ViewModels
                 _tour.TourData.Add(t);
             };
         }
+
+        private void Add_DisplayFromToWindow()
+        {
+            _tour.displayGetTourWindow += (_, e) =>
+            {
+                _tourInfoView.Show();
+            };   
+        }
+
 
         private void SetUpLogs()
         {

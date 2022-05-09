@@ -73,7 +73,7 @@
                              Foreground="white"
                              FontSize="40" Height="40"
                     Width="60"
-             Command="{Binding DeleteAllToursCommand}">
+             Command="{Binding GetTourCommand}">
                     <Image Width="33" Source="pack://application:,,,/Images/car.png" />
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">

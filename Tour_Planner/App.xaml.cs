@@ -19,6 +19,7 @@ namespace Tour_Planner
             var tourDetails = new TourDetailsViewModel();
             var searchBar = new SearchBarViewModel();
 
+
             var window = new MainWindow()
             {
                DataContext = new MainViewModel(menu, tour, tourDetails, searchBar),

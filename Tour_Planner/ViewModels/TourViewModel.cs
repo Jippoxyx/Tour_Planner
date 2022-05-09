@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Input;
 using Tour_Planner.BL;
 using Tour_Planner.Models;
@@ -13,10 +14,12 @@ namespace Tour_Planner.ViewModels
             = new ObservableCollection<Tour>();
         public ICommand AddTourCommand { get; set; }
         public ICommand DeleteTourCommand { get; set; }
+        public ICommand GetTourCommand { get; set; }
 
         public event EventHandler<Tour> addTourEvent;
         public event EventHandler<Tour> deleteTourEvent;
         public event EventHandler<Tour> displayTourDetails;
+        public event EventHandler displayGetTourWindow;
 
         private Tour _tour = new Tour();
         public Tour Tour
@@ -53,7 +56,13 @@ namespace Tour_Planner.ViewModels
             DeleteTourCommand = new RelayCommand((_) =>
             {
                 this.deleteTourEvent?.Invoke(this, SelectedItem);
-            });               
+            });
+
+            GetTourCommand = new RelayCommand((_) =>
+            {
+                CancelEventArgs e = new CancelEventArgs();
+                this.displayGetTourWindow?.Invoke(null, EventArgs.Empty);
+            });
         }  
     }
 }

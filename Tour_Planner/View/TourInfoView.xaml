@@ -1,0 +1,41 @@
+﻿<Window x:Class="Tour_Planner.PL.View.TourInfoView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels1="clr-namespace:Tour_Planner.ViewModels"
+        mc:Ignorable="d"
+        Title="TourInfoView" Height="330" Width="400"
+         Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
+
+        </Grid.RowDefinitions>
+
+        <Label Content="From" FontSize="20" />
+        <TextBox Grid.Row="1" FontSize="20" Margin="5"/>
+        <Label  Grid.Row="2" FontSize="20" Content="To" />
+        <TextBox Grid.Row="3" FontSize="20" Margin="5"/>
+        <Button 
+            Grid.Row="4"
+            Content="Confirm"
+            Height="45"
+                Width="160"
+            Background="#571c39"
+            Foreground="white"
+            FontSize="20"
+            Margin=" 10,30,10,0" HorizontalAlignment="Center">
+
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</Window>
