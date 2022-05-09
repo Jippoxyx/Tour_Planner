@@ -9,6 +9,8 @@ namespace Tour_Planner.BL
 {
     public class OpenMapAPI
     {
+        ParseResponse _parseResponse = new ParseResponse();
+
         public async Task<Tour> GetTour(string from, string to)
         {
             var tour = new Tour();
@@ -16,14 +18,16 @@ namespace Tour_Planner.BL
             var json = JsonConvert.SerializeObject(tour);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var url = "http://open.mapquestapi.com/directions/v2/route?key=GFOcOZ5wey1dHS2iZGavpmEi7Ret0BZn&from=\"{from}\"&to=\"{to}\"";
+            //key should be from config file
+            var url = $"http://open.mapquestapi.com/directions/v2/route?key=GFOcOZ5wey1dHS2iZGavpmEi7Ret0BZn&from=\"{from}\"&to=\"{to}\"";
             using var client = new HttpClient();
 
             var response = await client.PostAsync(url, data);
+            //Console.WriteLine(response);
 
-            string result = response.Content.ReadAsStringAsync().Result;
+            string result = await response.Content.ReadAsStringAsync();
 
-            return tour;
+            return _parseResponse.ParseTourFromServer(result);
         }
     }
 }

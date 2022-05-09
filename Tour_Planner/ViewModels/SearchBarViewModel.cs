@@ -21,7 +21,7 @@ namespace Tour_Planner.ViewModels
          */
     public class SearchBarViewModel : ViewModelBase
     {
-        private readonly ITourFactory tourFactory = new TourFactory();
+        //private readonly ITourFactory tourFactory = new TourFactory();
 
         public event EventHandler<string> SearchBoxChanged;
         public ICommand SearchBtn { get; }
@@ -49,7 +49,7 @@ namespace Tour_Planner.ViewModels
 
         public void SearchTour(string search)
         {
-            tourFactory.SearchTour(search);
+           // tourFactory.SearchTour(search);
         }
 
         public string ResultBox

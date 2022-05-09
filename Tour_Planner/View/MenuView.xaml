@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:Tour_Planner.View" 
              xmlns:viewmodels="clr-namespace:Tour_Planner.ViewModels"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-             d:DataContext="{d:DesignInstance Type=viewmodels:MenuViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>

@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewmodels1="clr-namespace:Tour_Planner.ViewModels"
+        xmlns:viewmodels1="clr-namespace:Tour_Planner.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels1:TourInfoViewModel}"
         mc:Ignorable="d"
         Title="TourInfoView" Height="330" Width="400"
          Closing="Window_Closing">
@@ -18,9 +19,9 @@
         </Grid.RowDefinitions>
 
         <Label Content="From" FontSize="20" />
-        <TextBox Grid.Row="1" FontSize="20" Margin="5"/>
+        <TextBox Grid.Row="1" FontSize="20" Margin="5" Text="{Binding From}"/>
         <Label  Grid.Row="2" FontSize="20" Content="To" />
-        <TextBox Grid.Row="3" FontSize="20" Margin="5"/>
+        <TextBox Grid.Row="3" FontSize="20" Text="{Binding To}" Margin="5" />
         <Button 
             Grid.Row="4"
             Content="Confirm"
@@ -29,7 +30,8 @@
             Background="#571c39"
             Foreground="white"
             FontSize="20"
-            Margin=" 10,30,10,0" HorizontalAlignment="Center">
+            Margin=" 10,30,10,0" HorizontalAlignment="Center"
+            Command="{Binding ConfirmTourInfoCommand}">
 
             <Button.Resources>
                 <Style TargetType="Border">

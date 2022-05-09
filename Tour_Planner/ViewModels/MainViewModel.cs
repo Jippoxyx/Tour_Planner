@@ -21,6 +21,7 @@ namespace Tour_Planner.ViewModels
 
         TourInfoViewModel _tourInfoViewModel = new TourInfoViewModel();
         TourInfoView _tourInfoView = new TourInfoView();
+        OpenMapAPI _openMapAPI = new OpenMapAPI();
 
         public MainViewModel(MenuViewModel menu, 
             TourViewModel tour, 
@@ -36,6 +37,7 @@ namespace Tour_Planner.ViewModels
             SetUpSearch();
             this._menu = menu;
             SetUpMenu();
+            _tourInfoView.DataContext = _tourInfoViewModel;
         }
 
         private void SetUpMenu()
@@ -63,8 +65,20 @@ namespace Tour_Planner.ViewModels
 
             //Add_AddTourFromServer();
             Add_DisplayFromToWindow();
+            Add_UserInputTourInfo();
         }
-      
+
+        private void Add_UserInputTourInfo()
+        {
+           _tourInfoViewModel.confirmTourInfo += async(_, t) =>
+           {              
+               Tour tour = await _openMapAPI.GetTour(_tourInfoViewModel.From, _tourInfoViewModel.To);
+               //Console.WriteLine($"{tour.EstimatedTime} {tour.TourDistance}");
+               tour = _tourService.AddTour();
+               _tour.TourData.Add(tour);
+           };
+        }
+
         private void loadLogData()
         {
             foreach (var log in _tourService.GetLogData(_tour.SelectedItem))
@@ -77,7 +91,7 @@ namespace Tour_Planner.ViewModels
         {
             foreach (var tour in _tourService.GetData())
             {
-                _tour.TourData.Add(tour);
+                _tour.TourData.Add(tour);                
             }
         }
 
@@ -136,7 +150,6 @@ namespace Tour_Planner.ViewModels
                 _tourInfoView.Show();
             };   
         }
-
 
         private void SetUpLogs()
         {
