@@ -63,12 +63,11 @@ namespace Tour_Planner.ViewModels
             Add_DisplayTourDetails();
             loadData();
 
-            //Add_AddTourFromServer();
             Add_DisplayFromToWindow();
-            Add_UserInputTourInfo();
+            Add_UserInputCreateTour();
         }
 
-        private void Add_UserInputTourInfo()
+        private void Add_UserInputCreateTour()
         {
            _tourInfoViewModel.confirmTourInfo += async(_, t) =>
            {              
