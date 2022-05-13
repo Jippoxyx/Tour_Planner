@@ -85,16 +85,15 @@ namespace Tour_Planner.ViewModels
             }
         }
 
-        private static string GetImageSourceFromConfig()
-        {
-            var file = File.ReadAllText($"..\\..\\..\\config.json");
-            JObject text = JsonConvert.DeserializeObject<JObject>(file);
-            string source = text["imageSource"].ToString();
-            return source;
-        }
+        private string _displayImage;
         public string DisplayImage
         {
-            get { return GetImageSourceFromConfig();}
+            get { return _displayImage;}
+            set
+            {
+                _displayImage = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

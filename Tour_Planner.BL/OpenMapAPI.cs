@@ -22,11 +22,11 @@ namespace Tour_Planner.BL
             var tour = new Tour() { Id = Guid.NewGuid() };
 
             //key should be from config file
-            var url = $"http://open.mapquestapi.com/directions/v2/route?key={GetKeyFromConfig()}&from=\"{from}\"&to=\"{to}\"";
+            var url = $"http://open.mapquestapi.com/directions/v2/route?key={GetKeyFromConfig()}&from={from}&to={to}";
             using var client = new HttpClient();
 
             var response = await client.GetStringAsync(url);
-            //Console.WriteLine(response);
+            Console.WriteLine(response);
 
             tour = _parseResponse.ParseTourFromServer(response);
             tour.RouteImagePath = await GetTourImage(tour.Session, tour.BoundingBox);
@@ -50,10 +50,10 @@ namespace Tour_Planner.BL
             return source;
         }
 
-        public async Task<string> GetTourImage(string session, string boundingBox )
+        public async Task<string> GetTourImage(string session, string boundingBox)
         {
             //key should be from config file
-            var url = $"http://mapquestapi.com/staticmap/v5/map?key={GetKeyFromConfig()}&size=300,640&session=\"{session}\"&boundingBox= \"{boundingBox}\"";
+            var url = $"http://mapquestapi.com/staticmap/v5/map?key={GetKeyFromConfig()}&size=300,640&session={session}&boundingBox={boundingBox}";
             using var client = new HttpClient();
 
             var response = await client.GetByteArrayAsync(url);
@@ -68,7 +68,7 @@ namespace Tour_Planner.BL
                 image.Save(path, ImageFormat.Jpeg);  // Or Png
             }
 
-            return path;           
+            return path;
         }
     }
 }

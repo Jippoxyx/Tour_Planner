@@ -117,9 +117,7 @@ namespace Tour_Planner.ViewModels
             _tour.displayTourDetails += (_, t) =>
             {
                 _tourDetailsViewModel.Tour = _tour.SelectedItem;
-                //display image
-                _tourDetailsViewModel.Tour.RouteImagePath = _tourDetailsViewModel.DisplayImage;
-
+                _tourDetailsViewModel.DisplayImage = _tour.SelectedItem.RouteImagePath;
                 if (_tour.SelectedItem != null)
                 {
                     _tourDetailsViewModel.TourLogData

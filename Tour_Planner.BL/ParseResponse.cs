@@ -19,7 +19,7 @@ namespace Tour_Planner.BL
             JObject json = JObject.Parse(tourInfo);
             tourObj.TourDistance = json["route"]["distance"].ToString();
             tourObj.EstimatedTime = json["route"]["time"].ToString();
-            tourObj.Session = json["route"]["session"].ToString();
+            tourObj.Session = json["route"]["sessionId"].ToString();
             tourObj.BoundingBox += json["route"]["boundingBox"]
                 ["ul"]["lat"].ToString();
             tourObj.BoundingBox += ",";
