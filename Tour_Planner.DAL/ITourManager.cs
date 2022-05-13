@@ -12,10 +12,10 @@ namespace Tour_Planner.DAL
 
         List<Tour> GetTourData();
         List<TourLog> GetTourLogData(Tour tour);
-        Tour CreateTour();
+        void CreateTour(Tour tour);
         void DeleteAllTours();
         void DeleteTour(Tour tour);
-        TourLog CreateLog(Tour tour);
+        void CreateLog(Tour tour, TourLog log);
         void DeleteTourLog(Tour tour, TourLog log);
 
 

@@ -19,7 +19,7 @@ namespace Tour_Planner.BL
 
         public async Task<Tour> GetTour(string from, string to)
         {
-            var tour = new Tour();
+            var tour = new Tour() { Id = Guid.NewGuid() };
 
             //key should be from config file
             var url = $"http://open.mapquestapi.com/directions/v2/route?key={GetKeyFromConfig()}&from=\"{from}\"&to=\"{to}\"";

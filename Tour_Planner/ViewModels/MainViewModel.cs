@@ -23,12 +23,12 @@ namespace Tour_Planner.ViewModels
         TourInfoView _tourInfoView = new TourInfoView();
         OpenMapAPI _openMapAPI = new OpenMapAPI();
 
-        public MainViewModel(MenuViewModel menu, 
-            TourViewModel tour, 
-            TourDetailsViewModel tourDetails, 
+        public MainViewModel(MenuViewModel menu,
+            TourViewModel tour,
+            TourDetailsViewModel tourDetails,
             SearchBarViewModel search)
         {
-            _tourService = new IoCContainerConfig().tourService;           
+            _tourService = new IoCContainerConfig().tourService;
             this._tour = tour;
             SetUpTourView();
             this._tourDetailsViewModel = tourDetails;
@@ -48,7 +48,7 @@ namespace Tour_Planner.ViewModels
         private void Add_DeleteAllButton()
         {
             _menu.deleteAllToursEvent += (_, e) =>
-            {              
+            {
                 _tourService.DeleteAllTours();
                 _tour.TourData.Clear();
                 loadData();
@@ -58,7 +58,7 @@ namespace Tour_Planner.ViewModels
         }
         private void SetUpTourView()
         {
-            Add_AddTourEvent();            
+            Add_AddTourEvent();
             Add_DeleteTourEvent();
             Add_DisplayTourDetails();
             loadData();
@@ -69,28 +69,32 @@ namespace Tour_Planner.ViewModels
 
         private void Add_UserInputCreateTour()
         {
-           _tourInfoViewModel.confirmTourInfo += async(_, t) =>
-           {              
-               Tour tour = await _openMapAPI.GetTour(_tourInfoViewModel.From, _tourInfoViewModel.To);
+            _tourInfoViewModel.confirmTourInfo += async (_, t) =>
+            {
+                Tour tour = await _openMapAPI.GetTour(_tourInfoViewModel.From, _tourInfoViewModel.To);
                //Console.WriteLine($"{tour.EstimatedTime} {tour.TourDistance}");
-               tour = _tourService.AddTour();
-               _tour.TourData.Add(tour);
-           };
+               _tourService.AddTour(tour);
+                _tour.TourData.Add(tour);
+            };
         }
 
         private void loadLogData()
         {
-            foreach (var log in _tourService.GetLogData(_tour.SelectedItem))
+            if (_tour.SelectedItem != null)
             {
-                _tourDetailsViewModel._tourLogData.Add(log);
+                foreach (var log in _tourService.GetLogData(_tour.SelectedItem))
+                {
+                    _tourDetailsViewModel.TourLogData.Add(log);
+                }
             }
+
         }
 
         private void loadData()
         {
             foreach (var tour in _tourService.GetData())
             {
-                _tour.TourData.Add(tour);                
+                _tour.TourData.Add(tour);
             }
         }
 
@@ -134,13 +138,13 @@ namespace Tour_Planner.ViewModels
                 _tourDetailsViewModel.TourLogData.Clear();
                 loadLogData();
             };
-        }      
+        }
 
         private void Add_AddTourEvent()
         {
             _tour.addTourEvent += (_, t) =>
             {
-                t = _tourService.AddTour();
+                _tourService.AddTour(t);
                 _tour.TourData.Add(t);
             };
         }
@@ -150,7 +154,7 @@ namespace Tour_Planner.ViewModels
             _tour.displayGetTourWindow += (_, e) =>
             {
                 _tourInfoView.Show();
-            };   
+            };
         }
 
         private void SetUpLogs()
@@ -164,10 +168,10 @@ namespace Tour_Planner.ViewModels
         private void Add_DisplayTourLogDetails()
         {
             _tourDetailsViewModel.displayTourLogDetails += (_, t) =>
-            {            
-                if (_tour.SelectedItem != null  && _tourDetailsViewModel.SelectedLog != null)
-                {         
-                   _tourDetailsViewModel.TourLog = _tourDetailsViewModel.SelectedLog;                                  
+            {
+                if (_tour.SelectedItem != null && _tourDetailsViewModel.SelectedLog != null)
+                {
+                    _tourDetailsViewModel.TourLog = _tourDetailsViewModel.SelectedLog;
                 }
             };
         }
@@ -176,11 +180,11 @@ namespace Tour_Planner.ViewModels
         {
             _tourDetailsViewModel.addLogEvent += (_, l) =>
             {
-                if(_tour.SelectedItem != null)
+                if (_tour.SelectedItem != null)
                 {
-                    l = _tourService.AddLog(_tour.SelectedItem);
+                    _tourService.AddLog(_tour.SelectedItem, l);
                     _tourDetailsViewModel.TourLogData.Add(l);
-                }              
+                }
             };
         }
 
@@ -188,13 +192,13 @@ namespace Tour_Planner.ViewModels
         {
             _tourDetailsViewModel.deleteLogEvent += (_, l) =>
             {
-                if(_tourDetailsViewModel.SelectedLog != null)
+                if (_tourDetailsViewModel.SelectedLog != null)
                 {
-                    _tourService.DeleteSelectedTourLog(_tour.SelectedItem ,l);
+                    _tourService.DeleteSelectedTourLog(_tour.SelectedItem, l);
                     _tourDetailsViewModel.TourLogData.Clear();
                     loadLogData();
-                }               
+                }
             };
-        }      
+        }
     }
 }

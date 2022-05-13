@@ -11,10 +11,11 @@ namespace Tour_Planner.BL
 {
     public class ParseResponse
     {
-        Tour tourObj = new Tour();
+        
 
         public Tour ParseTourFromServer(string tourInfo)
         {
+            Tour tourObj = new Tour() { Id = Guid.NewGuid() };
             JObject json = JObject.Parse(tourInfo);
             tourObj.TourDistance = json["route"]["distance"].ToString();
             tourObj.EstimatedTime = json["route"]["time"].ToString();

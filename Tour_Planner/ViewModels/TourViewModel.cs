@@ -48,7 +48,7 @@ namespace Tour_Planner.ViewModels
         {
             AddTourCommand = new RelayCommand((_) =>
             {
-                Tour t = new Tour();
+                Tour t = new Tour() { Title = "new_Tour", Id = Guid.NewGuid() };
                 this.addTourEvent?.Invoke(this, t);
             }
                 );
