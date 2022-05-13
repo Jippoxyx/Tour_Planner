@@ -13,7 +13,7 @@ namespace Tour_Planner.BL
 
         public async Task<Tour> GetTour(string from, string to)
         {
-            var tour = new Tour();
+            var tour = new Tour() { Id = Guid.NewGuid() };
 
             var json = JsonConvert.SerializeObject(tour);
             var data = new StringContent(json, Encoding.UTF8, "application/json");

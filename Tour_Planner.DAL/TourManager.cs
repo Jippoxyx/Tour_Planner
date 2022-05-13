@@ -40,7 +40,7 @@ namespace Tour_Planner.DAL
                 $" values (@id, @title, @description, @_from, @_to, @transport_type, @distance, @estimated_time, @route_image_path);";
             NpgsqlCommand command = new NpgsqlCommand(query, conn);
             command.Parameters.AddWithValue("id", tour.Id);
-            command.Parameters.AddWithValue("title", tour.Title);
+            command.Parameters.AddWithValue("title", tour.Title ?? string.Empty);
             command.Parameters.AddWithValue("description", tour.Desciption ?? string.Empty);
             command.Parameters.AddWithValue("_from", tour.From ?? string.Empty);
             command.Parameters.AddWithValue("_to", tour.To ?? string.Empty);
