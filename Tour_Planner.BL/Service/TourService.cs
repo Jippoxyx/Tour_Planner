@@ -22,9 +22,10 @@ namespace Tour_Planner.BL.Service
             return _tourManager.GetTourData();
         }
 
-        public Tour AddTour()
+        public void AddTour(Tour tour)
         {
-            return _tourManager.CreateTour();
+            //save in db 
+            _tourManager.CreateTour(tour);
         }
 
         public void DeleteSelectedTour(Tour tour)
@@ -41,9 +42,9 @@ namespace Tour_Planner.BL.Service
             return _tourManager.GetTourLogData(tour);
         }
 
-        public TourLog AddLog(Tour tour)
+        public void AddLog(Tour tour, TourLog log)
         {
-            return _tourManager.CreateLog(tour);
+            _tourManager.CreateLog(tour, log);
         }       
 
         public void DeleteAllTours()

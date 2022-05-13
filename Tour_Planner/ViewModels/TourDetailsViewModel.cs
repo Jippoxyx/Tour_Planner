@@ -24,12 +24,11 @@ namespace Tour_Planner.ViewModels
         {
             AddLogCommand = new RelayCommand((_) =>
             {
-                TourLog l = new TourLog();
+                TourLog l= new TourLog() { Comment = "new_log", Id = Guid.NewGuid() };
                 this.addLogEvent?.Invoke(this, l);
             });
             DeleteLogCommand = new RelayCommand((_) =>
-            {
-                TourLog l = new TourLog();
+            {           
                 this.deleteLogEvent?.Invoke(this, SelectedLog);
             });
         }

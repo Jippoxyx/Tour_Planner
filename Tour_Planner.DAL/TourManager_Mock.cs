@@ -89,11 +89,9 @@ namespace Tour_Planner.DAL
             return _tourData;
         }
 
-        public Tour CreateTour()
+        public void CreateTour(Tour tour)
         {
-            Tour tou = new Tour() { Title = "new_Tour", Id = Guid.NewGuid() };
-            _tourData.Add(tou);
-            return tou;
+            _tourData.Add(tour);
         }
 
         public void DeleteTour(Tour tour)
@@ -108,12 +106,9 @@ namespace Tour_Planner.DAL
             }
         }
         
-        public TourLog CreateLog(Tour tour)
-        {
-            TourLog log = new TourLog() { Comment = "new_Tour", Id = Guid.NewGuid() };
+        public void CreateLog(Tour tour, TourLog log)
+        {        
             tour.Logs.Add(log);
-            return log;
-
         }
 
         public void DeleteTourLog(Tour tour, TourLog log)
