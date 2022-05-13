@@ -16,10 +16,20 @@ namespace Tour_Planner.BL
         public Tour ParseTourFromServer(string tourInfo)
         {
             JObject json = JObject.Parse(tourInfo);
-           // Console.WriteLine(json);
             tourObj.TourDistance = json["route"]["distance"].ToString();
             tourObj.EstimatedTime = json["route"]["time"].ToString();
-            
+            tourObj.Session = json["route"]["session"].ToString();
+            tourObj.BoundingBox += json["route"]["boundingBox"]
+                ["ul"]["lat"].ToString();
+            tourObj.BoundingBox += ",";
+            tourObj.BoundingBox += json["route"]["boundingBox"]
+                ["ul"]["lng"].ToString();
+            tourObj.BoundingBox += ",";
+            tourObj.BoundingBox += json["route"]["boundingBox"]
+                ["lr"]["lat"].ToString();
+            tourObj.BoundingBox += ",";
+            tourObj.BoundingBox += json["route"]["boundingBox"]
+                ["lr"]["lng"].ToString();
             return tourObj;
         }
     }

@@ -113,11 +113,14 @@ namespace Tour_Planner.ViewModels
             _tour.displayTourDetails += (_, t) =>
             {
                 _tourDetailsViewModel.Tour = _tour.SelectedItem;
+                //display image
+                _tourDetailsViewModel.Tour.RouteImagePath = _tourDetailsViewModel.DisplayImage;
+
                 if (_tour.SelectedItem != null)
                 {
                     _tourDetailsViewModel.TourLogData
                 = new ObservableCollection<TourLog>(_tour.SelectedItem.Logs);
-                }    
+                }                
             };
         }
 

@@ -17,6 +17,8 @@ namespace Tour_Planner.Models
         public string TourDistance { get; set; }
         public string EstimatedTime { get; set; }
         public string RouteImagePath { get; set; }
+        public string Session { get; set; }
+        public string BoundingBox { get; set; }
 
         public List<TourLog> Logs { get; set; } = new List<TourLog>();
     }

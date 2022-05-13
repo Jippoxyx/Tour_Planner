@@ -50,5 +50,10 @@ namespace Tour_Planner.BL.Service
         {
             _tourManager.DeleteAllTours();
         }
+
+        public void GetTourImage()
+        {
+
+        }
     }
 }

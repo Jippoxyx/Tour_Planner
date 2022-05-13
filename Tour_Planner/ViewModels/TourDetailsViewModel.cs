@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -81,6 +84,18 @@ namespace Tour_Planner.ViewModels
                 OnPropertyChanged();
                 displayTourLogDetails?.Invoke(this, _selectedLogItem);
             }
+        }
+
+        private static string GetImageSourceFromConfig()
+        {
+            var file = File.ReadAllText($"..\\..\\..\\config.json");
+            JObject text = JsonConvert.DeserializeObject<JObject>(file);
+            string source = text["imageSource"].ToString();
+            return source;
+        }
+        public string DisplayImage
+        {
+            get { return GetImageSourceFromConfig();}
         }
     }
 }

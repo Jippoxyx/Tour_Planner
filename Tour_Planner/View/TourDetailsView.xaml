@@ -28,7 +28,9 @@
 
             <TabControl Grid.Row="1"
                         FontSize="20">
-                <TabItem Header="Route"/>
+                <TabItem Header="Route" >
+                    <Image Source="{Binding DisplayImage}"/>
+                </TabItem>
                 <TabItem Header="Description">
 
                     <ScrollViewer VerticalScrollBarVisibility="Auto"
@@ -48,7 +50,7 @@
                         Content = "Description"
                                 Width="175">
                                 </Label>
-                                <TextBox Text ="{Binding Tour.Desciption}" Width="298" Margin="20,0,0,0"
+                                <TextBox Text ="{Binding Tour.Desciption,UpdateSourceTrigger=LostFocus}" Width="298" Margin="20,0,0,0"
                          />
                             </StackPanel>
 
