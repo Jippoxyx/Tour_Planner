@@ -17,11 +17,10 @@ namespace Tour_Planner.BL
     {
         ParseResponse _parseResponse = new ParseResponse();
 
-        public async Task<Tour> GetTour(string from, string to)
+        public async Task<Tour> GetTour(string title, string from, string to)
         {
             var tour = new Tour() { Id = Guid.NewGuid() };
 
-            //key should be from config file
             var url = $"http://open.mapquestapi.com/directions/v2/route?key={GetKeyFromConfig()}&from={from}&to={to}";
             using var client = new HttpClient();
 
@@ -30,6 +29,9 @@ namespace Tour_Planner.BL
 
             tour = _parseResponse.ParseTourFromServer(response);
             tour.RouteImagePath = await GetTourImage(tour.Session, tour.BoundingBox);
+            if (String.IsNullOrEmpty(title))
+                title = "New_S.Tour";
+            tour.Title = title;
 
             return tour;
         }
@@ -52,14 +54,12 @@ namespace Tour_Planner.BL
 
         public async Task<string> GetTourImage(string session, string boundingBox)
         {
-            //key should be from config file
-            var url = $"http://mapquestapi.com/staticmap/v5/map?key={GetKeyFromConfig()}&size=300,640&session={session}&boundingBox={boundingBox}";
+            var url = $"http://mapquestapi.com/staticmap/v5/map?key={GetKeyFromConfig()}&size=800,300&session={session}&boundingBox={boundingBox}";
             using var client = new HttpClient();
 
             var response = await client.GetByteArrayAsync(url);
 
             byte[] bitmap = response;
-
 
             string path = GetImageSourceFromConfig();
             path += $"{Guid.NewGuid()}.jpeg";
@@ -67,7 +67,6 @@ namespace Tour_Planner.BL
             {
                 image.Save(path, ImageFormat.Jpeg);  // Or Png
             }
-
             return path;
         }
     }

@@ -71,7 +71,7 @@ namespace Tour_Planner.ViewModels
         {
             _tourInfoViewModel.confirmTourInfo += async (_, t) =>
             {
-                Tour tour = await _openMapAPI.GetTour(_tourInfoViewModel.From, _tourInfoViewModel.To);
+                Tour tour = await _openMapAPI.GetTour(_tourInfoViewModel.TourTitle ,_tourInfoViewModel.From, _tourInfoViewModel.To);
                //Console.WriteLine($"{tour.EstimatedTime} {tour.TourDistance}");
                _tourService.AddTour(tour);
                 _tour.TourData.Add(tour);
@@ -117,11 +117,12 @@ namespace Tour_Planner.ViewModels
             _tour.displayTourDetails += (_, t) =>
             {
                 _tourDetailsViewModel.Tour = _tour.SelectedItem;
-                _tourDetailsViewModel.DisplayImage = _tour.SelectedItem.RouteImagePath;
+                
                 if (_tour.SelectedItem != null)
                 {
                     _tourDetailsViewModel.TourLogData
                 = new ObservableCollection<TourLog>(_tour.SelectedItem.Logs);
+                    _tourDetailsViewModel.DisplayImage = _tour.SelectedItem.RouteImagePath;
                 }                
             };
         }

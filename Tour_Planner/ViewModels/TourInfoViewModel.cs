@@ -44,5 +44,13 @@ namespace Tour_Planner.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        string _tourTitle;
+        public string TourTitle
+        { 
+            get { return _tourTitle; } 
+            set { _tourTitle = value; OnPropertyChanged(); 
+            } 
+        }
     }
 }
