@@ -12,7 +12,9 @@ namespace Tour_Planner.ViewModels
     public class MenuViewModel : ViewModelBase
     {
         public ICommand DeleteAllToursCommand { get; set; }
+        public ICommand CreatePDFCommand { get; set; }
         public event EventHandler deleteAllToursEvent;
+        public event EventHandler createPDFEvent;
 
         private Tour _tour;
         public Tour Tour
@@ -30,6 +32,11 @@ namespace Tour_Planner.ViewModels
             DeleteAllToursCommand = new RelayCommand((_) =>
             {
                 this.deleteAllToursEvent?.Invoke(null, EventArgs.Empty);
+            });
+
+            CreatePDFCommand = new RelayCommand((_) =>
+            {
+                this.createPDFEvent?.Invoke(null, EventArgs.Empty);
             });
         }
     }

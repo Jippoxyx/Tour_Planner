@@ -42,7 +42,16 @@ namespace Tour_Planner.ViewModels
 
         private void SetUpMenu()
         {
+            Add_CreatePDFButton();
             Add_DeleteAllButton();
+        }
+
+        public void Add_CreatePDFButton()
+        {
+            _menu.createPDFEvent += (_, e) =>
+            {
+                _tourService.CreatePDFFromSelectedTour(_tour.SelectedItem);
+            };
         }
 
         private void Add_DeleteAllButton()

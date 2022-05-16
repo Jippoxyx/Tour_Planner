@@ -11,12 +11,13 @@
     <Grid>
         <StackPanel>
             <Button 
-            Content="File"
+            Content="Create PDF"
             Height="45"
             Background="#571c39"
             Foreground="white"
             FontSize="20"
-            Margin=" 10,30,10,0">
+            Margin=" 10,30,10,0"
+            Command="{Binding CreatePDFCommand}">
 
                 
                 <Button.Resources>

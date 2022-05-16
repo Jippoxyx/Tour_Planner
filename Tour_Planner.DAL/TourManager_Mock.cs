@@ -21,7 +21,7 @@ namespace Tour_Planner.DAL
         {        
             _tourData.Add(new Tour()
             {
-                Title = "0_Tour",
+                Title = "0_Tour", Desciption = new ("heyaa"),
                 Id = new(" 0f8fad5b-d9cb-469f-a165-70967728950e"),
                 Logs = new List<TourLog>() { new TourLog() { Comment = "0 Log",
                     Id = new(" 0f8fad5b-d9cb-469f-a165-70967728950e") } },
