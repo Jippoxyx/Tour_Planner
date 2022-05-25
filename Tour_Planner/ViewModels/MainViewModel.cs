@@ -96,7 +96,6 @@ namespace Tour_Planner.ViewModels
                     _tourDetailsViewModel.TourLogData.Add(log);
                 }
             }
-
         }
 
         private void loadData()
