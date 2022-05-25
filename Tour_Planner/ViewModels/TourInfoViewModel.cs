@@ -45,11 +45,23 @@ namespace Tour_Planner.ViewModels
             }
         }
 
+        public string _transportType;
+        public string TransportType 
+        {
+            get { return _transportType; }
+            set
+            {
+                _transportType = value;
+                OnPropertyChanged();
+            }
+        }
+
         string _tourTitle;
         public string TourTitle
         { 
             get { return _tourTitle; } 
-            set { _tourTitle = value; OnPropertyChanged(); 
+            set { _tourTitle = value; 
+                OnPropertyChanged(); 
             } 
         }
     }

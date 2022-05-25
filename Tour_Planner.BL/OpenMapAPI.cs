@@ -17,7 +17,7 @@ namespace Tour_Planner.BL
     {
         ParseResponse _parseResponse = new ParseResponse();
 
-        public async Task<Tour> GetTour(string title, string from, string to)
+        public async Task<Tour> GetTour(string title, string from, string to, string transportType)
         {
             var tour = new Tour() { Id = Guid.NewGuid() };
 
@@ -31,7 +31,11 @@ namespace Tour_Planner.BL
             tour.RouteImagePath = await GetTourImage(tour.Session, tour.BoundingBox);
             if (String.IsNullOrEmpty(title))
                 title = "New_S.Tour";
+            if (String.IsNullOrEmpty(transportType))
+                transportType = "unknown";
+
             tour.Title = title;
+            tour.TransportType = transportType;
 
             return tour;
         }

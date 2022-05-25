@@ -80,7 +80,7 @@ namespace Tour_Planner.ViewModels
         {
             _tourInfoViewModel.confirmTourInfo += async (_, t) =>
             {
-                Tour tour = await _openMapAPI.GetTour(_tourInfoViewModel.TourTitle ,_tourInfoViewModel.From, _tourInfoViewModel.To);
+                Tour tour = await _openMapAPI.GetTour(_tourInfoViewModel.TourTitle ,_tourInfoViewModel.From, _tourInfoViewModel.To, _tourInfoViewModel.TransportType);
                //Console.WriteLine($"{tour.EstimatedTime} {tour.TourDistance}");
                _tourService.AddTour(tour);
                 _tour.TourData.Add(tour);
