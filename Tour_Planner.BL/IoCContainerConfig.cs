@@ -19,14 +19,14 @@ namespace Tour_Planner.BL
         public IoCContainerConfig()
         {
             var services = new ServiceCollection();
-
+            
             // whenever an IArgumentHandler is required, the service will inject a CommandLineArgumentHandler
             // it will always provide the same CommandLineArgumentHandler instance, because we register it as a singleton
             services.AddSingleton<ITourManager, TourManager>();
 
             // register, the ServiceProvider will provide the constructor parameters
             // based on the configuration above
-            services.AddSingleton<Service.TourService>();
+            services.AddSingleton<TourService>();
 
             // finish configuration and build the provider
             _serviceProvider = services.BuildServiceProvider();          
@@ -34,8 +34,8 @@ namespace Tour_Planner.BL
         /// <summary>
         /// Getter for retrieving and binding the MainViewModel in MainWindow.xaml as its DataContext
         /// </summary>
-        public Service.TourService tourService
-            => _serviceProvider.GetService<Service.TourService>(); 
+        public TourService tourService
+            => _serviceProvider.GetService<TourService>(); 
     }
 }
 

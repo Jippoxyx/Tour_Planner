@@ -9,7 +9,6 @@ namespace Tour_Planner.DAL
 {
     public interface ITourManager
     {
-
         List<Tour> GetTourData();
         List<TourLog> GetTourLogData(Tour tour);
         void CreateTour(Tour tour);
@@ -17,7 +16,5 @@ namespace Tour_Planner.DAL
         void DeleteTour(Tour tour);
         void CreateLog(Tour tour, TourLog log);
         void DeleteTourLog(Tour tour, TourLog log);
-
-
     }
 }

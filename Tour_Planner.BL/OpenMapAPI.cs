@@ -31,11 +31,11 @@ namespace Tour_Planner.BL
             tour.RouteImagePath = await GetTourImage(tour.Session, tour.BoundingBox);
             if (String.IsNullOrEmpty(title))
                 title = "New_S.Tour";
-            if (String.IsNullOrEmpty(transportType))
-                transportType = "unknown";
 
             tour.Title = title;
             tour.TransportType = transportType;
+            tour.From = from;
+            tour.To = to;   
 
             return tour;
         }

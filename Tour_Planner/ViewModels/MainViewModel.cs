@@ -8,12 +8,13 @@ using Tour_Planner.BL;
 using System.Collections.ObjectModel;
 using Tour_Planner.PL.View;
 using System.ComponentModel;
+using System.Windows;
 
 namespace Tour_Planner.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        BL.Service.TourService _tourService;
+        TourService _tourService;
         TourViewModel _tour;
         TourDetailsViewModel _tourDetailsViewModel;
         SearchBarViewModel _searchVM;
@@ -80,10 +81,28 @@ namespace Tour_Planner.ViewModels
         {
             _tourInfoViewModel.confirmTourInfo += async (_, t) =>
             {
-                Tour tour = await _openMapAPI.GetTour(_tourInfoViewModel.TourTitle ,_tourInfoViewModel.From, _tourInfoViewModel.To, _tourInfoViewModel.TransportType);
-               //Console.WriteLine($"{tour.EstimatedTime} {tour.TourDistance}");
-               _tourService.AddTour(tour);
-                _tour.TourData.Add(tour);
+                if(String.IsNullOrEmpty(_tourInfoViewModel.From) || String.IsNullOrEmpty(_tourInfoViewModel.To))
+                {
+                    MessageBox.Show(" From and To must be filled in");
+                    return;
+                }
+                else if (_tourInfoViewModel.TransportType != "fastest" ||
+                _tourInfoViewModel.TransportType != "shortest" ||
+                _tourInfoViewModel.TransportType != "pedestrian" ||
+                _tourInfoViewModel.TransportType != "bicycle" ||
+                String.IsNullOrEmpty(_tourInfoViewModel.TransportType))
+                {
+                    MessageBox.Show("Transport Type doesn´t exist. " +
+                        "Choose between fastest, pedestrian, shortest and bicycle");
+                    return;
+                }
+                else
+                {
+                    Tour tour = await _openMapAPI.GetTour(_tourInfoViewModel.TourTitle, _tourInfoViewModel.From, _tourInfoViewModel.To, _tourInfoViewModel.TransportType);
+                    //Console.WriteLine($"{tour.EstimatedTime} {tour.TourDistance}");
+                    _tourService.AddTour(tour);
+                    _tour.TourData.Add(tour);
+                }          
             };
         }
 

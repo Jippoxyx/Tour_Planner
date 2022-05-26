@@ -143,8 +143,7 @@ namespace Tour_Planner.DAL
                 foreach (TourLog log in tour.Logs)
                 {
                     logList.Add(log);
-                }
-               
+                }              
             }
             return logList;
         }
