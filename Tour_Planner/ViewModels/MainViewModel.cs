@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using Tour_Planner.PL.View;
 using System.ComponentModel;
 using System.Windows;
+using Tour_Planner.Logging;
 
 namespace Tour_Planner.ViewModels
 {
@@ -23,6 +24,7 @@ namespace Tour_Planner.ViewModels
         TourInfoViewModel _tourInfoViewModel = new TourInfoViewModel();
         TourInfoView _tourInfoView = new TourInfoView();
         OpenMapAPI _openMapAPI = new OpenMapAPI();
+        ILoggerWrapper _loggerWrapper = LoggerFactory.GetLogger();
 
         public MainViewModel(MenuViewModel menu,
             TourViewModel tour,
@@ -52,6 +54,8 @@ namespace Tour_Planner.ViewModels
             _menu.createPDFEvent += (_, e) =>
             {
                 _tourService.CreatePDFFromSelectedTour(_tour.SelectedItem);
+                MessageBox.Show("You have created a PDF with the selected Tour");
+                _loggerWrapper.Debug("User created a PDF with selected Tour");
             };
         }
 
@@ -64,6 +68,8 @@ namespace Tour_Planner.ViewModels
                 loadData();
                 _tourDetailsViewModel.TourLogData.Clear();
                 loadLogData();
+
+                MessageBox.Show("You deleted all Tours");
             };
         }
         private void SetUpTourView()
@@ -86,10 +92,10 @@ namespace Tour_Planner.ViewModels
                     MessageBox.Show(" From and To must be filled in");
                     return;
                 }
-                else if (_tourInfoViewModel.TransportType != "fastest" ||
-                _tourInfoViewModel.TransportType != "shortest" ||
-                _tourInfoViewModel.TransportType != "pedestrian" ||
-                _tourInfoViewModel.TransportType != "bicycle" ||
+                else if (_tourInfoViewModel.TransportType != "fastest" &&
+                _tourInfoViewModel.TransportType != "shortest" &&
+                _tourInfoViewModel.TransportType != "pedestrian" &&
+                _tourInfoViewModel.TransportType != "bicycle" &&
                 String.IsNullOrEmpty(_tourInfoViewModel.TransportType))
                 {
                     MessageBox.Show("Transport Type doesn´t exist. " +
@@ -102,6 +108,7 @@ namespace Tour_Planner.ViewModels
                     //Console.WriteLine($"{tour.EstimatedTime} {tour.TourDistance}");
                     _tourService.AddTour(tour);
                     _tour.TourData.Add(tour);
+                    _loggerWrapper.Debug("User requested Tour from Server");
                 }          
             };
         }
@@ -172,6 +179,7 @@ namespace Tour_Planner.ViewModels
             {
                 _tourService.AddTour(t);
                 _tour.TourData.Add(t);
+                _loggerWrapper.Debug("User added a Tour");
             };
         }
 

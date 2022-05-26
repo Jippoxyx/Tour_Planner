@@ -151,11 +151,20 @@ namespace Tour_Planner.BL.Service
                     .SetBold()
                     .SetFontColor(ColorConstants.BLACK);
             document.Add(imageHeader);
-            ImageData imageData = ImageDataFactory.Create("..\\..\\..\\images\\car.png");
+
+            ImageData imageData;
+            if (String.IsNullOrEmpty(tour.RouteImagePath))
+            {
+                //for Mock Data
+                imageData = ImageDataFactory.Create("..\\..\\.\\images\\car.png");
+            }
+            else
+            {
+                imageData = ImageDataFactory.Create(tour.RouteImagePath);
+            }         
             document.Add(new Image(imageData));
 
             document.Close();
-
         }
         private static Cell getHeaderCell(String s)
         {

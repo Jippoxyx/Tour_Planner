@@ -6,12 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Tour_Planner.Logging;
 
 namespace Tour_Planner.DAL
 {
     public sealed class ConfigClass
     {
         private static ConfigClass instance = null;
+        ILoggerWrapper _loggerWrapper = LoggerFactory.GetLogger();
 
         private ConfigClass()
         {
@@ -31,27 +33,54 @@ namespace Tour_Planner.DAL
 
         public string GetConnectionString()
         {
-            var file = File.ReadAllText($"..\\..\\..\\config.json");
+            string connect = null;
+            try
+            {
+                var file = File.ReadAllText($"..\\..\\..\\config.json");
 
-            JObject text = JsonConvert.DeserializeObject<JObject>(file);    // JObject oder dynamic(ohne ToString())
-            string connect = text["database"]["connection"].ToString();
-
+                JObject text = JsonConvert.DeserializeObject<JObject>(file);    // JObject oder dynamic(ohne ToString())
+                connect = text["database"]["connection"].ToString();
+            }
+            catch(Exception ex)
+            {
+                _loggerWrapper.Warn("Cant find [database] in config");
+            }
+            
             return connect;
         }
 
         public string GetKeyFromConfig()
         {
-            var file = File.ReadAllText($"..\\..\\..\\config.json");
-            JObject text = JsonConvert.DeserializeObject<JObject>(file);
-            string key = text["key"].ToString();
+            string key = null;
+            try
+            {
+                var file = File.ReadAllText($"..\\..\\..\\config.json");
+                JObject text = JsonConvert.DeserializeObject<JObject>(file);
+                 key = text["key"].ToString();
+
+            }
+            catch (Exception ex)
+            {
+                _loggerWrapper.Warn("Cant find [key] in config");
+            }
+            
             return key;
         }
 
         public string GetImageSourceFromConfig()
         {
-            var file = File.ReadAllText($"..\\..\\..\\config.json");
-            JObject text = JsonConvert.DeserializeObject<JObject>(file);
-            string source = text["imageSource"].ToString();
+            string source = null;
+            try
+            {
+                var file = File.ReadAllText($"..\\..\\..\\config.json");
+                JObject text = JsonConvert.DeserializeObject<JObject>(file);
+                source = text["imageSource"].ToString();
+            }
+            catch(Exception ex)
+            {
+                _loggerWrapper.Warn("Cant find [imageSource] in config");
+            }
+            
             return source;
         }
     }

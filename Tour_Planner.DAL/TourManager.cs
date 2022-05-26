@@ -10,7 +10,7 @@ namespace Tour_Planner.DAL
 {
     public class TourManager : ITourManager
     {
-        private readonly NpgsqlConnection conn = new(DBConfigAccess.Instance().GetConnectionString());
+        private readonly NpgsqlConnection conn = new(ConfigClass.Instance.GetConnectionString());
 
         public void CreateLog(Tour tour, TourLog log)
         {
