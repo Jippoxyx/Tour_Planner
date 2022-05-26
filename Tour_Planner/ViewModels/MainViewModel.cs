@@ -7,9 +7,9 @@ using Tour_Planner.BL.Service;
 using Tour_Planner.BL;
 using System.Collections.ObjectModel;
 using Tour_Planner.PL.View;
-using System.ComponentModel;
 using System.Windows;
 using Tour_Planner.Logging;
+using Tour_Planner.BL.Tour_Documentation;
 
 namespace Tour_Planner.ViewModels
 {
@@ -25,6 +25,7 @@ namespace Tour_Planner.ViewModels
         TourInfoView _tourInfoView = new TourInfoView();
         OpenMapAPI _openMapAPI = new OpenMapAPI();
         ILoggerWrapper _loggerWrapper = LoggerFactory.GetLogger();
+        Reporting _report = new Reporting();
 
         public MainViewModel(MenuViewModel menu,
             TourViewModel tour,
@@ -47,15 +48,39 @@ namespace Tour_Planner.ViewModels
         {
             Add_CreatePDFButton();
             Add_DeleteAllButton();
+            Add_ExportTour();
+        }
+
+        private void Add_ExportTour()
+        {
+            _menu.exportTourEvent += (_, e) =>
+            {
+                if (_tour.SelectedItem != null)
+                {
+                    _report.exportTour(_tour.SelectedItem);
+                    MessageBox.Show("You have exported the selected Tour");
+                }
+                else
+                {
+                    MessageBox.Show("Please select a Tour");
+                }
+            };
         }
 
         public void Add_CreatePDFButton()
         {
             _menu.createPDFEvent += (_, e) =>
             {
-                _tourService.CreatePDFFromSelectedTour(_tour.SelectedItem);
-                MessageBox.Show("You have created a PDF with the selected Tour");
-                _loggerWrapper.Debug("User created a PDF with selected Tour");
+                if (_tour.SelectedItem != null)
+                {
+                    _report.CreatePDFFromSelectedTour(_tour.SelectedItem);
+                    MessageBox.Show("You have created a PDF with the selected Tour");
+                    _loggerWrapper.Debug("User created a PDF with selected Tour");
+                }
+                else
+                {
+                    MessageBox.Show("Please select a Tour");
+                }               
             };
         }
 
@@ -64,12 +89,15 @@ namespace Tour_Planner.ViewModels
             _menu.deleteAllToursEvent += (_, e) =>
             {
                 _tourService.DeleteAllTours();
+                if (_tour.TourData.Count > 0)
+                {
+                    MessageBox.Show("You deleted all Tours");
+                }
                 _tour.TourData.Clear();
                 loadData();
                 _tourDetailsViewModel.TourLogData.Clear();
                 loadLogData();
-
-                MessageBox.Show("You deleted all Tours");
+           
             };
         }
         private void SetUpTourView()
@@ -104,7 +132,8 @@ namespace Tour_Planner.ViewModels
                 }
                 else
                 {
-                    Tour tour = await _openMapAPI.GetTour(_tourInfoViewModel.TourTitle, _tourInfoViewModel.From, _tourInfoViewModel.To, _tourInfoViewModel.TransportType);
+                    Tour tour = await _openMapAPI.GetTour(_tourInfoViewModel.TourTitle, 
+                        _tourInfoViewModel.From, _tourInfoViewModel.To, _tourInfoViewModel.TransportType);
                     //Console.WriteLine($"{tour.EstimatedTime} {tour.TourDistance}");
                     _tourService.AddTour(tour);
                     _tour.TourData.Add(tour);
