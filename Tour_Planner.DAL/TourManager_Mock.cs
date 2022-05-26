@@ -89,9 +89,10 @@ namespace Tour_Planner.DAL
             return _tourData;
         }
 
-        public void CreateTour(Tour tour)
+        public bool CreateTour(Tour tour)
         {
             _tourData.Add(tour);
+            return true;
         }
 
         public void DeleteTour(Tour tour)

@@ -18,7 +18,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"
-                       Text="Tour Name:"
+                       Text="Tour Info"
                        Background="#3d1223"
                        FontSize="20"
                        Foreground="White"                       

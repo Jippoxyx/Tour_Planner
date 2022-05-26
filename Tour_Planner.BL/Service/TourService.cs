@@ -14,6 +14,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Tour_Planner.DAL;
+using Tour_Planner.Logging;
 using Tour_Planner.Models;
 
 namespace Tour_Planner.BL.Service
@@ -21,6 +22,7 @@ namespace Tour_Planner.BL.Service
     public class TourService 
     {
         private readonly ITourManager _tourManager;
+        ILoggerWrapper _loggerWrapper = LoggerFactory.GetLogger();
 
         public TourService(ITourManager tourManager)
         {
@@ -32,10 +34,9 @@ namespace Tour_Planner.BL.Service
             return _tourManager.GetTourData();
         }
 
-        public void AddTour(Tour tour)
+        public bool AddTour(Tour tour)
         {
-            //save in db 
-            _tourManager.CreateTour(tour);
+            return (_tourManager.CreateTour(tour));           
         }
 
         public void DeleteSelectedTour(Tour tour)

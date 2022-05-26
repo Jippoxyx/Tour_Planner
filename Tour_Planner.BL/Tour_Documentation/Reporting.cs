@@ -133,9 +133,10 @@ namespace Tour_Planner.BL.Tour_Documentation
             File.WriteAllText(tour.Title + ".json", json);
         }
 
-        public void importTour()
+        public Tour importTour(string jsonObject)
         {
-
+            Tour _tour = JsonSerializer.Deserialize<Tour>(jsonObject);
+            return _tour;
         }
     }
 }

@@ -14,10 +14,13 @@ namespace Tour_Planner.ViewModels
         public ICommand DeleteAllToursCommand { get; set; }
         public ICommand CreatePDFCommand { get; set; }
         public ICommand ExportTourCommand { get; set; }
+        public ICommand ImportTourCommand { get; set; }
 
         public event EventHandler deleteAllToursEvent;
         public event EventHandler createPDFEvent;
         public event EventHandler exportTourEvent;
+        public event EventHandler importTourEvent;
+
 
         private Tour _tour;
         public Tour Tour
@@ -45,6 +48,11 @@ namespace Tour_Planner.ViewModels
             ExportTourCommand = new RelayCommand((_) =>
             {
                 this.exportTourEvent?.Invoke(null, EventArgs.Empty);
+            });
+
+            ImportTourCommand = new RelayCommand((_) =>
+            {
+                this.importTourEvent?.Invoke(null, EventArgs.Empty);
             });
         }
     }

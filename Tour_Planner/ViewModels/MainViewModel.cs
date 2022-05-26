@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Tour_Planner.Models;
 using Tour_Planner.ViewModels.Utility;
 using Tour_Planner.BL.Service;
@@ -10,6 +8,9 @@ using Tour_Planner.PL.View;
 using System.Windows;
 using Tour_Planner.Logging;
 using Tour_Planner.BL.Tour_Documentation;
+using Tour_Planner.PL.ViewModels;
+using Microsoft.Win32;
+using System.IO;
 
 namespace Tour_Planner.ViewModels
 {
@@ -21,11 +22,15 @@ namespace Tour_Planner.ViewModels
         SearchBarViewModel _searchVM;
         MenuViewModel _menu;
 
-        TourInfoViewModel _tourInfoViewModel = new TourInfoViewModel();
         TourInfoView _tourInfoView = new TourInfoView();
+        TourInfoViewModel _tourInfoViewModel = new TourInfoViewModel();    
+
+        ImportTourView _importView = new ImportTourView();
+        ImportTourViewModel _importTourVM = new ImportTourViewModel();
+
         OpenMapAPI _openMapAPI = new OpenMapAPI();
         ILoggerWrapper _loggerWrapper = LoggerFactory.GetLogger();
-        Reporting _report = new Reporting();
+        Reporting _report = new Reporting();       
 
         public MainViewModel(MenuViewModel menu,
             TourViewModel tour,
@@ -41,7 +46,10 @@ namespace Tour_Planner.ViewModels
             SetUpSearch();
             this._menu = menu;
             SetUpMenu();
+
             _tourInfoView.DataContext = _tourInfoViewModel;
+            _importView.DataContext = _importTourVM;
+
         }
 
         private void SetUpMenu()
@@ -49,6 +57,54 @@ namespace Tour_Planner.ViewModels
             Add_CreatePDFButton();
             Add_DeleteAllButton();
             Add_ExportTour();
+            Add_OpenWindowImportTour();
+            Add_GetImportInfo();
+            Add_ImportTour();
+        }
+
+        private void Add_ImportTour()
+        {
+            _importTourVM.confirmTourFromFolderEvent += (_, e) =>
+            {
+                if(String.IsNullOrEmpty(_importTourVM.SelectedFolder))
+                {
+                    MessageBox.Show("Please select a Tour from your Directory");
+                    _loggerWrapper.Warn("User tried to import a Tour without selecting a Json File");
+                }
+                else
+                {                  
+                    Tour tour = _report.importTour(_importTourVM.SelectedFolder);
+                    if(_tourService.AddTour(tour))
+                    {
+                        _tour.TourData.Add(tour);
+                        _loggerWrapper.Debug("User has imported a Tour from Json File");
+                    }
+                    else
+                    {
+                        MessageBox.Show("It´s not possible to import a Tour which already exist");
+                        _loggerWrapper.Warn("User trys to important a Tour which already exist");
+                    }
+                }
+            };
+        }
+
+        private void Add_GetImportInfo()
+        {
+            _importTourVM.openFolderEvent += (_, e) =>
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Json files (*.json)|*.json|Text files (*.txt)|*.txt";
+                if (openFileDialog.ShowDialog() == true)
+                    _importTourVM.SelectedFolder = File.ReadAllText(openFileDialog.FileName);
+            };
+        }
+
+        private void Add_OpenWindowImportTour()
+        {
+            _menu.importTourEvent += (_, e) =>
+            {
+                _importView.Show();
+            };
         }
 
         private void Add_ExportTour()
@@ -96,8 +152,7 @@ namespace Tour_Planner.ViewModels
                 _tour.TourData.Clear();
                 loadData();
                 _tourDetailsViewModel.TourLogData.Clear();
-                loadLogData();
-           
+                loadLogData();        
             };
         }
         private void SetUpTourView()
