@@ -17,6 +17,8 @@ namespace Tour_Planner.DAL
         void DeleteTour(Tour tour);
         void CreateLog(Tour tour, TourLog log);
         void DeleteTourLog(Tour tour, TourLog log);
+        void UpdateTourData(Tour tour);
+        void UpdateTourLogData(Tour tour, TourLog log);
 
 
     }

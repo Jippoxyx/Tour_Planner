@@ -208,5 +208,10 @@ namespace Tour_Planner.ViewModels
                 }
             };
         }
+
+        private void UpdateData()
+        {
+            //Updatestuff
+        }
     }
 }

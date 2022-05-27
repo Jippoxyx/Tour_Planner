@@ -65,13 +65,22 @@ namespace Tour_Planner.BL.Service
 
         }
 
+        public void UpdateTour(Tour tour)
+        {
+            _tourManager.UpdateTourData(tour);
+        }
+        
+        public void UpdateTourLog(Tour tour, TourLog log )
+        {
+            _tourManager.UpdateTourLogData(tour, log);
+        }
         public void CreatePDFFromSelectedTour(Tour tour)
         {
             string pdfName = "";
 
             if (tour.Title != null)
             {
-               pdfName = $"TourReport{tour.Title}.pdf";
+               pdfName = $"TourReport_{tour.Title}.pdf";
             }
             else
             {
