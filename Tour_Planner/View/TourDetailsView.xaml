@@ -122,15 +122,6 @@
                                 <TextBox Text ="{Binding Tour.EstimatedTime}" Width="298" Margin="20,0,0,0"
                          />
                             </StackPanel>
-
-                            <StackPanel Orientation="Horizontal">
-                                <Label
-                        Content = "Route Information"
-                                Width="175">
-                                </Label>
-                                <TextBox Text ="{Binding Tour.RouteInformation}" Width="298" Margin="20,0,0,0"
-                         />
-                            </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
 
@@ -220,7 +211,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBox Text ="{Binding TourLog.Date}"  FontSize="17"/>
                         <TextBox Text ="{Binding TourLog.Time}"  FontSize="17"/>
-                        <TextBox Text ="{Binding SelectedLog.Comment}"  FontSize="17"/>
+                        <TextBox Text ="{Binding TourLog.Comment}"  FontSize="17"/>
                         <TextBox Text ="{Binding TourLog.Difficulty}"  FontSize="17"/>
                         <TextBox Text ="{Binding TourLog.TotalTime}"  FontSize="17"/>
                         <TextBox Text ="{Binding TourLog.Rating}"  FontSize="17"/>

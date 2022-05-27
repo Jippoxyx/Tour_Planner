@@ -11,6 +11,7 @@ using Tour_Planner.BL.Tour_Documentation;
 using Tour_Planner.PL.ViewModels;
 using Microsoft.Win32;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Tour_Planner.ViewModels
 {
@@ -174,14 +175,12 @@ namespace Tour_Planner.ViewModels
         private void Add_LoadTourDataForSelectedItem()
         {
             _tour.loadlTourDataForSelectedItem += (_, s) =>
-            {
-               
+            {              
                 if(s != null)
                 {
                     _tourDetailsViewModel.TourLogData.Clear();
                     loadLogData();
-                }
-                
+                }               
             };
         }
 
@@ -190,8 +189,17 @@ namespace Tour_Planner.ViewModels
             _tourDetailsViewModel.updateTourEvent += (_, e) =>
             {
                 if (_tour.SelectedItem != null)
-                {                   
+                {
+                    List<TourLog> selectedTourLogs = new List<TourLog>();
+
+                    foreach (TourLog log in _tourDetailsViewModel.TourLogData)
+                    {
+                        selectedTourLogs.Add(log);
+                    }
+
+                    _tour.SelectedItem.Logs = selectedTourLogs;
                     _tourService.UpdateTour(_tour.SelectedItem);
+                    
                 }
             };
         }
