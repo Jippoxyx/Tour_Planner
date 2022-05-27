@@ -6,10 +6,12 @@
         xmlns:viewmodels1="clr-namespace:Tour_Planner.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels1:TourInfoViewModel}"
         mc:Ignorable="d"
-        Title="TourInfoView" Height="420" Width="400"
+        Title="TourInfoView" Height="530" Width="400"
          Closing="Window_Closing">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="40"/>
@@ -25,8 +27,11 @@
         <TextBox Grid.Row="3" FontSize="20" Margin="5" Text="{Binding From}"/>
         <Label  Grid.Row="4" FontSize="20" Content="To" />
         <TextBox Grid.Row="5" FontSize="20" Text="{Binding To}" Margin="5" />
+        <Label  Grid.Row="6" FontSize="20" Content="Transport Type" />
+        <TextBox Grid.Row="7" FontSize="20" Text="{Binding TransportType}" Margin="5" />
+       
         <Button 
-            Grid.Row="6"
+            Grid.Row="8"
             Content="Confirm"
             Height="45"
                 Width="160"
@@ -42,5 +47,6 @@
                 </Style>
             </Button.Resources>
         </Button>
+        
     </Grid>
 </Window>

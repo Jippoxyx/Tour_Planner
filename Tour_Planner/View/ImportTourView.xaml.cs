@@ -12,24 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Tour_Planner
+namespace Tour_Planner.PL.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ImportTourView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ImportTourView : Window
     {
-        public MainWindow()
+        public ImportTourView()
         {
             InitializeComponent();
         }
 
-        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            base.OnMouseLeftButtonDown(e);
-
-            // Begin dragging the window
-            this.DragMove();
+            e.Cancel = true;
+            this.Visibility = Visibility.Hidden;
         }
     }
 }

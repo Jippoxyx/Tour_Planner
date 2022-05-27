@@ -28,12 +28,13 @@
             </Button>
 
             <Button 
-            Content="Edit"
+            Content="Import Tour"
             Height="45"
             Background="#571c39"
             Foreground="white"
             FontSize="20"
-            Margin=" 10,30,10,0">
+            Margin=" 10,30,10,0"
+                Command="{Binding ImportTourCommand}">
 
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -43,35 +44,21 @@
             </Button>
 
             <Button 
-            Content="Options"
+            Content="Export Tour"
             Height="45"
             Background="#571c39"
             Foreground="white"
             FontSize="20"
-            Margin=" 10,30,10,0">
+            Margin=" 10,30,10,0"
+                Command="{Binding ExportTourCommand}">
 
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
                     </Style>
                 </Button.Resources>
+                
             </Button>
-
-            <Button 
-            Content="Help"
-            Height="45"
-            Background="#571c39" 
-            Foreground="white"
-            FontSize="20"
-            Margin=" 10,30,10,0">
-
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="5"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-
             <Button 
             Content="Delete All"
             Height="45"

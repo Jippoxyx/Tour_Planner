@@ -9,10 +9,9 @@ namespace Tour_Planner.DAL
 {
     public interface ITourManager
     {
-
         List<Tour> GetTourData();
         List<TourLog> GetTourLogData(Tour tour);
-        void CreateTour(Tour tour);
+        bool CreateTour(Tour tour);
         void DeleteAllTours();
         void DeleteTour(Tour tour);
         void CreateLog(Tour tour, TourLog log);

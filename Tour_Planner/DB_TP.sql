@@ -13,8 +13,8 @@
     route_image_path text
 );
 
-alter table tour
-    owner to postgres;
+alter table tour 
+        owner to postgres;
 
 create unique index tour_id_uindex
     on tour (id);

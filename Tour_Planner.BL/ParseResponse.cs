@@ -12,7 +12,6 @@ namespace Tour_Planner.BL
     public class ParseResponse
     {
         
-
         public Tour ParseTourFromServer(string tourInfo)
         {
             Tour tourObj = new Tour() { Id = Guid.NewGuid() };

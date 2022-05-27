@@ -1,0 +1,57 @@
+﻿<Window x:Class="Tour_Planner.PL.View.ImportTourView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tour_Planner.PL.View" 
+        xmlns:viewmodels="clr-namespace:Tour_Planner.PL.ViewModels"       
+        mc:Ignorable="d" Height="600" Width="500"
+        Title="ImportTourView"
+         Closing="Window_Closing"
+        >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height = "90" />
+                <RowDefinition Height="350"/>
+                <RowDefinition Height = "90" />
+            </Grid.RowDefinitions >
+
+            <Button
+            Content="Open Folder"
+            Height="45"
+                Width="160"
+            Background="#571c39"
+            Foreground="white"
+            FontSize="20"
+            Margin=" 0,0,0,20" HorizontalAlignment="Center"
+            Command="{Binding OpenFolderCommand}">
+                <Button.Resources>
+                    <Style TargetType = "Border" >
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
+            <TextBlock  FontSize= "20" Margin= "5" Text="{Binding SelectedFolder}" TextWrapping="Wrap" />
+        </ScrollViewer>
+
+
+        <Button
+            Content= "Confirm"
+            Height= "45"
+                Width= "160"
+            Background= "#571c39"
+            Foreground= "white"
+            FontSize= "20"
+            Margin= " 10,30,10,0" HorizontalAlignment= "Center"
+            Command= "{Binding ConfirmTourFromFolderCommand}"
+            Grid.Row= "2" >
+                <Button.Resources >
+                    <Style TargetType= "Border" >
+                        <Setter Property= "CornerRadius" Value= "5" />
+                    </Style >
+                </Button.Resources >
+            </Button >
+        </Grid >
+
+</Window>

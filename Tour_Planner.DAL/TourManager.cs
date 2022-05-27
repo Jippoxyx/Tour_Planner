@@ -1,16 +1,18 @@
-﻿using Npgsql;
+﻿using log4net.Core;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tour_Planner.Logging;
 using Tour_Planner.Models;
 
 namespace Tour_Planner.DAL
 {
     public class TourManager : ITourManager
     {
-        private readonly NpgsqlConnection conn = new(DBConfigAccess.Instance().GetConnectionString());
+        private readonly NpgsqlConnection conn = new(ConfigClass.Instance.GetConnectionString());
 
         public void CreateLog(Tour tour, TourLog log)
         {
@@ -33,24 +35,33 @@ namespace Tour_Planner.DAL
             conn.Close();
         }
 
-        public void CreateTour(Tour tour)
+        public bool CreateTour(Tour tour)
         {
-            conn.Open();
-            string query = $"INSERT INTO tour (id, title, description, _from, _to, transport_type, distance, estimated_time, route_image_path)" +
-                $" values (@id, @title, @description, @_from, @_to, @transport_type, @distance, @estimated_time, @route_image_path);";
-            NpgsqlCommand command = new NpgsqlCommand(query, conn);
-            command.Parameters.AddWithValue("id", tour.Id);
-            command.Parameters.AddWithValue("title", tour.Title ?? string.Empty);
-            command.Parameters.AddWithValue("description", tour.Desciption ?? string.Empty);
-            command.Parameters.AddWithValue("_from", tour.From ?? string.Empty);
-            command.Parameters.AddWithValue("_to", tour.To ?? string.Empty);
-            command.Parameters.AddWithValue("transport_type", tour.TransportType ?? string.Empty);
-            command.Parameters.AddWithValue("distance", tour.TourDistance ?? string.Empty);
-            command.Parameters.AddWithValue("estimated_time", tour.EstimatedTime ?? string.Empty);
-            command.Parameters.AddWithValue("route_image_path", tour.RouteImagePath ?? string.Empty);
-            command.Prepare();
-            command.ExecuteReader();
+            bool tourDoesntExist = true;
+            try
+            {
+                conn.Open();
+                string query = $"INSERT INTO tour (id, title, description, _from, _to, transport_type, distance, estimated_time, route_image_path)" +
+                    $" values (@id, @title, @description, @_from, @_to, @transport_type, @distance, @estimated_time, @route_image_path);";
+                NpgsqlCommand command = new NpgsqlCommand(query, conn);
+                command.Parameters.AddWithValue("id", tour.Id);
+                command.Parameters.AddWithValue("title", tour.Title ?? string.Empty);
+                command.Parameters.AddWithValue("description", tour.Desciption ?? string.Empty);
+                command.Parameters.AddWithValue("_from", tour.From ?? string.Empty);
+                command.Parameters.AddWithValue("_to", tour.To ?? string.Empty);
+                command.Parameters.AddWithValue("transport_type", tour.TransportType ?? string.Empty);
+                command.Parameters.AddWithValue("distance", tour.TourDistance ?? string.Empty);
+                command.Parameters.AddWithValue("estimated_time", tour.EstimatedTime ?? string.Empty);
+                command.Parameters.AddWithValue("route_image_path", tour.RouteImagePath ?? string.Empty);
+                command.Prepare();
+                command.ExecuteReader();               
+            }
+            catch (PostgresException)
+            {
+                tourDoesntExist = false;
+            }
             conn.Close();
+            return tourDoesntExist;
         }
 
         public void DeleteAllTours()

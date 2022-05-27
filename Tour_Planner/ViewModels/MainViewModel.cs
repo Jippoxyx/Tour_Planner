@@ -1,27 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Tour_Planner.Models;
 using Tour_Planner.ViewModels.Utility;
 using Tour_Planner.BL.Service;
 using Tour_Planner.BL;
 using System.Collections.ObjectModel;
 using Tour_Planner.PL.View;
-using System.ComponentModel;
+using System.Windows;
+using Tour_Planner.Logging;
+using Tour_Planner.BL.Tour_Documentation;
+using Tour_Planner.PL.ViewModels;
+using Microsoft.Win32;
+using System.IO;
 
 namespace Tour_Planner.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        BL.Service.TourService _tourService;
+        TourService _tourService;
         TourViewModel _tour;
         TourDetailsViewModel _tourDetailsViewModel;
         SearchBarViewModel _searchVM;
         MenuViewModel _menu;
 
-        TourInfoViewModel _tourInfoViewModel = new TourInfoViewModel();
         TourInfoView _tourInfoView = new TourInfoView();
+        TourInfoViewModel _tourInfoViewModel = new TourInfoViewModel();    
+
+        ImportTourView _importView = new ImportTourView();
+        ImportTourViewModel _importTourVM = new ImportTourViewModel();
+
         OpenMapAPI _openMapAPI = new OpenMapAPI();
+        ILoggerWrapper _loggerWrapper = LoggerFactory.GetLogger();
+        Reporting _report = new Reporting();       
 
         public MainViewModel(MenuViewModel menu,
             TourViewModel tour,
@@ -37,20 +46,97 @@ namespace Tour_Planner.ViewModels
             SetUpSearch();
             this._menu = menu;
             SetUpMenu();
+
             _tourInfoView.DataContext = _tourInfoViewModel;
+            _importView.DataContext = _importTourVM;
+
         }
 
         private void SetUpMenu()
         {
             Add_CreatePDFButton();
             Add_DeleteAllButton();
+            Add_ExportTour();
+            Add_OpenWindowImportTour();
+            Add_GetImportInfo();
+            Add_ImportTour();
+        }
+
+        private void Add_ImportTour()
+        {
+            _importTourVM.confirmTourFromFolderEvent += (_, e) =>
+            {
+                if(String.IsNullOrEmpty(_importTourVM.SelectedFolder))
+                {
+                    MessageBox.Show("Please select a Tour from your Directory");
+                    _loggerWrapper.Warn("User tried to import a Tour without selecting a Json File");
+                }
+                else
+                {                  
+                    Tour tour = _report.importTour(_importTourVM.SelectedFolder);
+                    if(_tourService.AddTour(tour))
+                    {
+                        _tour.TourData.Add(tour);
+                        _loggerWrapper.Debug("User has imported a Tour from Json File");
+                    }
+                    else
+                    {
+                        MessageBox.Show("It´s not possible to import a Tour which already exist");
+                        _loggerWrapper.Warn("User trys to important a Tour which already exist");
+                    }
+                }
+            };
+        }
+
+        private void Add_GetImportInfo()
+        {
+            _importTourVM.openFolderEvent += (_, e) =>
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Json files (*.json)|*.json|Text files (*.txt)|*.txt";
+                if (openFileDialog.ShowDialog() == true)
+                    _importTourVM.SelectedFolder = File.ReadAllText(openFileDialog.FileName);
+            };
+        }
+
+        private void Add_OpenWindowImportTour()
+        {
+            _menu.importTourEvent += (_, e) =>
+            {
+                _importView.Show();
+            };
+        }
+
+        private void Add_ExportTour()
+        {
+            _menu.exportTourEvent += (_, e) =>
+            {
+                if (_tour.SelectedItem != null)
+                {
+                    _report.exportTour(_tour.SelectedItem);
+                    MessageBox.Show("You have exported the selected Tour");
+                }
+                else
+                {
+                    MessageBox.Show("Please select a Tour");
+                }
+            };
         }
 
         public void Add_CreatePDFButton()
         {
             _menu.createPDFEvent += (_, e) =>
             {
-                _tourService.CreatePDFFromSelectedTour(_tour.SelectedItem);
+                if (_tour.SelectedItem != null)
+                {
+                    _report.CreatePDFFromSelectedTour(_tour.SelectedItem);
+                    MessageBox.Show("You have created a PDF with the selected Tour");
+                    _loggerWrapper.Debug("User created a PDF with selected Tour");
+                }
+                else
+                {
+                    MessageBox.Show("Please select a Tour");
+                }               
             };
         }
 
@@ -59,10 +145,14 @@ namespace Tour_Planner.ViewModels
             _menu.deleteAllToursEvent += (_, e) =>
             {
                 _tourService.DeleteAllTours();
+                if (_tour.TourData.Count > 0)
+                {
+                    MessageBox.Show("You deleted all Tours");
+                }
                 _tour.TourData.Clear();
                 loadData();
                 _tourDetailsViewModel.TourLogData.Clear();
-                loadLogData();
+                loadLogData();        
             };
         }
         private void SetUpTourView()
@@ -80,10 +170,30 @@ namespace Tour_Planner.ViewModels
         {
             _tourInfoViewModel.confirmTourInfo += async (_, t) =>
             {
-                Tour tour = await _openMapAPI.GetTour(_tourInfoViewModel.TourTitle ,_tourInfoViewModel.From, _tourInfoViewModel.To);
-               //Console.WriteLine($"{tour.EstimatedTime} {tour.TourDistance}");
-               _tourService.AddTour(tour);
-                _tour.TourData.Add(tour);
+                if(String.IsNullOrEmpty(_tourInfoViewModel.From) || String.IsNullOrEmpty(_tourInfoViewModel.To))
+                {
+                    MessageBox.Show(" From and To must be filled in");
+                    return;
+                }
+                else if (_tourInfoViewModel.TransportType != "fastest" &&
+                _tourInfoViewModel.TransportType != "shortest" &&
+                _tourInfoViewModel.TransportType != "pedestrian" &&
+                _tourInfoViewModel.TransportType != "bicycle" &&
+                String.IsNullOrEmpty(_tourInfoViewModel.TransportType))
+                {
+                    MessageBox.Show("Transport Type doesn´t exist. " +
+                        "Choose between fastest, pedestrian, shortest and bicycle");
+                    return;
+                }
+                else
+                {
+                    Tour tour = await _openMapAPI.GetTour(_tourInfoViewModel.TourTitle, 
+                        _tourInfoViewModel.From, _tourInfoViewModel.To, _tourInfoViewModel.TransportType);
+                    //Console.WriteLine($"{tour.EstimatedTime} {tour.TourDistance}");
+                    _tourService.AddTour(tour);
+                    _tour.TourData.Add(tour);
+                    _loggerWrapper.Debug("User requested Tour from Server");
+                }          
             };
         }
 
@@ -96,7 +206,6 @@ namespace Tour_Planner.ViewModels
                     _tourDetailsViewModel.TourLogData.Add(log);
                 }
             }
-
         }
 
         private void loadData()
@@ -154,6 +263,7 @@ namespace Tour_Planner.ViewModels
             {
                 _tourService.AddTour(t);
                 _tour.TourData.Add(t);
+                _loggerWrapper.Debug("User added a Tour");
             };
         }
 
