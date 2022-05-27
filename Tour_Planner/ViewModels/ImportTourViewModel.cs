@@ -39,6 +39,7 @@ namespace Tour_Planner.PL.ViewModels
             { 
                 _selectedFolder = value;
                 OnPropertyChanged();
+
             } 
         }
 

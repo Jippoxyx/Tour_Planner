@@ -17,9 +17,11 @@ namespace Tour_Planner.ViewModels
     {
         public ICommand AddLogCommand { get; set; }
         public ICommand DeleteLogCommand { get; set; }
+        public ICommand UpdateTourCommand { get; set; }
         public event EventHandler<TourLog> addLogEvent;
         public event EventHandler<TourLog> deleteLogEvent;
         public event EventHandler<TourLog> displayTourLogDetails;
+        public event EventHandler updateTourEvent;
 
         public TourViewModel _tourViewModel;
 
@@ -33,6 +35,10 @@ namespace Tour_Planner.ViewModels
             DeleteLogCommand = new RelayCommand((_) =>
             {           
                 this.deleteLogEvent?.Invoke(this, SelectedLog);
+            });
+            UpdateTourCommand = new RelayCommand((_) =>
+            {
+                this.updateTourEvent?.Invoke(this, EventArgs.Empty);
             });
         }
 

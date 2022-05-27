@@ -39,12 +39,13 @@ namespace Tour_Planner.ViewModels
         {
             _tourService = new IoCContainerConfig().tourService;
             this._tour = tour;
-            SetUpTourView();
             this._tourDetailsViewModel = tourDetails;
-            SetUpLogs();
             this._searchVM = search;
-            SetUpSearch();
             this._menu = menu;
+
+            SetUpTourView();           
+            SetUpLogs();           
+            SetUpSearch();           
             SetUpMenu();
 
             _tourInfoView.DataContext = _tourInfoViewModel;
@@ -85,6 +86,7 @@ namespace Tour_Planner.ViewModels
                         _loggerWrapper.Warn("User trys to important a Tour which already exist");
                     }
                 }
+                _importTourVM.SelectedFolder = "";
             };
         }
 
@@ -164,6 +166,34 @@ namespace Tour_Planner.ViewModels
 
             Add_DisplayFromToWindow();
             Add_UserInputCreateTour();
+
+            Add_UpdateTour();
+            Add_LoadTourDataForSelectedItem();
+        }
+
+        private void Add_LoadTourDataForSelectedItem()
+        {
+            _tour.loadlTourDataForSelectedItem += (_, s) =>
+            {
+               
+                if(s != null)
+                {
+                    _tourDetailsViewModel.TourLogData.Clear();
+                    loadLogData();
+                }
+                
+            };
+        }
+
+        private void Add_UpdateTour()
+        {
+            _tourDetailsViewModel.updateTourEvent += (_, e) =>
+            {
+                if (_tour.SelectedItem != null)
+                {                   
+                    _tourService.UpdateTour(_tour.SelectedItem);
+                }
+            };
         }
 
         private void Add_UserInputCreateTour()
@@ -317,11 +347,6 @@ namespace Tour_Planner.ViewModels
                     loadLogData();
                 }
             };
-        }
-
-        private void UpdateData()
-        {
-            //Updatestuff
         }
     }
 }

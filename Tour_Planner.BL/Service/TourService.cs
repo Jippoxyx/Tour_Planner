@@ -56,11 +56,16 @@ namespace Tour_Planner.BL.Service
         public void AddLog(Tour tour, TourLog log)
         {
             _tourManager.CreateLog(tour, log);
-        }       
+        }
 
         public void DeleteAllTours()
         {
             _tourManager.DeleteAllTours();
+        }
+
+        public void UpdateTour(Tour tour)
+        { 
+            _tourManager.UpdateTourData(tour);
         }
     }
 }

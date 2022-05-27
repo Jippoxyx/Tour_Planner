@@ -158,10 +158,12 @@ namespace Tour_Planner.DAL
         public void UpdateTourData(Tour tour)
         {
             conn.Open();
-            string query = $"UPDATE tour SET title=@title, description=@description, _from=@_from, _to=@_to, transport_type=@transport_type," +
-                $" distance=@distance, estimated_time=@estimated_time, route_image_path=@route_image_path WHERE id=@id";
+            string query = $"UPDATE tour SET title=@title, description=@description, " +
+                $"_from=@_from, _to=@_to, transport_type=@transport_type," +
+                $" distance=@distance, estimated_time=@estimated_time, " +
+                $"route_image_path=@route_image_path WHERE id=@id";
             NpgsqlCommand command = new NpgsqlCommand(query, conn);
-            command.Parameters.AddWithValue("id", tour.Id);
+            command.Parameters.AddWithValue("id", tour.Id.ToString());
             command.Parameters.AddWithValue("title", tour.Title ?? string.Empty);
             command.Parameters.AddWithValue("description", tour.Desciption ?? string.Empty);
             command.Parameters.AddWithValue("_from", tour.From ?? string.Empty);
@@ -178,23 +180,25 @@ namespace Tour_Planner.DAL
                 UpdateTourLogData(tour, l);
                 Console.WriteLine(tour.Logs.Count());
             }
-
         }
 
         public void UpdateTourLogData(Tour tour, TourLog log)
         {
             conn.Open();
-            string query = $"UPDATE tour_log SET id=@id, date=@date, time=@time, rating=@rating, difficulty=@difficulty, total_time=@total_time," +
-                $" comment=@comment WHERE tour_id=@tour_id);";
+            string query = $"UPDATE tour_log SET  date=@date, time=@time, " +
+                $"rating=@rating, difficulty=@difficulty, total_time=@total_time," +
+                $" comment=@comment WHERE id=@id";
+            Console.WriteLine(log.Id);
+            Console.WriteLine(log.Comment);
             NpgsqlCommand command = new NpgsqlCommand(query, conn);
-            command.Parameters.AddWithValue("id", log.Id);
+            command.Parameters.AddWithValue("id", log.Id.ToString());
             command.Parameters.AddWithValue("date", log.Date ?? string.Empty);
             command.Parameters.AddWithValue("time", log.Time);
             command.Parameters.AddWithValue("rating", log.Rating);
             command.Parameters.AddWithValue("difficulty", log.Difficulty);
             command.Parameters.AddWithValue("total_time", log.TotalTime);
             command.Parameters.AddWithValue("comment", log.Comment ?? string.Empty);
-            command.Parameters.AddWithValue("tour_id", tour.Id);
+            //command.Parameters.AddWithValue("tour_id", tour.Id.ToString());
             command.Prepare();
             command.ExecuteReader();
             conn.Close();
