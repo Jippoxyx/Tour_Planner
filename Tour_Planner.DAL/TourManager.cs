@@ -149,8 +149,7 @@ namespace Tour_Planner.DAL
                     Comment = reader[6].ToString(),                  
                 });
             }
-             conn.Close();
-          
+             conn.Close();       
             return tourlogs;
         }
     }

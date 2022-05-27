@@ -13,7 +13,7 @@ namespace Tour_Planner.DAL
         List<Tour> _tourData = new List<Tour>();
 
         public TourManager_Mock()
-        {
+        {           
             CreateTours();
         }
 
