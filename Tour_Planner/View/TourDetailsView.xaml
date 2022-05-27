@@ -55,7 +55,7 @@
                 </TabItem>
                 <TabItem Header="Description">
 
-                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"                                
                                   >
                         <StackPanel>
                             <StackPanel Orientation="Horizontal">
@@ -72,7 +72,7 @@
                         Content = "Description"
                                 Width="175">
                                 </Label>
-                                <TextBox Text ="{Binding Tour.Desciption}" Width="298" Margin="20,0,0,0"
+                                <TextBox Text ="{Binding Tour.Desciption}"  Width="298" Margin="20,0,0,0"
                          />
                             </StackPanel>
 
@@ -109,7 +109,7 @@
                         Content = "Tour Distance"
                                 Width="175">
                                 </Label>
-                                <TextBox Text ="{Binding Tour.TourDistance}" Width="298" Margin="20,0,0,0"
+                                <TextBox Text ="{Binding Tour.TourDistance}"   Width="298" Margin="20,0,0,0"
                          />
                             </StackPanel>
 
@@ -185,12 +185,12 @@
                     Margin="0,0,0,0">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Date"  DisplayMemberBinding="{Binding Date}"/>
-                            <GridViewColumn Header="Time"  DisplayMemberBinding="{Binding Time}" />
-                            <GridViewColumn Header="Comment"  DisplayMemberBinding="{Binding Comment}" />
-                            <GridViewColumn Header="Difficulty" DisplayMemberBinding="{Binding Difficulty}" />
-                            <GridViewColumn Header="Total time"  DisplayMemberBinding="{Binding TotalTime}" />
-                            <GridViewColumn Header="Rating" DisplayMemberBinding="{Binding Rating}" />
+                            <GridViewColumn Header="Date"  DisplayMemberBinding="{Binding Date}" Width="auto" />
+                            <GridViewColumn Header="Time"  DisplayMemberBinding="{Binding Time}"  Width="auto" />
+                            <GridViewColumn Header="Comment"  DisplayMemberBinding="{Binding Comment}"  Width="auto" />
+                            <GridViewColumn Header="Difficulty" DisplayMemberBinding="{Binding Difficulty}" Width="auto"/>
+                            <GridViewColumn Header="Total time"  DisplayMemberBinding="{Binding TotalTime}" Width="auto"/>
+                            <GridViewColumn Header="Rating" DisplayMemberBinding="{Binding Rating}" Width="auto"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

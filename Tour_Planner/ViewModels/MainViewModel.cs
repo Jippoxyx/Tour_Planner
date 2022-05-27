@@ -51,7 +51,6 @@ namespace Tour_Planner.ViewModels
 
             _tourInfoView.DataContext = _tourInfoViewModel;
             _importView.DataContext = _importTourVM;
-
         }
 
         private void SetUpMenu()
@@ -199,7 +198,7 @@ namespace Tour_Planner.ViewModels
 
                     _tour.SelectedItem.Logs = selectedTourLogs;
                     _tourService.UpdateTour(_tour.SelectedItem);
-                    
+                    MessageBox.Show("Tour has been updated");
                 }
             };
         }
@@ -208,30 +207,51 @@ namespace Tour_Planner.ViewModels
         {
             _tourInfoViewModel.confirmTourInfo += async (_, t) =>
             {
-                if(String.IsNullOrEmpty(_tourInfoViewModel.From) || String.IsNullOrEmpty(_tourInfoViewModel.To))
+                Tour tour = new Tour();
+                try
                 {
-                    MessageBox.Show(" From and To must be filled in");
-                    return;
+                    if (String.IsNullOrEmpty(_tourInfoViewModel.From) || String.IsNullOrEmpty(_tourInfoViewModel.To))
+                    {
+                        MessageBox.Show(" From and To must be filled in");
+                        return;
+                    }
+                    else if (_tourInfoViewModel.TransportType != "fastest" &&
+                    _tourInfoViewModel.TransportType != "shortest" &&
+                    _tourInfoViewModel.TransportType != "pedestrian" &&
+                    _tourInfoViewModel.TransportType != "bicycle" &&
+                    String.IsNullOrEmpty(_tourInfoViewModel.TransportType))
+                    {
+                        MessageBox.Show("Transport Type doesn´t exist. " +
+                            "Choose between fastest, pedestrian, shortest and bicycle");
+                        return;
+                    }
+                    else
+                    {
+                        if (_tourInfoViewModel.TourTitle.Length > 40)
+                        {
+                            MessageBox.Show("You´re can only use 40 characters");
+                        }
+                        if (_tourInfoViewModel.To.Length > 70 || _tourInfoViewModel.From.Length > 70)
+                        {
+                            MessageBox.Show("Adress can only have a maximum of 70 characters");
+                        }
+
+                        tour = await _openMapAPI.GetTour(_tourInfoViewModel.TourTitle,
+                            _tourInfoViewModel.From, _tourInfoViewModel.To, _tourInfoViewModel.TransportType);
+                        //Console.WriteLine($"{tour.EstimatedTime} {tour.TourDistance}");
+                        if(tour != null)
+                        {
+                            _tourService.AddTour(tour);
+                            _tour.TourData.Add(tour);
+                            _loggerWrapper.Debug("User requested Tour from Server");
+                        }                      
+                    }
                 }
-                else if (_tourInfoViewModel.TransportType != "fastest" &&
-                _tourInfoViewModel.TransportType != "shortest" &&
-                _tourInfoViewModel.TransportType != "pedestrian" &&
-                _tourInfoViewModel.TransportType != "bicycle" &&
-                String.IsNullOrEmpty(_tourInfoViewModel.TransportType))
+                catch (System.Net.Http.HttpRequestException)
                 {
-                    MessageBox.Show("Transport Type doesn´t exist. " +
-                        "Choose between fastest, pedestrian, shortest and bicycle");
-                    return;
-                }
-                else
-                {
-                    Tour tour = await _openMapAPI.GetTour(_tourInfoViewModel.TourTitle, 
-                        _tourInfoViewModel.From, _tourInfoViewModel.To, _tourInfoViewModel.TransportType);
-                    //Console.WriteLine($"{tour.EstimatedTime} {tour.TourDistance}");
-                    _tourService.AddTour(tour);
-                    _tour.TourData.Add(tour);
-                    _loggerWrapper.Debug("User requested Tour from Server");
-                }          
+                    MessageBox.Show("Sorry, requested Tour cant be found");
+                    _loggerWrapper.Warn("The requested Tour coudnt be found");
+                }                
             };
         }
 

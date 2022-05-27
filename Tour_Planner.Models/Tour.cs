@@ -21,5 +21,7 @@ namespace Tour_Planner.Models
         public string BoundingBox { get; set; }
 
         public List<TourLog> Logs { get; set; } = new List<TourLog>();
+
+        public string MyProperty { get; set; }
     }
 }
