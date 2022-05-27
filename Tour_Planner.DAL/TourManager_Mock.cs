@@ -153,5 +153,15 @@ namespace Tour_Planner.DAL
         {
             _tourData.Clear();
         }
+
+        public void UpdateTourData(Tour tour)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateTourLogData(Tour tour, TourLog log)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

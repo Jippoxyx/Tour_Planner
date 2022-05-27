@@ -17,8 +17,8 @@ namespace Tour_Planner.DAL
         public void CreateLog(Tour tour, TourLog log)
         {
             conn.Open();
-            string query = $"INSERT INTO tour_log (id, date, time, comment, difficulty, total_time, rating, tour_id)" +
-                $" values (@id, @date, @time, @comment, @difficulty, @total_time, @rating, @tour_id);";
+            string query = $"INSERT INTO tour_log (id, date, time, rating, difficulty, total_time, comment, tour_id)" +
+                $" values (@id, @date, @time, @rating, @difficulty, @total_time, @comment, @tour_id);";
             NpgsqlCommand command = new NpgsqlCommand(query, conn);
             command.Parameters.AddWithValue("id", log.Id);
             command.Parameters.AddWithValue("date", log.Date ?? string.Empty);
@@ -29,7 +29,9 @@ namespace Tour_Planner.DAL
             command.Parameters.AddWithValue("rating", log.Rating);
             command.Parameters.AddWithValue("tour_id", tour.Id);
             command.Prepare();
-            NpgsqlDataReader reader = command.ExecuteReader();
+            command.ExecuteReader();
+
+
             conn.Close();
         }
 
@@ -151,6 +153,51 @@ namespace Tour_Planner.DAL
             }
              conn.Close();       
             return tourlogs;
+        }
+
+        public void UpdateTourData(Tour tour)
+        {
+            conn.Open();
+            string query = $"UPDATE tour SET title=@title, description=@description, _from=@_from, _to=@_to, transport_type=@transport_type," +
+                $" distance=@distance, estimated_time=@estimated_time, route_image_path=@route_image_path WHERE id=@id";
+            NpgsqlCommand command = new NpgsqlCommand(query, conn);
+            command.Parameters.AddWithValue("id", tour.Id);
+            command.Parameters.AddWithValue("title", tour.Title ?? string.Empty);
+            command.Parameters.AddWithValue("description", tour.Desciption ?? string.Empty);
+            command.Parameters.AddWithValue("_from", tour.From ?? string.Empty);
+            command.Parameters.AddWithValue("_to", tour.To ?? string.Empty);
+            command.Parameters.AddWithValue("transport_type", tour.TransportType ?? string.Empty);
+            command.Parameters.AddWithValue("distance", tour.TourDistance ?? string.Empty);
+            command.Parameters.AddWithValue("estimated_time", tour.EstimatedTime ?? string.Empty);
+            command.Parameters.AddWithValue("route_image_path", tour.RouteImagePath ?? string.Empty);
+            command.Prepare();
+            command.ExecuteReader();
+            conn.Close();
+            foreach (TourLog l in tour.Logs)
+            {
+                UpdateTourLogData(tour, l);
+                Console.WriteLine(tour.Logs.Count());
+            }
+
+        }
+
+        public void UpdateTourLogData(Tour tour, TourLog log)
+        {
+            conn.Open();
+            string query = $"UPDATE tour_log SET id=@id, date=@date, time=@time, rating=@rating, difficulty=@difficulty, total_time=@total_time," +
+                $" comment=@comment WHERE tour_id=@tour_id);";
+            NpgsqlCommand command = new NpgsqlCommand(query, conn);
+            command.Parameters.AddWithValue("id", log.Id);
+            command.Parameters.AddWithValue("date", log.Date ?? string.Empty);
+            command.Parameters.AddWithValue("time", log.Time);
+            command.Parameters.AddWithValue("rating", log.Rating);
+            command.Parameters.AddWithValue("difficulty", log.Difficulty);
+            command.Parameters.AddWithValue("total_time", log.TotalTime);
+            command.Parameters.AddWithValue("comment", log.Comment ?? string.Empty);
+            command.Parameters.AddWithValue("tour_id", tour.Id);
+            command.Prepare();
+            command.ExecuteReader();
+            conn.Close();
         }
     }
 }
