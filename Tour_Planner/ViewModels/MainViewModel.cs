@@ -12,6 +12,7 @@ using Tour_Planner.PL.ViewModels;
 using Microsoft.Win32;
 using System.IO;
 using System.Collections.Generic;
+using Tour_Planner.BL.Exceptions;
 
 namespace Tour_Planner.ViewModels
 {
@@ -67,26 +68,34 @@ namespace Tour_Planner.ViewModels
         {
             _importTourVM.confirmTourFromFolderEvent += (_, e) =>
             {
-                if(String.IsNullOrEmpty(_importTourVM.SelectedFolder))
+                try
                 {
-                    MessageBox.Show("Please select a Tour from your Directory");
-                    _loggerWrapper.Warn("User tried to import a Tour without selecting a Json File");
-                }
-                else
-                {                  
-                    Tour tour = _report.importTour(_importTourVM.SelectedFolder);
-                    if(_tourService.AddTour(tour))
+                    if (String.IsNullOrEmpty(_importTourVM.SelectedFolder))
                     {
-                        _tour.TourData.Add(tour);
-                        _loggerWrapper.Debug("User has imported a Tour from Json File");
+                        MessageBox.Show("Please select a Tour from your Directory");
+                        _loggerWrapper.Warn("User tried to import a Tour without selecting a Json File");
                     }
                     else
                     {
-                        MessageBox.Show("It´s not possible to import a Tour which already exist");
-                        _loggerWrapper.Warn("User trys to important a Tour which already exist");
+                        Tour tour = _report.importTour(_importTourVM.SelectedFolder);
+                        if (_tourService.AddTour(tour))
+                        {
+                            _tour.TourData.Add(tour);
+                            _loggerWrapper.Debug("User has imported a Tour from Json File");
+                        }
+                        else
+                        {
+                            MessageBox.Show("It´s not possible to import a Tour which already exist");
+                            _loggerWrapper.Warn("User trys to important a Tour which already exist");
+                        }
                     }
+                    _importTourVM.SelectedFolder = "";
                 }
-                _importTourVM.SelectedFolder = "";
+                catch (Import_Exception)
+                {
+                    MessageBox.Show("Could not import Tour");
+                    _loggerWrapper.Error("Could not import Tour");
+                }
             };
         }
 
@@ -113,14 +122,22 @@ namespace Tour_Planner.ViewModels
         {
             _menu.exportTourEvent += (_, e) =>
             {
-                if (_tour.SelectedItem != null)
+                try
                 {
-                    _report.exportTour(_tour.SelectedItem);
-                    MessageBox.Show("You have exported the selected Tour");
+                    if (_tour.SelectedItem != null)
+                    {
+                        _report.exportTour(_tour.SelectedItem);
+                        MessageBox.Show("You have exported the selected Tour");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please select a Tour");
+                    }
                 }
-                else
+                catch (Export_Exception)
                 {
-                    MessageBox.Show("Please select a Tour");
+                    MessageBox.Show("Could not export Tour");
+                    _loggerWrapper.Error("Could not export Tour");
                 }
             };
         }
@@ -165,7 +182,7 @@ namespace Tour_Planner.ViewModels
             loadData();
 
             Add_DisplayFromToWindow();
-            Add_UserInputCreateTour();
+            Add_RequestTourFromServer();
 
             Add_UpdateTour();
             Add_LoadTourDataForSelectedItem();
@@ -203,7 +220,7 @@ namespace Tour_Planner.ViewModels
             };
         }
 
-        private void Add_UserInputCreateTour()
+        private void Add_RequestTourFromServer()
         {
             _tourInfoViewModel.confirmTourInfo += async (_, t) =>
             {
@@ -238,7 +255,6 @@ namespace Tour_Planner.ViewModels
 
                         tour = await _openMapAPI.GetTour(_tourInfoViewModel.TourTitle,
                             _tourInfoViewModel.From, _tourInfoViewModel.To, _tourInfoViewModel.TransportType);
-                        //Console.WriteLine($"{tour.EstimatedTime} {tour.TourDistance}");
                         if(tour != null)
                         {
                             _tourService.AddTour(tour);
@@ -247,7 +263,7 @@ namespace Tour_Planner.ViewModels
                         }                      
                     }
                 }
-                catch (System.Net.Http.HttpRequestException)
+                catch (OpenMapAPI_Exception)
                 {
                     MessageBox.Show("Sorry, requested Tour cant be found");
                     _loggerWrapper.Warn("The requested Tour coudnt be found");

@@ -7,8 +7,7 @@ using Tour_Planner.ViewModels;
 namespace Tour_Planner_Test
 {
     public class Tests
-    {
-        
+    {        
         [SetUp]
         public void Setup()
         { 

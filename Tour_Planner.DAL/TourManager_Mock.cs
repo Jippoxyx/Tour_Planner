@@ -156,12 +156,30 @@ namespace Tour_Planner.DAL
 
         public void UpdateTourData(Tour tour)
         {
-            throw new NotImplementedException();
+            List<Tour> items = _tourData.Where(x => x.Id == tour.Id).ToList();
+            foreach (Tour item in items)
+            {
+                _tourData.Remove(item);
+                _tourData.Add(item);
+            }
         }
 
         public void UpdateTourLogData(Tour tour, TourLog log)
         {
-            throw new NotImplementedException();
+            foreach(Tour tou in _tourData)
+                {
+                if (tour.Id == tou.Id)
+                {
+                    foreach (TourLog losss in tou.Logs)
+                    {
+                        if (log.Id == losss.Id)
+                        {
+                            tou.Logs.Remove(losss);
+                            tou.Logs.Add(log);
+                        }
+                    }
+                }
+            }
         }
     }
 }

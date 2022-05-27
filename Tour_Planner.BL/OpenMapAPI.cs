@@ -11,6 +11,7 @@ using System.Drawing;
 using static System.Net.Mime.MediaTypeNames;
 using Tour_Planner.BL.Service;
 using Tour_Planner.Logging;
+using Tour_Planner.BL.Exceptions;
 
 namespace Tour_Planner.BL
 {
@@ -22,34 +23,39 @@ namespace Tour_Planner.BL
 
         public async Task<Tour> GetTour(string title, string from, string to, string transportType)
         {
-            var tour = new Tour() { Id = Guid.NewGuid() };
-
-            var url = $"http://open.mapquestapi.com/directions/v2/route?key={_configService.GetSingletonInstance().GetKeyFromConfig()}&from={from}&to={to}";
-            using var client = new HttpClient();
-           
-            var response = await client.GetStringAsync(url);
-
-            if(response == null)
+            try
             {
-                _loggerWrapper.Error("Server returned nothing");
+                var tour = new Tour() { Id = Guid.NewGuid() };
+
+                var url = $"http://open.mapquestapi.com/directions/v2/route?key={_configService.GetSingletonInstance().GetKeyFromConfig()}&from={from}&to={to}";
+                using var client = new HttpClient();
+
+                var response = await client.GetStringAsync(url);
+
+                if (response == null)
+                {
+                    _loggerWrapper.Error("Server returned nothing");
+                }
+                else
+                {
+                    tour = _parseResponse.ParseTourFromServer(response);
+                    tour.RouteImagePath = await GetTourImage(tour.Session, tour.BoundingBox);
+                    if (String.IsNullOrEmpty(title))
+                        title = "New_S.Tour";
+
+                    tour.Title = title;
+                    tour.TransportType = transportType;
+                    tour.From = from;
+                    tour.To = to;
+
+                    _loggerWrapper.Debug("Server returned a Tour & Image");
+                }
+                return tour;
             }
-            else
+            catch (Exception)
             {
-                tour = _parseResponse.ParseTourFromServer(response);
-                tour.RouteImagePath = await GetTourImage(tour.Session, tour.BoundingBox);
-                if (String.IsNullOrEmpty(title))
-                    title = "New_S.Tour";
-
-                tour.Title = title;
-                tour.TransportType = transportType;
-                tour.From = from;
-                tour.To = to;
-
-                _loggerWrapper.Debug("Server returned a Tour & Image");
-            }          
-
-            
-            return tour;
+                throw new OpenMapAPI_Exception("Could not find a Tour with the requested Data");
+            }
         }
 
         public async Task<string> GetTourImage(string session, string boundingBox)
