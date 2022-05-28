@@ -54,6 +54,35 @@ namespace Tour_Planner.ViewModels
             _importView.DataContext = _importTourVM;
         }
 
+        private void SetUpTourView()
+        {
+            Add_AddTourEvent();
+            Add_DeleteTourEvent();
+            Add_DisplayTourDetails();
+            loadData();
+
+            Add_DisplayFromToWindow();
+            Add_RequestTourFromServer();
+
+            Add_UpdateTour();
+            Add_LoadTourDataForSelectedItem();
+
+            ComputedTourAttributes();
+        }
+
+        private void SetUpLogs()
+        {
+            loadLogData();
+            Add_DisplayTourLogDetails();
+            Add_AddLogEvent();
+            Add_DeleteLogEvent();
+        }
+
+        private void SetUpSearch()
+        {
+            Add_SearchTours();
+        }
+
         private void SetUpMenu()
         {
             Add_CreatePDFButton();
@@ -174,21 +203,7 @@ namespace Tour_Planner.ViewModels
                 loadLogData();        
             };
         }
-        private void SetUpTourView()
-        {
-            Add_AddTourEvent();
-            Add_DeleteTourEvent();
-            Add_DisplayTourDetails();
-            loadData();
-
-            Add_DisplayFromToWindow();
-            Add_RequestTourFromServer();
-
-            Add_UpdateTour();
-            Add_LoadTourDataForSelectedItem();
-
-            ComputedTourAttributes();
-        }
+       
 
         private void ComputedTourAttributes()
         {
@@ -330,10 +345,7 @@ namespace Tour_Planner.ViewModels
             }
         }
 
-        private void SetUpSearch()
-        {
-            Add_SearchTours();
-        }
+      
 
         void Add_SearchTours()
         {
@@ -387,14 +399,6 @@ namespace Tour_Planner.ViewModels
             {
                 _tourInfoView.Show();
             };
-        }
-
-        private void SetUpLogs()
-        {
-            loadLogData();
-            Add_DisplayTourLogDetails();
-            Add_AddLogEvent();
-            Add_DeleteLogEvent();
         }
 
         private void Add_DisplayTourLogDetails()
