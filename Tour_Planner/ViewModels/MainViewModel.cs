@@ -186,6 +186,46 @@ namespace Tour_Planner.ViewModels
 
             Add_UpdateTour();
             Add_LoadTourDataForSelectedItem();
+
+            ComputedTourAttributes();
+        }
+
+        private void ComputedTourAttributes()
+        {
+            _tourDetailsViewModel.calculateComputedTourAttributes += (_, e) =>
+            {
+                if(_tour.SelectedItem != null)
+                {
+                    if (_tour.SelectedItem.Logs.Count > 0)
+                    {
+                        int numCounter = 1;
+                        int counter = 0;
+                        foreach (TourLog log in _tour.SelectedItem.Logs)
+                        {
+                            counter += log.Difficulty;
+                            counter += log.TotalTime;
+                            if(log.TotalTime > 0 || log.TotalTime > 0 )
+                            {
+                                numCounter += 2;
+                            }                           
+                        }
+                        float temp = 0;
+                        if (_tour.SelectedItem.TourDistance.Contains("."))
+                        {
+                            temp = float.Parse(_tour.SelectedItem.TourDistance);
+                        }
+                        counter += (int)temp;
+                        counter /= numCounter;
+                        _tour.SelectedItem.ChildFriendliness = counter;
+                        _tour.SelectedItem.Popularity = _tour.SelectedItem.Logs.Count;
+                    }
+                    else
+                    {
+                        _tour.SelectedItem._childFriendliness = 0;
+                        _tour.SelectedItem.Popularity = 0;
+                    }
+                }
+            };
         }
 
         private void Add_LoadTourDataForSelectedItem()

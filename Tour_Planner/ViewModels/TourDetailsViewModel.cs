@@ -22,6 +22,7 @@ namespace Tour_Planner.ViewModels
         public event EventHandler<TourLog> deleteLogEvent;
         public event EventHandler<TourLog> displayTourLogDetails;
         public event EventHandler updateTourEvent;
+        public event EventHandler calculateComputedTourAttributes;
 
         public TourViewModel _tourViewModel;
 
@@ -52,7 +53,8 @@ namespace Tour_Planner.ViewModels
             get { return _tourDetail; }
             set
             {
-                _tourDetail = value;
+                _tourDetail = value;     
+                calculateComputedTourAttributes?.Invoke(this, EventArgs.Empty);
                 OnPropertyChanged();
             }
         }

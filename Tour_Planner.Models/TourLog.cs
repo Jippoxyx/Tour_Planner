@@ -48,7 +48,7 @@ namespace Tour_Planner.Models
             get { return _comment; }
             set
             {
-                if (value.Length < 148 && value.Length > 0)
+                if (value?.Length < 148 && value?.Length > 0)
                 {
                     _comment = value;
                 }

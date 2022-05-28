@@ -24,6 +24,7 @@ namespace Tour_Planner.ViewModels
 
         public event EventHandler<Tour> loadlTourDataForSelectedItem;
 
+
         private Tour _tour = new Tour();
         public Tour Tour
         {
@@ -44,7 +45,7 @@ namespace Tour_Planner.ViewModels
                 _selectedItem = value;
                 OnPropertyChanged();
                 displayTourDetails?.Invoke(this, _selectedItem);
-                loadlTourDataForSelectedItem?.Invoke(this, _selectedItem);
+                loadlTourDataForSelectedItem?.Invoke(this, _selectedItem);               
             }
         }
 

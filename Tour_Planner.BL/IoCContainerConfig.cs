@@ -22,7 +22,7 @@ namespace Tour_Planner.BL
             
             // whenever an IArgumentHandler is required, the service will inject a CommandLineArgumentHandler
             // it will always provide the same CommandLineArgumentHandler instance, because we register it as a singleton
-            services.AddSingleton<ITourManager, TourManager_Mock>();
+            services.AddSingleton<ITourManager, TourManager>();
 
             // register, the ServiceProvider will provide the constructor parameters
             // based on the configuration above

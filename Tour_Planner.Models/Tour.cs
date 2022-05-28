@@ -88,5 +88,25 @@ namespace Tour_Planner.Models
         public string BoundingBox { get; set; }
 
         public List<TourLog> Logs { get; set; } = new List<TourLog>();
+
+
+        public int _childFriendliness;
+        public int ChildFriendliness
+        {
+            get { return _childFriendliness; }
+            set
+            {
+                _childFriendliness = value;               
+            }
+        }
+        public int _popularity;
+        public int Popularity
+        {
+            get { return _popularity; }
+            set
+            {
+                _popularity = Logs.Count;
+            }
+        }
     }
 }

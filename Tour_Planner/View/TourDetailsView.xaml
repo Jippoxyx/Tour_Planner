@@ -122,6 +122,25 @@
                                 <TextBox Text ="{Binding Tour.EstimatedTime}" Width="298" Margin="20,0,0,0"
                          />
                             </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label
+                        Content = "Child-Friendliness"
+                                Width="175">
+                                </Label>
+                                <TextBox Text ="{Binding Tour.ChildFriendliness}" IsReadOnly="True"  Width="298" Margin="20,0,0,0"
+                         />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Label
+                        Content = "Popularity"
+                                Width="175">
+                                </Label>
+                                <TextBox Text ="{Binding Tour.Popularity}" IsReadOnly="True" Width="298" Margin="20,0,0,0"
+                         />
+                            </StackPanel>
+
                         </StackPanel>
                     </ScrollViewer>
 
