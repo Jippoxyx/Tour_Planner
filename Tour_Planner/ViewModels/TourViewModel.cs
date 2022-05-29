@@ -15,7 +15,7 @@ namespace Tour_Planner.ViewModels
         public ICommand AddTourCommand { get; set; }
         public ICommand DeleteTourCommand { get; set; }
         public ICommand GetTourCommand { get; set; }
-     
+
 
         public event EventHandler<Tour> addTourEvent;
         public event EventHandler<Tour> deleteTourEvent;
@@ -23,7 +23,6 @@ namespace Tour_Planner.ViewModels
         public event EventHandler displayGetTourWindow;
 
         public event EventHandler<Tour> loadlTourDataForSelectedItem;
-
 
         private Tour _tour = new Tour();
         public Tour Tour
@@ -45,7 +44,7 @@ namespace Tour_Planner.ViewModels
                 _selectedItem = value;
                 OnPropertyChanged();
                 displayTourDetails?.Invoke(this, _selectedItem);
-                loadlTourDataForSelectedItem?.Invoke(this, _selectedItem);               
+                loadlTourDataForSelectedItem?.Invoke(this, _selectedItem);
             }
         }
 
@@ -67,9 +66,7 @@ namespace Tour_Planner.ViewModels
             {
                 CancelEventArgs e = new CancelEventArgs();
                 this.displayGetTourWindow?.Invoke(null, EventArgs.Empty);
-            });  
-            
-
-        }  
+            });
+        }
     }
 }

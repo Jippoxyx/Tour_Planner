@@ -230,7 +230,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBox Text ="{Binding TourLog.Date}"  FontSize="17"/>
                         <TextBox Text ="{Binding TourLog.Time}"  FontSize="17"/>
-                        <TextBox Text ="{Binding TourLog.Comment}"  FontSize="17"/>
+                        <TextBox Text ="{Binding SelectedLog.Comment}"  FontSize="17"/>
                         <TextBox Text ="{Binding TourLog.Difficulty}"  FontSize="17"/>
                         <TextBox Text ="{Binding TourLog.TotalTime}"  FontSize="17"/>
                         <TextBox Text ="{Binding TourLog.Rating}"  FontSize="17"/>

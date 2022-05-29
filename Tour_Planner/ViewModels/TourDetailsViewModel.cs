@@ -53,7 +53,7 @@ namespace Tour_Planner.ViewModels
             get { return _tourDetail; }
             set
             {
-                _tourDetail = value;     
+                _tourDetail = value;
                 calculateComputedTourAttributes?.Invoke(this, EventArgs.Empty);
                 OnPropertyChanged();
             }
