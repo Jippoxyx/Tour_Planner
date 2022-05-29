@@ -24,16 +24,16 @@ namespace Tour_Planner.BL
                 tourObj.EstimatedTime = json["route"]["time"].ToString();
                 tourObj.Session = json["route"]["sessionId"].ToString();
                 tourObj.BoundingBox += json["route"]["boundingBox"]
-                    ["ul"]["lat"].ToString();
+                    ["ul"]["lat"].ToString().Replace(",", ".");
                 tourObj.BoundingBox += ",";
                 tourObj.BoundingBox += json["route"]["boundingBox"]
-                    ["ul"]["lng"].ToString();
+                    ["ul"]["lng"].ToString().Replace(",", ".");
                 tourObj.BoundingBox += ",";
                 tourObj.BoundingBox += json["route"]["boundingBox"]
-                    ["lr"]["lat"].ToString();
+                    ["lr"]["lat"].ToString().Replace(",", ".");
                 tourObj.BoundingBox += ",";
                 tourObj.BoundingBox += json["route"]["boundingBox"]
-                    ["lr"]["lng"].ToString();
+                    ["lr"]["lng"].ToString().Replace(",", ".");
                 Console.WriteLine(tourObj.BoundingBox);
             }
             catch (NullReferenceException)
