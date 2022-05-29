@@ -86,6 +86,7 @@ namespace Tour_Planner.ViewModels
         private void SetUpMenu()
         {
             Add_CreatePDFButton();
+            Add_CreateSummaryButton();
             Add_DeleteAllButton();
             Add_ExportTour();
             Add_OpenWindowImportTour();
@@ -185,6 +186,23 @@ namespace Tour_Planner.ViewModels
                 {
                     MessageBox.Show("Please select a Tour");
                 }               
+            };
+        }
+
+        public void Add_CreateSummaryButton()
+        {
+            _menu.createSummaryPDFEvent += (_, e) =>
+            {
+                if (_tour != null)
+                {
+                    _report.CreateSummary();
+                    MessageBox.Show("You have created a PDF with a summary of the tours");
+                    _loggerWrapper.Debug("User created a PDF with a summary of the tours");
+                }
+                else
+                {
+                    MessageBox.Show("Please create a Tour");
+                }
             };
         }
 
