@@ -34,6 +34,7 @@ namespace Tour_Planner.BL
                 tourObj.BoundingBox += ",";
                 tourObj.BoundingBox += json["route"]["boundingBox"]
                     ["lr"]["lng"].ToString();
+                Console.WriteLine(tourObj.BoundingBox);
             }
             catch (NullReferenceException)
             {
