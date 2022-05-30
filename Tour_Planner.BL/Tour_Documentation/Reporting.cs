@@ -109,7 +109,7 @@ namespace Tour_Planner.BL.Tour_Documentation
             {
                 imageData = ImageDataFactory.Create(tour.RouteImagePath);
             }
-            //document.Add(new Image(imageData));
+            document.Add(new Image(imageData));
 
             document.Close();
         }

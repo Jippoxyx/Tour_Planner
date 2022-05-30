@@ -12,7 +12,6 @@ namespace Tour_Planner.BL
 {
     public class Import_Export
     {
-
         public void exportTour(Tour tour)
         {
             try
