@@ -75,7 +75,7 @@ namespace Tour_Planner.BL.Tour_Documentation
                 tableLogs.AddCell(getHeaderCell("ID"));
                 tableLogs.AddCell(log.Id.ToString());
                 tableLogs.AddCell(getHeaderCell("Date"));
-                tableLogs.AddCell(log.Date != null ? log.Date : System.DateTime.Today.ToShortDateString()); 
+                tableLogs.AddCell(log.Date != null ? log.Date : System.DateTime.Today.ToShortDateString());
                 tableLogs.AddCell(getHeaderCell("Time"));
                 tableLogs.AddCell(log.Time.ToString());
                 tableLogs.AddCell(getHeaderCell("Comment"));
@@ -118,12 +118,20 @@ namespace Tour_Planner.BL.Tour_Documentation
             return new Cell().Add(new Paragraph(s)).SetBold().SetBackgroundColor(ColorConstants.GRAY);
         }
 
-        public void CreateSummary()
+        public void CreateSummary(List<Tour> allTourData = null)
         {
-            TourManager service = new TourManager();
             List<Tour> tours = new List<Tour>();
-            Tour summary = new Tour();
-            tours = service.GetTourData();
+            //Tour summary = new Tour();
+            if (allTourData == null)
+            {
+                TourManager service = new TourManager();
+                tours = service.GetTourData();
+            }
+            else
+            {
+                tours = allTourData;
+            }
+
 
             string pdfNameSummary = $"ToursSummary.pdf";
 
@@ -165,7 +173,7 @@ namespace Tour_Planner.BL.Tour_Documentation
             doc.Add(titelTourStats);
 
             foreach (Tour tour in tours)
-            { 
+            {
                 Paragraph titelTour = new Paragraph($"{tour.Title}")
                     .SetFont(PdfFontFactory.CreateFont(StandardFonts.TIMES_ROMAN))
                     .SetFontSize(15)
@@ -188,7 +196,7 @@ namespace Tour_Planner.BL.Tour_Documentation
                     .SetFontColor(ColorConstants.BLACK);
                 doc.Add(AverageData);
             }
-                doc.Close();
+            doc.Close();
         }
 
         public double GetAverage(List<TourLog> logs, int type)

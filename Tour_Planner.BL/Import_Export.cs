@@ -30,11 +30,12 @@ namespace Tour_Planner.BL
         {
             try
             {
-                Tour _tour = JsonSerializer.Deserialize<Tour>(jsonObject);
-                return _tour;
+                Tour tour = JsonSerializer.Deserialize<Tour>(jsonObject);
+                return tour;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 throw new Import_Exception("Cound not import Tour");
             }
         }

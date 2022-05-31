@@ -1,5 +1,9 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using Tour_Planner.BL;
+using Tour_Planner.BL.Tour_Documentation;
 using Tour_Planner.DAL;
 using Tour_Planner.Models;
 using Tour_Planner.ViewModels;
@@ -124,7 +128,7 @@ namespace Tour_Planner_Test
             log_3.Difficulty = -1;
 
             //Act
-            int expected = 0;      
+            int expected = 0;
             int _expected = 5;
 
             //Assert
@@ -160,7 +164,7 @@ namespace Tour_Planner_Test
         {
             //Arrage
             TourLog log_1 = new TourLog();
-            
+
             for (int i = 0; i < 148; i++)
             {
                 log_1.Comment += "a";
@@ -239,7 +243,7 @@ namespace Tour_Planner_Test
         public void TestValidation_Title()
         {
             //Arrage
-            Tour tour= new Tour();
+            Tour tour = new Tour();
 
             for (int i = 0; i < 148; i++)
             {
@@ -326,5 +330,145 @@ namespace Tour_Planner_Test
             Assert.AreEqual(expected, tour.EstimatedTime.Length);
             Assert.AreEqual(_expected, tour_.EstimatedTime);
         }
+
+        [Test]
+        public void Test_ImportTour()
+        {
+            Import_Export imp_exp = new Import_Export();
+
+            Tour tour = new()
+            {
+                Title = "0_Tour",
+                Desciption = new("heyaa"),
+                Id = new(" 0f8fad5b-d9cb-469f-a165-70967728950e"),
+                TourDistance = 0.ToString(),
+                EstimatedTime = 0.ToString(),
+                From = "Rumania",
+                To = "Vienna",
+                TransportType = "fastest",
+
+
+                Logs = new List<TourLog>()
+                {
+                    new TourLog()
+                    {
+                        Comment = "0 Log",
+                        Id = new(" 0f8fad5b-d9cb-469f-a165-70967728950e")
+                    }
+                }
+            };
+
+            string json = JsonSerializer.Serialize<Tour>(tour);
+            System.Console.WriteLine(json);
+            Tour tour_1 = new Tour();
+            tour_1 = imp_exp.importTour(json);
+
+            List<Tour> tour_list = new List<Tour>();
+            tour_list.Add(tour_1);
+
+            Assert.AreEqual(tour_list[0].Id, tour.Id);
+        }
+
+        [Test]
+        public void Test_Export()
+        {
+
+            Import_Export imp_exp = new Import_Export();
+
+            Tour tour = new()
+            {
+                Title = "0_Tour",
+                Desciption = new("heyaa"),
+                Id = new(" 0f8fad5b-d9cb-469f-a165-70967728950e"),
+                TourDistance = 0.ToString(),
+                EstimatedTime = 0.ToString(),
+                From = "Rumania",
+                To = "Vienna",
+                TransportType = "fastest",
+
+
+                Logs = new List<TourLog>()
+                {
+                    new TourLog()
+                    {
+                        Comment = "0 Log",
+                        Id = new(" 0f8fad5b-d9cb-469f-a165-70967728950e")
+                    }
+                }
+            };
+
+            imp_exp.exportTour(tour);
+
+            if (!File.Exists("0_Tour.json"))
+            {
+                Assert.Fail("File doens´t exist");
+            }
+            else
+            {
+                Assert.Pass("File was correctly exported");
+            }
+
+        }
+
+        [Test]
+        public void Test_CreatePDF()
+        {
+            Reporting report = new Reporting();
+
+            Tour tour = new()
+            {
+                Title = "0_Tour",
+                Desciption = new("heyaa"),
+                Id = new(" 0f8fad5b-d9cb-469f-a165-70967728950e"),
+                TourDistance = 0.ToString(),
+                EstimatedTime = 0.ToString(),
+                From = "Rumania",
+                To = "Vienna",
+                TransportType = "fastest",
+                RouteImagePath = "..\\..\\..\\..\\Tour_Planner\\images\\car.png",
+
+
+                Logs = new List<TourLog>()
+                {
+                    new TourLog()
+                    {
+                        Comment = "0 Log",
+                        Id = new(" 0f8fad5b-d9cb-469f-a165-70967728950e")
+                    }
+                }
+            };
+
+            report.CreatePDFFromSelectedTour(tour);
+
+            if (!File.Exists($"TourReport_{tour.Title}.pdf"))
+            {
+                Assert.Fail("File doens´t exist");
+            }
+            else
+            {
+                Assert.Pass("File was correctly exported");
+            }
+        }
+
+        [Test]
+        public void Test_CreateSummaryPDF()
+        {
+            Reporting report = new Reporting();
+
+            TourManager_Mock mock = new TourManager_Mock();
+            List<Tour> mockData = mock.GetTourData();
+
+            report.CreateSummary(mockData);
+
+            if (!File.Exists($"ToursSummary.pdf"))
+            {
+                Assert.Fail("File doens´t exist");
+            }
+            else
+            {
+                Assert.Pass("File was correctly exported");
+            }
+        }
+
     }
 }
