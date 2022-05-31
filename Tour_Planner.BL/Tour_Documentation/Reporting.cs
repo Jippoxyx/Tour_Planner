@@ -103,13 +103,13 @@ namespace Tour_Planner.BL.Tour_Documentation
             if (String.IsNullOrEmpty(tour.RouteImagePath))
             {
                 //for Mock Data
-                //imageData = ImageDataFactory.Create("..\\..\\.\\images\\car.png");
+                imageData = ImageDataFactory.Create("..\\..\\.\\images\\car.png");
             }
             else
             {
-                //imageData = ImageDataFactory.Create(tour.RouteImagePath);
+                imageData = ImageDataFactory.Create(tour.RouteImagePath);
             }
-            //document.Add(new Image(imageData));
+            document.Add(new Image(imageData));
 
             document.Close();
         }
@@ -220,33 +220,6 @@ namespace Tour_Planner.BL.Tour_Documentation
                     Console.WriteLine("Fehler beim erstellen einer Zusammenfassung");
                     return 0;
             }
-        }
-
-        public void exportTour(Tour tour)
-        {
-            try
-            {
-                string json = JsonSerializer.Serialize(tour);
-                Console.WriteLine(json);
-                File.WriteAllText(tour.Title + ".json", json);
-            }
-            catch (Exception)
-            {
-                throw new Export_Exception("Could not export Tour");
-            }
-        }
-
-        public Tour importTour(string jsonObject)
-        {
-            try
-            {
-                Tour _tour = JsonSerializer.Deserialize<Tour>(jsonObject);
-                return _tour;
-            }
-            catch (Exception)
-            {
-                throw new Import_Exception("Cound not import Tour"); 
-            }           
         }
     }
 }

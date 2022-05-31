@@ -81,7 +81,7 @@
                         Content = "From"
                                 Width="175">
                                 </Label>
-                                <TextBox Text ="{Binding Tour.From}" Width="298" Margin="20,0,0,0"
+                                <TextBox Text ="{Binding Tour.From}" Width="298"  IsReadOnly="True"  Margin="20,0,0,0"
                          />
                             </StackPanel>
 
@@ -90,7 +90,7 @@
                         Content = "To"
                                 Width="175">
                                 </Label>
-                                <TextBox Text ="{Binding Tour.To}" Width="298" Margin="20,0,0,0"
+                                <TextBox Text ="{Binding Tour.To}" Width="298"  IsReadOnly="True" Margin="20,0,0,0"
                          />
                             </StackPanel>
 
@@ -99,7 +99,7 @@
                         Content = "Transport Type"
                                 Width="175">
                                 </Label>
-                                <TextBox Text ="{Binding Tour.TransportType}" Width="298" Margin="20,0,0,0"
+                                <TextBox Text ="{Binding Tour.TransportType}"  IsReadOnly="True"  Width="298" Margin="20,0,0,0"
                          />
                             </StackPanel>
 
@@ -109,7 +109,7 @@
                         Content = "Tour Distance"
                                 Width="175">
                                 </Label>
-                                <TextBox Text ="{Binding Tour.TourDistance}"   Width="298" Margin="20,0,0,0"
+                                <TextBox Text ="{Binding Tour.TourDistance}"  IsReadOnly="True"  Width="298" Margin="20,0,0,0"
                          />
                             </StackPanel>
 
@@ -119,7 +119,7 @@
                         Content = "Estimated Time"
                                 Width="175">
                                 </Label>
-                                <TextBox Text ="{Binding Tour.EstimatedTime}" Width="298" Margin="20,0,0,0"
+                                <TextBox Text ="{Binding Tour.EstimatedTime}" IsReadOnly="True" Width="298" Margin="20,0,0,0"
                          />
                             </StackPanel>
 

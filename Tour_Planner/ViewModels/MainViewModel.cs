@@ -13,6 +13,7 @@ using Microsoft.Win32;
 using System.IO;
 using System.Collections.Generic;
 using Tour_Planner.BL.Exceptions;
+using System.Globalization;
 
 namespace Tour_Planner.ViewModels
 {
@@ -32,7 +33,8 @@ namespace Tour_Planner.ViewModels
 
         OpenMapAPI _openMapAPI = new OpenMapAPI();
         ILoggerWrapper _loggerWrapper = LoggerFactory.GetLogger();
-        Reporting _report = new Reporting();       
+        Reporting _report = new Reporting();   
+        Import_Export imp_exp = new Import_Export();
 
         public MainViewModel(MenuViewModel menu,
             TourViewModel tour,
@@ -107,7 +109,7 @@ namespace Tour_Planner.ViewModels
                     }
                     else
                     {
-                        Tour tour = _report.importTour(_importTourVM.SelectedFolder);
+                        Tour tour = imp_exp.importTour(_importTourVM.SelectedFolder);
                         if (_tourService.AddTour(tour))
                         {
                             _tour.TourData.Add(tour);
@@ -156,7 +158,7 @@ namespace Tour_Planner.ViewModels
                 {
                     if (_tour.SelectedItem != null)
                     {
-                        _report.exportTour(_tour.SelectedItem);
+                        imp_exp.exportTour(_tour.SelectedItem);
                         MessageBox.Show("You have exported the selected Tour");
                     }
                     else
@@ -243,9 +245,10 @@ namespace Tour_Planner.ViewModels
                             }                           
                         }
                         float temp = 0;
-                        if (_tour.SelectedItem.TourDistance.Contains("."))
+                        if (_tour.SelectedItem.TourDistance.Contains(".") || _tour.SelectedItem.TourDistance.Contains(","))
                         {
-                            temp = float.Parse(_tour.SelectedItem.TourDistance);
+                            _tour.SelectedItem.TourDistance.Replace(",", ".");
+                            temp = float.Parse(_tour.SelectedItem.TourDistance, CultureInfo.InvariantCulture);
                         }
                         counter += (int)temp;
                         counter /= numCounter;
