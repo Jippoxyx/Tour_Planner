@@ -15,10 +15,6 @@ namespace Tour_Planner.DAL
         private static ConfigClass instance = null;
         ILoggerWrapper _loggerWrapper = LoggerFactory.GetLogger();
 
-        private ConfigClass()
-        {
-        }
-
         public static ConfigClass Instance
         {
             get

@@ -49,7 +49,7 @@ namespace Tour_Planner.BL.Tour_Documentation
             tableTour.AddCell(tour.To ?? string.Empty);
             tableTour.AddCell(getHeaderCell("Transport Type"));
             tableTour.AddCell(tour.TransportType ?? string.Empty);
-            tableTour.AddCell(getHeaderCell("Distance[km]"));
+            tableTour.AddCell(getHeaderCell("Distance[miles]"));
             tableTour.AddCell(tour.TourDistance ?? string.Empty);
             tableTour.AddCell(getHeaderCell("Estimated Time i[ss]"));
             tableTour.AddCell(tour.EstimatedTime ?? string.Empty);
