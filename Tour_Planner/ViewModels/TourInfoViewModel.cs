@@ -23,7 +23,7 @@ namespace Tour_Planner.ViewModels
             });           
         }
 
-        string _from;
+        private string _from;
         public string From
         {
             get { return _from; }
@@ -34,7 +34,7 @@ namespace Tour_Planner.ViewModels
             }
         }
 
-        string _to;
+        private string _to;
         public string To
         {
             get { return _to; }
@@ -56,7 +56,7 @@ namespace Tour_Planner.ViewModels
             }
         }
 
-        string _tourTitle;
+        private string _tourTitle;
         public string TourTitle
         { 
             get { return _tourTitle; } 

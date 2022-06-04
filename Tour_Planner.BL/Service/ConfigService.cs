@@ -7,7 +7,7 @@ using Tour_Planner.DAL;
 
 namespace Tour_Planner.BL.Service
 {
-    class ConfigService
+    public class ConfigService
     {
         public ConfigClass GetSingletonInstance()
         {

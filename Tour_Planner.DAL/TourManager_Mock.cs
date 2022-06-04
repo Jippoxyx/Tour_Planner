@@ -10,7 +10,7 @@ namespace Tour_Planner.DAL
     public class TourManager_Mock : ITourManager
     {
 
-        List<Tour> _tourData = new List<Tour>();
+        private List<Tour> _tourData = new List<Tour>();
 
         public TourManager_Mock()
         {           

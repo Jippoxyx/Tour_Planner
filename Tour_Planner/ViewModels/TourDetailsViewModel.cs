@@ -46,7 +46,7 @@ namespace Tour_Planner.ViewModels
         public ObservableCollection<TourLog> _tourLogData { get; set; }
             = new ObservableCollection<TourLog>();
 
-        public Tour _tourDetail;
+        private Tour _tourDetail;
 
         public Tour Tour
         {
