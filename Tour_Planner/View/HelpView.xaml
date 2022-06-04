@@ -1,0 +1,170 @@
+﻿<Window x:Class="Tour_Planner.PL.View.HelpView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tour_Planner.PL.View"
+        mc:Ignorable="d"
+        Title="HelpView" Height="450" Width="800">
+    <ScrollViewer>
+        <StackPanel>
+
+            <!--<Grid.ColumnDefinitions>-->
+            <!--
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>-->
+
+            <StackPanel
+            Orientation="Vertical"
+            HorizontalAlignment="Center">
+                <Label FontSize="25" Content="Help"></Label>
+            </StackPanel>
+
+            <StackPanel
+            Orientation="Horizontal">
+                <StackPanel
+                Orientation="vertical"
+                    Width="200">
+                    <Label Content="Tours" FontSize="20" FontWeight="Medium"></Label>
+                    <Label Content="Create Tour"></Label>
+                    <Label Content="Modify Tour"></Label>
+                    <Label Content="Delete Tour"></Label>
+                </StackPanel>
+
+                <StackPanel
+                    Width="200">
+                    <Label Content="Logs" FontSize="20" FontWeight="Medium">
+                    </Label>
+                    <TextBlock> touri
+                    <Hyperlink Name="Touri"></Hyperlink>
+                        
+                    </TextBlock>
+                    <Label Content="Create Log"></Label>
+                    <Label Content="Modify Log"></Label>
+                    <Label Content="Delete Log"></Label>
+                    <Label Content="Update Tour/Log"></Label>
+                </StackPanel>
+
+                <StackPanel 
+                Orientation="Vertical"
+                    Width="200">
+                    <Label Content="Menu-Buttons" FontSize="20" FontWeight="Medium"></Label>
+                    <Label Content="Create Report"></Label>
+                    <Label Content="Create Summary"></Label>
+                    <Label Content="Import/Export Tour"></Label>
+                    <Label Content="Delete All Tours"></Label>
+                </StackPanel>
+                <StackPanel
+                    Width="200">
+                    <Label Content="Search" FontSize="20" FontWeight="Medium"></Label>
+                    <Label Content="Searchfunction"></Label>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+                <StackPanel>
+                    <Label FontSize="20" Content="How to create a Tour?"></Label>
+                    <TextBlock Margin="10,0,0,0">There are two ways to create a tour:
+                    <LineBreak/>
+                    <LineBreak/>
+                    <BulletDecorator>
+                        <BulletDecorator.Bullet>
+                           <Ellipse Height="7" Width="7" Fill="Black"></Ellipse>
+                        </BulletDecorator.Bullet>
+                    <TextBlock Margin="5,0,0,0">Click on the "+" button, a new Tour will appear, fill in the tourdata by your own.<LineBreak/>
+                        After that click on the Update-Button.</TextBlock>
+                    </BulletDecorator>
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    <LineBreak/>
+                    <LineBreak/>
+                    <BulletDecorator>
+                        <BulletDecorator.Bullet>
+                           <Ellipse Height="7" Width="7" Fill="Black"></Ellipse>
+                        </BulletDecorator.Bullet>
+                    <TextBlock Margin="5,0,0,0">Click on the "create Tour" button. A new window will appear.<LineBreak/>
+                        Fill in a titel, startposition and a destination, through confirming a new Tour will be created.</TextBlock>
+                    </BulletDecorator>
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                </TextBlock>
+                </StackPanel>
+                <StackPanel>
+                    <Label FontSize="20" Content="How to modify a Tour?"></Label>
+                    <TextBlock Margin="10,0,0,0">Just Click on your tour and in the right half of the window. After that click on "Description",<LineBreak/>
+                        there you can modify the tourdata. Modify your data and click on "Update" Button</TextBlock>
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                </StackPanel>
+                <StackPanel>
+                    <Label FontSize="20" Content="How to delete a Tour?"></Label>
+                    <TextBlock Margin="10,0,0,0">Select a Tour and click on the "Delete" button in the tour section
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel>
+                    <Label FontSize="20" Content="How to create a Log?"></Label>
+                    <TextBlock Margin="10,0,0,0">Select a Tour, click in the tour-section on the "+"-button this will add a new Log,<LineBreak/> 
+                        fill in the data in the empty blocks above. After that click on the update button to save it.
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel>
+                    <Label FontSize="20" Content="How to modify a Log?"></Label>
+                    <TextBlock Margin="10,0,0,0"> If a Tour is already selected you can modify the Tourlogdata by selecting a tour.<LineBreak/>
+                        After changing the data click on the Update-Button.
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel>
+                    <Label FontSize="20" Content="How to delete a Log?"></Label>
+                    <TextBlock Margin="10,0,0,0">Select a Tour, then a log by clicking on the "-"-Button you can delete a Tour.</TextBlock>
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                </StackPanel>
+                <StackPanel>
+                    <Label Name="Toursi" FontSize="20" Content="How to Update a Tour/Log?"></Label>
+                    <TextBlock Margin="10,0,0,0">If any data was change manually, please click on the "Update"-button.</TextBlock>
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                </StackPanel>
+                <StackPanel>
+                    <Label FontSize="20" Content="How to create a Report?"></Label>
+                    <TextBlock Margin="10,0,0,0"> Before clicking on the "Create Report"- Button, you find it in the left half of the window, you have to select a tour.<LineBreak/>
+                        This will create a detailed Report about your selected Tour.
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    </TextBlock>
+                </StackPanel>               
+                <StackPanel>
+                    <Label FontSize="20" Content="How to create a Summary?"></Label>
+                    <TextBlock Margin="10,0,0,0"> By clicking on the "Summary"-Button, a PDF is created with a a short overview of the tours.
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel>
+                    <Label FontSize="20" Content="How to Import/Export a Tour?"></Label>
+                    <TextBlock Margin="10,0,0,0"> By clicking on Import/Export- Button you have to choose a file which you want to import.<LineBreak/>
+                        For exporting, please select a tour and then click on "export"
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel>
+                    <Label FontSize="20" Content="How to delete all Tours?"></Label>
+                    <TextBlock Margin="10,0,0,0">
+                        By clicking on "Delete all" every tour will be deleted.
+                    </TextBlock>
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                </StackPanel>
+                <StackPanel>
+                    <Label FontSize="20" Content="How to use the Searchfunction?"></Label>
+                    <TextBlock Margin="10,0,0,0">Search for anything, Startposition, destionation, comment, description or tourtitel,<LineBreak/> the results willappear in a dropdown menu.
+                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

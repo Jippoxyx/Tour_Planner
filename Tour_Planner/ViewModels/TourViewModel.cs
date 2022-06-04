@@ -48,6 +48,17 @@ namespace Tour_Planner.ViewModels
             }
         }
 
+        /*public string bg_color;
+
+        public string Background
+        {
+            get { return bg_color; }
+            set
+            {
+                bg_color = value;
+                OnPropertyChanged();
+            }
+        }*/
         public TourViewModel()
         {
             AddTourCommand = new RelayCommand((_) =>

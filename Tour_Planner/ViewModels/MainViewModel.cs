@@ -14,6 +14,7 @@ using System.IO;
 using System.Collections.Generic;
 using Tour_Planner.BL.Exceptions;
 using System.Globalization;
+using System.Windows.Data;
 
 namespace Tour_Planner.ViewModels
 {
@@ -30,6 +31,9 @@ namespace Tour_Planner.ViewModels
 
         ImportTourView _importView = new ImportTourView();
         ImportTourViewModel _importTourVM = new ImportTourViewModel();
+
+        HelpView _helpView = new HelpView();
+        HelpViewModel _helpVM = new HelpViewModel();
 
         OpenMapAPI _openMapAPI = new OpenMapAPI();
         ILoggerWrapper _loggerWrapper = LoggerFactory.GetLogger();
@@ -55,7 +59,7 @@ namespace Tour_Planner.ViewModels
             _tourInfoView.DataContext = _tourInfoViewModel;
             _importView.DataContext = _importTourVM;
         }
-
+        
         private void SetUpTourView()
         {
             Add_AddTourEvent();
@@ -94,6 +98,7 @@ namespace Tour_Planner.ViewModels
             Add_OpenWindowImportTour();
             Add_GetImportInfo();
             Add_ImportTour();
+            Add_OpenWindowHelp();
         }
 
         private void Add_ImportTour()
@@ -147,6 +152,13 @@ namespace Tour_Planner.ViewModels
             _menu.importTourEvent += (_, e) =>
             {
                 _importView.Show();
+            };
+        }        
+        private void Add_OpenWindowHelp()
+        {
+            _menu.helpEvent += (_, e) =>
+            {
+                _helpView.Show();
             };
         }
 
@@ -372,8 +384,51 @@ namespace Tour_Planner.ViewModels
         {
             _searchVM.SearchBoxChanged += (_, searchTours) =>
             {
-                var result = string.Join("\n", $"Dummy: {searchTours}");
-                this._searchVM.DisplayResult(result);
+                int result;
+                List<Tour> tourSearch = new List<Tour>();
+                List<Tour> resultTour = new List<Tour>();
+                tourSearch = _tourService.GetData();
+                _searchVM.cmbTour.Clear();
+                if (searchTours != null)
+                {
+                    foreach (Tour t in tourSearch)
+                    {
+                        if (t.Title.Contains(searchTours, StringComparison.OrdinalIgnoreCase) || t.From.Contains(searchTours, StringComparison.OrdinalIgnoreCase) 
+                        || t.To.Contains(searchTours, StringComparison.OrdinalIgnoreCase) || t.Desciption.Contains(searchTours, StringComparison.OrdinalIgnoreCase))
+                        {
+                            resultTour.Add(t);
+                            //_searchVM.cmbTour.Items.Add(t.Title);
+                            _searchVM.cmbTour.Add(t);
+
+                        }
+                        else
+                        {
+                            foreach (TourLog log in t.Logs)
+                            {
+                                if (t.Logs == null)
+                                {
+                                    break;
+                                }
+                                if ((log.Comment != null && log.Comment.Contains(searchTours, StringComparison.OrdinalIgnoreCase)) 
+                                || (log.Date != null && log.Date.Contains(searchTours, StringComparison.OrdinalIgnoreCase)))
+                                {
+                                    resultTour.Add(t);
+                                    //_searchVM.cmbTour.Items.Add(t.Title);
+                                    //_searchVM.cmbTour.Clear();
+                                    _searchVM.cmbTour.Add(t);
+
+                                }
+                            }
+                        }
+                    }
+                    result = resultTour.Count;
+                    //_tour.SelectedItem = _searchVM.cmbSelTour;
+                    //_tourDetailsViewModel.Tour = _searchVM.cmbSelTour;
+                }
+                else
+                { result = 0;}
+
+                this._searchVM.DisplayResult($"Found {result} Tour(s)");
             };
         }
 

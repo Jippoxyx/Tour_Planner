@@ -11,14 +11,25 @@
     <WrapPanel   
         HorizontalAlignment="Right"
         VerticalAlignment="Center">
-
+        
         <Label
-            Width="270"
+            Width="300"
             Height="40"
             Margin="0,0,5,0"
             FontSize="23"
             Content="{Binding ResultBox}"
             />
+        
+        
+        <ComboBox 
+            Width="270"
+            Margin="0,0,5,0"
+            DisplayMemberPath="Tour.Title"
+            ItemsSource="{Binding cmbTour}"
+            SelectedItem="{Binding cmbSelTour}"
+            >
+            
+        </ComboBox>
 
         <TextBox 
             Width="208"

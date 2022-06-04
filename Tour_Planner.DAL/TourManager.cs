@@ -85,12 +85,12 @@ namespace Tour_Planner.DAL
 
         public void DeleteTourLog(Tour tour, TourLog log)
         {
-             conn.Open();
-              string query = $"DELETE FROM tour_log where id=@logId";
-              NpgsqlCommand command = new NpgsqlCommand(query, conn);
-              command.Parameters.AddWithValue("logId", log.Id.ToString());
-              command.ExecuteReader();
-              conn.Close(); 
+            conn.Open();
+            string query = $"DELETE FROM tour_log where id=@logId";
+            NpgsqlCommand command = new NpgsqlCommand(query, conn);
+            command.Parameters.AddWithValue("logId", log.Id.ToString());
+            command.ExecuteReader();
+            conn.Close(); 
         }
 
         public List<Tour> GetTourData()

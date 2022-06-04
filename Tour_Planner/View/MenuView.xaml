@@ -91,6 +91,22 @@
                     </Style>
                 </Button.Resources>
             </Button>
+            
+           <Button 
+            Content="Help"
+            Height="45"
+            Background="#571c39"
+            Foreground="white"
+            FontSize="20"
+            Margin=" 10,30,10,0"
+               Command="{Binding HelpCommand}">
+
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel> 
     </Grid>
 </UserControl>

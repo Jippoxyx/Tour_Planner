@@ -6,28 +6,28 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Tour_Planner.ViewModels.Utility;
 using Tour_Planner.BL;
+using Tour_Planner.Models;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace Tour_Planner.ViewModels
 {
-    /*
-         * DummySearch v1
-         * TODO:
-         * SearchTour returntyp ändern
-         * 
-         * Wenn TourDaten in DB gespeichert werden können
-         * -> DB verbinden und nach Namen suchen
-         * 
-         * Frage: label klickbar und somit werden erst daten angezeigt?
-         */
     public class SearchBarViewModel : ViewModelBase
     {
-        //private readonly ITourFactory tourFactory = new TourFactory();
 
         public event EventHandler<string> SearchBoxChanged;
+        public event EventHandler<Tour> displaySearchResult;
+        public event EventHandler<Tour> loadTourDataForSelectedItem;
+
+        public ObservableCollection<Tour> cmbTour { get; set; }
+            = new ObservableCollection<Tour>();
         public ICommand SearchBtn { get; }
 
         public string searchText;
-        public string resultText = "leer";
+        public string resultText = "";
+
+        //public ComboBox cmbTour { get; set; }
+         //   = new ComboBox();
 
         public SearchBarViewModel()
         {
@@ -62,8 +62,42 @@ namespace Tour_Planner.ViewModels
             }
         }
 
+        /* public List<Tour> _cmbTour;
+         public Tour _cmbSelTour;
+
+         public List<Tour> cmbTour
+         {
+             get { return _cmbTour; }
+         }
+
+         public Tour cmbSelTour
+         {
+             get { return _cmbSelTour; }
+             set
+             {
+                 _cmbSelTour = value;
+                 OnPropertyChanged();
+                 displayTourDetails?.Invoke(this, _cmbSelTour);
+                 loadlTourDataForSelectedItem?.Invoke(this, _cmbSelTour);
+             }
+         }*/
+
+        private Tour _cmbSelTour;
+        public Tour cmbSelTour
+        {
+            get { return _cmbSelTour; }
+            set
+            {
+                _cmbSelTour = value;
+                OnPropertyChanged();
+                displaySearchResult?.Invoke(this, _cmbSelTour);
+                loadTourDataForSelectedItem?.Invoke(this, _cmbSelTour);
+            }
+        }
         public void DisplayResult(string resultText)
         {
+            //displaySearchResult?.Invoke(this, _cmbSelTour);
+
             ResultBox = resultText;
         }
     }
