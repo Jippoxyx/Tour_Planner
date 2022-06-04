@@ -7,19 +7,28 @@
              
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
-    <WrapPanel   
-        HorizontalAlignment="Right"
-        VerticalAlignment="Center">
-        
-        <Label
-            Width="300"
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <WrapPanel   
+        HorizontalAlignment="Left"
+        VerticalAlignment="Center" Margin="0,0,0,0">
+
+            <Label
+            Width="150"
             Height="40"
-            Margin="0,0,5,0"
-            FontSize="23"
+            Margin="0,0,0,0"
+            FontSize="20"
             Content="{Binding ResultBox}"
             />
-        
+        </WrapPanel>
+
+        <!--
         
         <ComboBox 
             Width="270"
@@ -30,8 +39,15 @@
             >
             
         </ComboBox>
+        -->
 
-        <TextBox 
+
+        <WrapPanel
+            Grid.Column="1"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+        >
+            <TextBox 
             Width="208"
             Height="40"
             VerticalAlignment="Center"
@@ -41,26 +57,26 @@
             Text="{Binding SearchBox}"
             >
 
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="3"/>
-                </Style>
-                <Style TargetType="TextBox">
-                    <Style.Triggers>
-                        <Trigger Property="IsFocused" Value="False">
-                            <Setter Property="Text" Value="search for..." />
-                            <Setter Property="Foreground" Value="Gray" />
-                        </Trigger>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Text" Value="" />
-                            <Setter Property="Foreground" Value="Black" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <Trigger Property="IsFocused" Value="False">
+                                <Setter Property="Text" Value="search for..." />
+                                <Setter Property="Foreground" Value="Gray" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Text" Value="" />
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
 
-        <Button                                                                                                                                                                                                                
+            <Button                                                                                                                                                                                                                
             Background="white"
             Foreground="White"
             FontSize="40" Height="39"
@@ -68,14 +84,35 @@
             BorderBrush="White"
             Command="{Binding SearchBtn}"
            >
-            
-            <Image Source="/Images/icons8-search-49.png" />
 
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-    </WrapPanel>
+                <Image Source="/Images/icons8-search-49.png" />
+
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button                                                                                                                                                                                                                
+            Background="white"
+            Foreground="White"
+            FontSize="30" Height="30"
+            Width="37"
+            BorderBrush="White"
+            Command="{Binding RefreshBtn}"
+           >
+
+                <Image Source="/Images/refresh.png" />
+
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+        </WrapPanel>
+    </Grid>
+    
 </UserControl>

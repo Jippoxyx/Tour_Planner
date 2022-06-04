@@ -22,18 +22,26 @@ namespace Tour_Planner.ViewModels
         public ObservableCollection<Tour> cmbTour { get; set; }
             = new ObservableCollection<Tour>();
         public ICommand SearchBtn { get; }
+        public ICommand RefreshBtn { get; set; }
+
+        public event EventHandler refreshBtn;
 
         public string searchText;
         public string resultText = "";
 
         //public ComboBox cmbTour { get; set; }
-         //   = new ComboBox();
+        //   = new ComboBox();
 
         public SearchBarViewModel()
         {
             SearchBtn = new RelayCommand((_) =>
             {
                 SearchBoxChanged?.Invoke(this, SearchBox);
+            });
+
+            RefreshBtn = new RelayCommand((_) =>
+            {
+                this.refreshBtn?.Invoke(null, EventArgs.Empty);
             });
         }
 

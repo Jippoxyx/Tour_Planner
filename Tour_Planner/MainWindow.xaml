@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tour_Planner.View"
         mc:Ignorable="d"
-        Height="600" 
-        Width="990"  
+        Height="650" 
+        Width="1180"  
         Background="Transparent"
         AllowsTransparency="True"
         WindowStyle="None">
@@ -15,11 +15,11 @@
         <!--Background="#3d1223"-->
         <Border Background="White"
             CornerRadius="20">
-            <Grid Margin="-10,10,10,-10">
+            <Grid Margin="10,10,10,20">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="205"/>
+                    <ColumnDefinition Width="180"/>
                     <ColumnDefinition Width="2"/>
-                    <ColumnDefinition Width="210"/>
+                    <ColumnDefinition Width="350"/>
                     <ColumnDefinition Width="2"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>

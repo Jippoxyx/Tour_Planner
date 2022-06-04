@@ -27,7 +27,7 @@ namespace Tour_Planner.ViewModels
         MenuViewModel menu;
 
         TourInfoView tourInfoView = new TourInfoView();
-        TourInfoViewModel tourInfoViewModel = new TourInfoViewModel();    
+        TourInfoViewModel tourInfoViewModel = new TourInfoViewModel();
 
         ImportTourView importView = new ImportTourView();
         ImportTourViewModel importTourVM = new ImportTourViewModel();
@@ -37,7 +37,7 @@ namespace Tour_Planner.ViewModels
 
         OpenMapAPI openMapAPI = new OpenMapAPI();
         ILoggerWrapper loggerWrapper = LoggerFactory.GetLogger();
-        Reporting report = new Reporting();   
+        Reporting report = new Reporting();
         Import_Export imp_exp = new Import_Export();
 
         public MainViewModel(MenuViewModel menu,
@@ -51,15 +51,15 @@ namespace Tour_Planner.ViewModels
             this.searchVM = search;
             this.menu = menu;
 
-            SetUpTourView();           
-            SetUpLogs();           
-            SetUpSearch();           
+            SetUpTourView();
+            SetUpLogs();
+            SetUpSearch();
             SetUpMenu();
 
             tourInfoView.DataContext = tourInfoViewModel;
             importView.DataContext = importTourVM;
         }
-        
+
         private void SetUpTourView()
         {
             Add_AddTourEvent();
@@ -87,7 +87,8 @@ namespace Tour_Planner.ViewModels
         private void SetUpSearch()
         {
             Add_SearchTours();
-        }
+            Add_ReloadSearchBtn();
+        }      
 
         private void SetUpMenu()
         {
@@ -99,6 +100,16 @@ namespace Tour_Planner.ViewModels
             Add_GetImportInfo();
             Add_ImportTour();
             Add_OpenWindowHelp();
+        }
+
+        private void Add_ReloadSearchBtn()
+        {
+            searchVM.refreshBtn += (_, e) =>
+            {
+                tour.TourData.Clear();
+                loadData();
+                this.searchVM.DisplayResult($"");
+            };
         }
 
         private void Add_ImportTour()
@@ -153,7 +164,7 @@ namespace Tour_Planner.ViewModels
             {
                 importView.Show();
             };
-        }        
+        }
         private void Add_OpenWindowHelp()
         {
             menu.helpEvent += (_, e) =>
@@ -199,7 +210,7 @@ namespace Tour_Planner.ViewModels
                 else
                 {
                     MessageBox.Show("Please select a Tour");
-                }               
+                }
             };
         }
 
@@ -232,16 +243,16 @@ namespace Tour_Planner.ViewModels
                 tour.TourData.Clear();
                 loadData();
                 tourDetailsViewModel.TourLogData.Clear();
-                loadLogData();        
+                loadLogData();
             };
         }
-       
+
 
         private void ComputedTourAttributes()
         {
             tourDetailsViewModel.calculateComputedTourAttributes += (_, e) =>
             {
-                if(tour.SelectedItem != null)
+                if (tour.SelectedItem != null)
                 {
                     if (tour.SelectedItem.Logs.Count > 0)
                     {
@@ -251,10 +262,10 @@ namespace Tour_Planner.ViewModels
                         {
                             counter += log.Difficulty;
                             counter += log.TotalTime;
-                            if(log.TotalTime > 0 || log.TotalTime > 0 )
+                            if (log.TotalTime > 0 || log.TotalTime > 0)
                             {
                                 numCounter += 2;
-                            }                           
+                            }
                         }
                         float temp = 0;
                         if (tour.SelectedItem.TourDistance.Contains(".") || tour.SelectedItem.TourDistance.Contains(","))
@@ -279,12 +290,12 @@ namespace Tour_Planner.ViewModels
         private void Add_LoadTourDataForSelectedItem()
         {
             tour.loadlTourDataForSelectedItem += (_, s) =>
-            {              
-                if(s != null)
+            {
+                if (s != null)
                 {
                     tourDetailsViewModel.TourLogData.Clear();
-                    loadLogData();
-                }               
+                    loadLogData();          
+                }
             };
         }
 
@@ -309,7 +320,7 @@ namespace Tour_Planner.ViewModels
         }
 
         private void Add_RequestTourFromServer()
-        { 
+        {
             tourInfoViewModel.confirmTourInfo += async (_, t) =>
             {
                 Tour tour = new Tour();
@@ -343,19 +354,19 @@ namespace Tour_Planner.ViewModels
 
                         tour = await openMapAPI.GetTour(tourInfoViewModel.TourTitle,
                             tourInfoViewModel.From, tourInfoViewModel.To, tourInfoViewModel.TransportType);
-                        if(tour != null)
+                        if (tour != null)
                         {
                             tourService.AddTour(tour);
                             this.tour.TourData.Add(tour);
                             loggerWrapper.Debug("User requested Tour from Server");
-                        }                      
+                        }
                     }
                 }
                 catch (OpenMapAPI_Exception)
                 {
                     MessageBox.Show("Sorry, requested Tour cant be found");
                     loggerWrapper.Warn("The requested Tour coudnt be found");
-                }                
+                }
             };
         }
 
@@ -378,7 +389,7 @@ namespace Tour_Planner.ViewModels
             }
         }
 
-      
+
 
         void Add_SearchTours()
         {
@@ -388,17 +399,19 @@ namespace Tour_Planner.ViewModels
                 List<Tour> tourSearch = new List<Tour>();
                 List<Tour> resultTour = new List<Tour>();
                 tourSearch = tourService.GetData();
-                searchVM.cmbTour.Clear();
                 if (searchTours != null)
                 {
+                    searchVM.cmbTour.Clear();
                     foreach (Tour t in tourSearch)
                     {
-                        if (t.Title.Contains(searchTours, StringComparison.OrdinalIgnoreCase) || t.From.Contains(searchTours, StringComparison.OrdinalIgnoreCase) 
+
+                        if (t.Title.Contains(searchTours, StringComparison.OrdinalIgnoreCase) || t.From.Contains(searchTours, StringComparison.OrdinalIgnoreCase)
                         || t.To.Contains(searchTours, StringComparison.OrdinalIgnoreCase) || t.Desciption.Contains(searchTours, StringComparison.OrdinalIgnoreCase))
                         {
-                            resultTour.Add(t);
-                            //_searchVM.cmbTour.Items.Add(t.Title);
                             searchVM.cmbTour.Add(t);
+                            //resultTour.Add(t);
+                            //_searchVM.cmbTour.Items.Add(t.Title);
+                            // searchVM.cmbTour.Add(t);
 
                         }
                         else
@@ -409,24 +422,30 @@ namespace Tour_Planner.ViewModels
                                 {
                                     break;
                                 }
-                                if ((log.Comment != null && log.Comment.Contains(searchTours, StringComparison.OrdinalIgnoreCase)) 
+                                if ((log.Comment != null && log.Comment.Contains(searchTours, StringComparison.OrdinalIgnoreCase))
                                 || (log.Date != null && log.Date.Contains(searchTours, StringComparison.OrdinalIgnoreCase)))
                                 {
-                                    resultTour.Add(t);
+                                    searchVM.cmbTour.Add(t);                                    //resultTour.Add(t);
                                     //_searchVM.cmbTour.Items.Add(t.Title);
                                     //_searchVM.cmbTour.Clear();
-                                    searchVM.cmbTour.Add(t);
+                                    //searchVM.cmbTour.Add(t);
 
                                 }
                             }
                         }
                     }
-                    result = resultTour.Count;
+                    
                     //_tour.SelectedItem = _searchVM.cmbSelTour;
                     //_tourDetailsViewModel.Tour = _searchVM.cmbSelTour;
+                    tour.TourData.Clear();
+                    foreach(Tour t in searchVM.cmbTour)
+                    {
+                        tour.TourData.Add(t);
+                    }                   
                 }
                 else
-                { result = 0;}
+                { result = 0; }
+                result = tour.TourData.Count;
 
                 this.searchVM.DisplayResult($"Found {result} Tour(s)");
             };
@@ -437,13 +456,13 @@ namespace Tour_Planner.ViewModels
             tour.displayTourDetails += (_, t) =>
             {
                 tourDetailsViewModel.Tour = tour.SelectedItem;
-                
+
                 if (tour.SelectedItem != null)
                 {
                     tourDetailsViewModel.TourLogData
                 = new ObservableCollection<TourLog>(tour.SelectedItem.Logs);
                     tourDetailsViewModel.DisplayImage = tour.SelectedItem.RouteImagePath;
-                }                
+                }
             };
         }
 

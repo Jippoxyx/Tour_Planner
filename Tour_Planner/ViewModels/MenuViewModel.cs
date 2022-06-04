@@ -17,6 +17,7 @@ namespace Tour_Planner.ViewModels
         public ICommand ExportTourCommand { get; set; }
         public ICommand ImportTourCommand { get; set; }
         public ICommand HelpCommand { get; set; }
+        
 
         public event EventHandler deleteAllToursEvent;
         public event EventHandler createPDFEvent;
@@ -24,6 +25,7 @@ namespace Tour_Planner.ViewModels
         public event EventHandler exportTourEvent;
         public event EventHandler importTourEvent;
         public event EventHandler helpEvent;
+        
 
 
         private Tour _tour;
@@ -68,6 +70,8 @@ namespace Tour_Planner.ViewModels
             {
                 this.helpEvent?.Invoke(null, EventArgs.Empty);
             });
+
+           ;
         }
     }
 }
