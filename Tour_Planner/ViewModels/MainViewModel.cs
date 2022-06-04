@@ -32,6 +32,9 @@ namespace Tour_Planner.ViewModels
         ImportTourView importView = new ImportTourView();
         ImportTourViewModel importTourVM = new ImportTourViewModel();
 
+        HelpView helpView = new HelpView();
+        HelpViewModel helpViewModel = new HelpViewModel();
+
         OpenMapAPI openMapAPI = new OpenMapAPI();
         ILoggerWrapper loggerWrapper = LoggerFactory.GetLogger();
         Reporting report = new Reporting();   
@@ -153,9 +156,9 @@ namespace Tour_Planner.ViewModels
         }        
         private void Add_OpenWindowHelp()
         {
-            _menu.helpEvent += (_, e) =>
+            menu.helpEvent += (_, e) =>
             {
-                _helpView.Show();
+                helpView.Show();
             };
         }
 
@@ -306,7 +309,7 @@ namespace Tour_Planner.ViewModels
         }
 
         private void Add_RequestTourFromServer()
-        
+        { 
             tourInfoViewModel.confirmTourInfo += async (_, t) =>
             {
                 Tour tour = new Tour();
@@ -384,8 +387,8 @@ namespace Tour_Planner.ViewModels
                 int result;
                 List<Tour> tourSearch = new List<Tour>();
                 List<Tour> resultTour = new List<Tour>();
-                tourSearch = _tourService.GetData();
-                _searchVM.cmbTour.Clear();
+                tourSearch = tourService.GetData();
+                searchVM.cmbTour.Clear();
                 if (searchTours != null)
                 {
                     foreach (Tour t in tourSearch)
@@ -395,7 +398,7 @@ namespace Tour_Planner.ViewModels
                         {
                             resultTour.Add(t);
                             //_searchVM.cmbTour.Items.Add(t.Title);
-                            _searchVM.cmbTour.Add(t);
+                            searchVM.cmbTour.Add(t);
 
                         }
                         else
@@ -412,7 +415,7 @@ namespace Tour_Planner.ViewModels
                                     resultTour.Add(t);
                                     //_searchVM.cmbTour.Items.Add(t.Title);
                                     //_searchVM.cmbTour.Clear();
-                                    _searchVM.cmbTour.Add(t);
+                                    searchVM.cmbTour.Add(t);
 
                                 }
                             }
@@ -425,7 +428,7 @@ namespace Tour_Planner.ViewModels
                 else
                 { result = 0;}
 
-                this._searchVM.DisplayResult($"Found {result} Tour(s)");
+                this.searchVM.DisplayResult($"Found {result} Tour(s)");
             };
         }
 
