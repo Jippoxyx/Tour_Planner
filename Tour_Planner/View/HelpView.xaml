@@ -41,10 +41,6 @@
                     Width="200">
                     <Label Content="Logs" FontSize="20" FontWeight="Medium">
                     </Label>
-                    <TextBlock> touri
-                    <Hyperlink Name="Touri"></Hyperlink>
-                        
-                    </TextBlock>
                     <Label Content="Create Log"></Label>
                     <Label Content="Modify Log"></Label>
                     <Label Content="Delete Log"></Label>
@@ -80,8 +76,7 @@
                     <TextBlock Margin="5,0,0,0">Click on the "+" button, a new Tour will appear, fill in the tourdata by your own.<LineBreak/>
                         After that click on the Update-Button.</TextBlock>
                     </BulletDecorator>
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    <Image Source="/Images/Screenshots/ToursCreate.png" Width="100" />
                     <LineBreak/>
                     <LineBreak/>
                     <BulletDecorator>
@@ -91,64 +86,68 @@
                     <TextBlock Margin="5,0,0,0">Click on the "create Tour" button. A new window will appear.<LineBreak/>
                         Fill in a titel, startposition and a destination, through confirming a new Tour will be created.</TextBlock>
                     </BulletDecorator>
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    <Image Source="/Images/Screenshots/TourDetails.PNG" Width="150"/>
+
                 </TextBlock>
                 </StackPanel>
                 <StackPanel>
+
                     <Label FontSize="20" Content="How to modify a Tour?"></Label>
                     <TextBlock Margin="10,0,0,0">Just Click on your tour and in the right half of the window. After that click on "Description",<LineBreak/>
-                        there you can modify the tourdata. Modify your data and click on "Update" Button</TextBlock>
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                        there you can modify the tourdata. Modify your data and click on "Update" Button
+                    <Image Source="/Images/Screenshots/ToursModify.PNG" Margin="50,0,0,0" Width="200"/>
+                    </TextBlock>
                 </StackPanel>
                 <StackPanel>
                     <Label FontSize="20" Content="How to delete a Tour?"></Label>
-                    <TextBlock Margin="10,0,0,0">Select a Tour and click on the "Delete" button in the tour section
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    <TextBlock Margin="10,0,0,0">Select a Tour and click on the "Delete" button in the tour section.
+                    <Image Source="/Images/Screenshots/ToursDelete.png" Width="100"/>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel>
                     <Label FontSize="20" Content="How to create a Log?"></Label>
                     <TextBlock Margin="10,0,0,0">Select a Tour, click in the tour-section on the "+"-button this will add a new Log,<LineBreak/> 
                         fill in the data in the empty blocks above. After that click on the update button to save it.
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    <Image Source="/Images/Screenshots/LogInfoAdd.png"  Width="300"/>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel>
                     <Label FontSize="20" Content="How to modify a Log?"></Label>
                     <TextBlock Margin="10,0,0,0"> If a Tour is already selected you can modify the Tourlogdata by selecting a tour.<LineBreak/>
                         After changing the data click on the Update-Button.
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                        <Image Source="/Images/Screenshots/LogInfoEdit.png" Margin="150,0,0,0"  Width="300"/>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel>
                     <Label FontSize="20" Content="How to delete a Log?"></Label>
                     <TextBlock Margin="10,0,0,0">Select a Tour, then a log by clicking on the "-"-Button you can delete a Tour.</TextBlock>
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    <Image Source="/Images/Screenshots/LogInfoDelete.png"  Width="300"/>
+
                 </StackPanel>
                 <StackPanel>
-                    <Label Name="Toursi" FontSize="20" Content="How to Update a Tour/Log?"></Label>
+                    <Label FontSize="20" Content="How to Update a Tour/Log?"></Label>
                     <TextBlock Margin="10,0,0,0">If any data was change manually, please click on the "Update"-button.</TextBlock>
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    <Image Source="pack://application:,,,/Images/Update.png" Width="50" />
+
                 </StackPanel>
                 <StackPanel>
                     <Label FontSize="20" Content="How to create a Report?"></Label>
                     <TextBlock Margin="10,0,0,0"> Before clicking on the "Create Report"- Button, you find it in the left half of the window, you have to select a tour.<LineBreak/>
                         This will create a detailed Report about your selected Tour.
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                        <Image Source="/Images/Screenshots/MenuCreatePDF.png" Width="150"/>
                     </TextBlock>
                 </StackPanel>               
                 <StackPanel>
                     <Label FontSize="20" Content="How to create a Summary?"></Label>
                     <TextBlock Margin="10,0,0,0"> By clicking on the "Summary"-Button, a PDF is created with a a short overview of the tours.
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                        <Image Source="/Images/Screenshots/MenuCreateSummary.png" Width="150"/>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel>
                     <Label FontSize="20" Content="How to Import/Export a Tour?"></Label>
                     <TextBlock Margin="10,0,0,0"> By clicking on Import/Export- Button you have to choose a file which you want to import.<LineBreak/>
                         For exporting, please select a tour and then click on "export"
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                        <Image Source="/Images/Screenshots/MenuImportExport.png" Width="150"/>
                     </TextBlock>
                 </StackPanel>
                 <StackPanel>
@@ -156,12 +155,13 @@
                     <TextBlock Margin="10,0,0,0">
                         By clicking on "Delete all" every tour will be deleted.
                     </TextBlock>
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    <Image Source="/Images/Screenshots/MenuDeleteAll.png" Width="150"/>
                 </StackPanel>
                 <StackPanel>
                     <Label FontSize="20" Content="How to use the Searchfunction?"></Label>
-                    <TextBlock Margin="10,0,0,0">Search for anything, Startposition, destionation, comment, description or tourtitel,<LineBreak/> the results willappear in a dropdown menu.
-                    <Image Source="/Images/car.png" Width="50" Margin="50,0,0,0" />
+                    <TextBlock Margin="10,0,0,0">Search for anything, Startposition, destionation, comment, description or tourtitel,<LineBreak/> 
+                        the results willappear in a dropdown menu.
+                     <Image Source="/Images/Screenshots/Search.png" Width="150"/>
                     </TextBlock>
                 </StackPanel>
             </StackPanel>
