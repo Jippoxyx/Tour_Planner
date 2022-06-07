@@ -25,12 +25,20 @@
             HorizontalAlignment="Center">
                 <Label FontSize="25" Content="Help"></Label>
             </StackPanel>
+            <Grid Margin="5,5,5,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-            <StackPanel
-            Orientation="Horizontal">
                 <StackPanel
-                Orientation="vertical"
-                    Width="200">
+                    Grid.Column="0"
+                    Orientation="Vertical">
                     <Label Content="Tours" FontSize="20" FontWeight="Medium"></Label>
                     <Label Content="Create Tour"></Label>
                     <Label Content="Modify Tour"></Label>
@@ -38,131 +46,240 @@
                 </StackPanel>
 
                 <StackPanel
-                    Width="200">
-                    <Label Content="Logs" FontSize="20" FontWeight="Medium">
-                    </Label>
-                    <Label Content="Create Log"></Label>
-                    <Label Content="Modify Log"></Label>
-                    <Label Content="Delete Log"></Label>
-                    <Label Content="Update Tour/Log"></Label>
+                    Grid.Column="1"
+                    Orientation="Vertical">
+                    <Label Grid.Column="1" Content="Logs" FontSize="20" FontWeight="Medium"></Label>
+                    <Label Grid.Column="1" Content="Create Log"></Label>
+                    <Label Grid.Column="1" Content="Modify Log"></Label>
+                    <Label Grid.Column="1" Content="Delete Log"></Label>
+                    <Label Grid.Column="1" Content="Update Tour/Log"></Label>
                 </StackPanel>
 
                 <StackPanel 
-                Orientation="Vertical"
-                    Width="200">
+                    Grid.Column="2"
+                    Orientation="Vertical">
                     <Label Content="Menu-Buttons" FontSize="20" FontWeight="Medium"></Label>
                     <Label Content="Create Report"></Label>
                     <Label Content="Create Summary"></Label>
                     <Label Content="Import/Export Tour"></Label>
                     <Label Content="Delete All Tours"></Label>
                 </StackPanel>
+
                 <StackPanel
-                    Width="200">
+                    Grid.Column="3">
                     <Label Content="Search" FontSize="20" FontWeight="Medium"></Label>
                     <Label Content="Searchfunction"></Label>
                 </StackPanel>
-            </StackPanel>
+            </Grid>
 
             <StackPanel Margin="10">
-                <StackPanel>
-                    <Label FontSize="20" Content="How to create a Tour?"></Label>
-                    <TextBlock Margin="10,0,0,0">There are two ways to create a tour:
-                    <LineBreak/>
-                    <LineBreak/>
-                    <BulletDecorator>
-                        <BulletDecorator.Bullet>
-                           <Ellipse Height="7" Width="7" Fill="Black"></Ellipse>
-                        </BulletDecorator.Bullet>
-                    <TextBlock Margin="5,0,0,0">Click on the "+" button, a new Tour will appear, fill in the tourdata by your own.<LineBreak/>
-                        After that click on the Update-Button.</TextBlock>
-                    </BulletDecorator>
-                    <Image Source="/Images/Screenshots/ToursCreate.png" Width="100" />
-                    <LineBreak/>
-                    <LineBreak/>
-                    <BulletDecorator>
-                        <BulletDecorator.Bullet>
-                           <Ellipse Height="7" Width="7" Fill="Black"></Ellipse>
-                        </BulletDecorator.Bullet>
-                    <TextBlock Margin="5,0,0,0">Click on the "create Tour" button. A new window will appear.<LineBreak/>
-                        Fill in a titel, startposition and a destination, through confirming a new Tour will be created.</TextBlock>
-                    </BulletDecorator>
-                    <Image Source="/Images/Screenshots/TourDetails.PNG" Width="150"/>
+                <StackPanel  Margin="0,10,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                </TextBlock>
+                        <StackPanel>
+                            <Label Grid.Column="0" FontSize="20" Content="How to create a Tour?"></Label>
+                            <TextBlock Margin="10,0,0,0">There are two ways to create a tour:
+                            <LineBreak/>
+                            <LineBreak/>
+                        <BulletDecorator>
+                            <BulletDecorator.Bullet>
+                                <Ellipse Height="7" Width="7" Fill="Black"></Ellipse>
+                            </BulletDecorator.Bullet>
+                            <TextBlock Margin="5,0,0,0">Click on the "+" button, a new Tour will appear, fill in the tourdata by your own.<LineBreak/>
+                                After that click on the Update-Button.</TextBlock>
+                        </BulletDecorator>
+                        <LineBreak/>
+                        <LineBreak/>
+                        <BulletDecorator>
+                            <BulletDecorator.Bullet>
+                               <Ellipse Height="7" Width="7" Fill="Black"></Ellipse>
+                            </BulletDecorator.Bullet>
+                        <TextBlock Margin="5,0,0,0">Click on the "create Tour" button. A new window will appear.<LineBreak/>
+                            Fill in a titel, startposition and a destination, through confirming a new Tour<LineBreak/>
+                            will be created.</TextBlock>
+                        </BulletDecorator>
+                            </TextBlock>
+                        </StackPanel>
+                        <WrapPanel Grid.Column="1">
+                            <Image  Source="/Images/Screenshots/ToursCreate.PNG" Width="100" />
+                            <Image Grid.Column="1" Source="/Images/Screenshots/TourDetails.PNG" Width="150"/>
+                        </WrapPanel>
+                    </Grid>
                 </StackPanel>
-                <StackPanel>
+                <StackPanel  Margin="0,10,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <StackPanel Grid.Column="0">
+                            <Label FontSize="20" Content="How to modify a Tour?"></Label>
+                            <TextBlock Margin="10,0,0,0">Just Click on your tour and in the right half of the window. After that click on "Description",<LineBreak/>
+                                there you can modify the tourdata. Modify your data and click on "Update" Button
+                            </TextBlock>
+                        </StackPanel>
+                        <Image Grid.Column="1" Source="/Images/Screenshots/ToursModify.PNG" Margin="50,0,0,0" Width="200"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Margin="0,10,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Label FontSize="20" Content="How to modify a Tour?"></Label>
-                    <TextBlock Margin="10,0,0,0">Just Click on your tour and in the right half of the window. After that click on "Description",<LineBreak/>
-                        there you can modify the tourdata. Modify your data and click on "Update" Button
-                    <Image Source="/Images/Screenshots/ToursModify.PNG" Margin="50,0,0,0" Width="200"/>
-                    </TextBlock>
+                        <StackPanel Grid.Column="0">
+                            <Label FontSize="20" Content="How to delete a Tour?"></Label>
+                            <TextBlock Margin="10,0,0,0">Select a Tour and click on the "Delete" button in the tour section.
+                            </TextBlock>
+                        </StackPanel>
+                        <Image Grid.Column="1" Source="/Images/Screenshots/ToursDelete.png" Width="100"/>
+                    </Grid>
                 </StackPanel>
-                <StackPanel>
-                    <Label FontSize="20" Content="How to delete a Tour?"></Label>
-                    <TextBlock Margin="10,0,0,0">Select a Tour and click on the "Delete" button in the tour section.
-                    <Image Source="/Images/Screenshots/ToursDelete.png" Width="100"/>
-                    </TextBlock>
-                </StackPanel>
-                <StackPanel>
-                    <Label FontSize="20" Content="How to create a Log?"></Label>
-                    <TextBlock Margin="10,0,0,0">Select a Tour, click in the tour-section on the "+"-button this will add a new Log,<LineBreak/> 
-                        fill in the data in the empty blocks above. After that click on the update button to save it.
-                    <Image Source="/Images/Screenshots/LogInfoAdd.png"  Width="300"/>
-                    </TextBlock>
-                </StackPanel>
-                <StackPanel>
-                    <Label FontSize="20" Content="How to modify a Log?"></Label>
-                    <TextBlock Margin="10,0,0,0"> If a Tour is already selected you can modify the Tourlogdata by selecting a tour.<LineBreak/>
-                        After changing the data click on the Update-Button.
-                        <Image Source="/Images/Screenshots/LogInfoEdit.png" Margin="150,0,0,0"  Width="300"/>
-                    </TextBlock>
-                </StackPanel>
-                <StackPanel>
-                    <Label FontSize="20" Content="How to delete a Log?"></Label>
-                    <TextBlock Margin="10,0,0,0">Select a Tour, then a log by clicking on the "-"-Button you can delete a Tour.</TextBlock>
-                    <Image Source="/Images/Screenshots/LogInfoDelete.png"  Width="300"/>
+                <StackPanel Margin="0,10,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
+                        <StackPanel Grid.Column="0">
+                            <Label FontSize="20" Content="How to create a Log?"></Label>
+                            <TextBlock Margin="10,0,0,0">Select a Tour, click in the tour-section on the "+"-button this will add a new Log,<LineBreak/> 
+                                fill in the data in the empty blocks above. After that click on "update" to save it.
+                            </TextBlock>
+                        </StackPanel>
+                    <Image Grid.Column="1" Source="/Images/Screenshots/LogInfoAdd.png" Width="300"/>
+                    </Grid>
                 </StackPanel>
-                <StackPanel>
-                    <Label FontSize="20" Content="How to Update a Tour/Log?"></Label>
-                    <TextBlock Margin="10,0,0,0">If any data was change manually, please click on the "Update"-button.</TextBlock>
-                    <Image Source="pack://application:,,,/Images/Update.png" Width="50" />
+                <StackPanel Margin="0,10,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
+                        <StackPanel Grid.Column="0">
+                            <Label FontSize="20" Content="How to modify a Log?"></Label>
+                            <TextBlock Margin="10,0,0,0"> If a Tour is already selected you can modify the Tourlogdata by selecting a tour.<LineBreak/>
+                                After changing the data click on the Update-Button.
+                            </TextBlock>
+                        </StackPanel>
+                    <Image Grid.Column="1"  Source="/Images/Screenshots/LogInfoEdit.png" Width="300"/>
+                    </Grid>
                 </StackPanel>
-                <StackPanel>
-                    <Label FontSize="20" Content="How to create a Report?"></Label>
-                    <TextBlock Margin="10,0,0,0"> Before clicking on the "Create Report"- Button, you find it in the left half of the window, you have to select a tour.<LineBreak/>
-                        This will create a detailed Report about your selected Tour.
-                        <Image Source="/Images/Screenshots/MenuCreatePDF.png" Width="150"/>
-                    </TextBlock>
+                <StackPanel Margin="0,10,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <Label FontSize="20" Content="How to delete a Log?"></Label>
+                            <TextBlock Margin="10,0,0,0">Select a Tour, then a log by clicking on the "-"-Button you can delete a Tour.</TextBlock>
+                        </StackPanel>
+                        <Image Grid.Column="1" Source="/Images/Screenshots/LogInfoDelete.png" Width="300"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Margin="0,10,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <Label FontSize="20" Content="How to Update a Tour/Log?"></Label>
+                            <TextBlock Margin="10,0,0,0">If any data was change manually, please click on the "Update"-button.</TextBlock>
+                        </StackPanel>
+                        <Image Grid.Column="1" Source="/Images/Screenshots/Update.png" Width="50" />
+                    </Grid>
+                </StackPanel>
+                <StackPanel Margin="0,10,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <Label FontSize="20" Content="How to create a Report?"></Label>
+                            <TextBlock Margin="10,0,0,0"> Before clicking on the "Create Report"- Button, you find it in the left half of<LineBreak/> 
+                                the window, you have to select a tour. This will create a detailed Report<LineBreak/>
+                                about your selected Tour.
+                            </TextBlock>
+                        </StackPanel>
+                        <Image Grid.Column="1" Source="/Images/Screenshots/MenuCreatePDF.png" Width="150"/>
+                    </Grid>
                 </StackPanel>               
-                <StackPanel>
-                    <Label FontSize="20" Content="How to create a Summary?"></Label>
-                    <TextBlock Margin="10,0,0,0"> By clicking on the "Summary"-Button, a PDF is created with a a short overview of the tours.
-                        <Image Source="/Images/Screenshots/MenuCreateSummary.png" Width="150"/>
-                    </TextBlock>
+                <StackPanel Margin="0,10,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <Label FontSize="20" Content="How to create a Summary?"></Label>
+                            <TextBlock Margin="10,0,0,0"> By clicking on the "Summary"-Button, a PDF is created with a a short overview of the tours.
+                            </TextBlock>
+                        </StackPanel>
+                        <Image Grid.Column="1" Source="/Images/Screenshots/MenuCreateSummary.png" Width="150"/>
+                    </Grid>
                 </StackPanel>
-                <StackPanel>
-                    <Label FontSize="20" Content="How to Import/Export a Tour?"></Label>
-                    <TextBlock Margin="10,0,0,0"> By clicking on Import/Export- Button you have to choose a file which you want to import.<LineBreak/>
-                        For exporting, please select a tour and then click on "export"
-                        <Image Source="/Images/Screenshots/MenuImportExport.png" Width="150"/>
-                    </TextBlock>
+                <StackPanel Margin="0,10,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <Label FontSize="20" Content="How to Import/Export a Tour?"></Label>
+                            <TextBlock Margin="10,0,0,0"> By clicking on Import/Export- Button you have to choose a file which you want to import.<LineBreak/>
+                                For exporting, please select a tour and then click on "export"
+                            </TextBlock>
+                        </StackPanel>
+                        <Image Grid.Column="1" Source="/Images/Screenshots/MenuImportExport.png" Width="150"/>
+                    </Grid>
                 </StackPanel>
-                <StackPanel>
-                    <Label FontSize="20" Content="How to delete all Tours?"></Label>
-                    <TextBlock Margin="10,0,0,0">
-                        By clicking on "Delete all" every tour will be deleted.
-                    </TextBlock>
-                    <Image Source="/Images/Screenshots/MenuDeleteAll.png" Width="150"/>
+                <StackPanel Margin="0,10,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <Label FontSize="20" Content="How to delete all Tours?"></Label>
+                            <TextBlock Margin="10,0,0,0">
+                                By clicking on "Delete all" every tour will be deleted.
+                            </TextBlock>
+                        </StackPanel>
+                        <Image Grid.Column="1" Source="/Images/Screenshots/MenuDeleteAll.png" Width="150"/>
+                    </Grid>
                 </StackPanel>
-                <StackPanel>
-                    <Label FontSize="20" Content="How to use the Searchfunction?"></Label>
-                    <TextBlock Margin="10,0,0,0">Search for anything, Startposition, destionation, comment, description or tourtitel,<LineBreak/> 
-                        the results willappear in a dropdown menu.
-                     <Image Source="/Images/Screenshots/Search.png" Width="150"/>
-                    </TextBlock>
+                <StackPanel Margin="0,10,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <Label FontSize="20" Content="How to use the Searchfunction?"></Label>
+                            <TextBlock Margin="10,0,0,0">Search for anything, startposition, destionation, comment, description or tourtitel,<LineBreak/> 
+                        the results willappear in in the tourlist. If you want to get the whole list, click reload.
+                            </TextBlock>
+                        </StackPanel>
+                        <Image Grid.Column="1" Source="/Images/Screenshots/Search.png" Width="250"/>
+                    </Grid>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

@@ -19,6 +19,19 @@
     <None Remove="Images\lupe.png" />
     <None Remove="Images\minus_2.png" />
     <None Remove="Images\refresh.png" />
+    <None Remove="Images\Screenshots\LogInfoAdd.png" />
+    <None Remove="Images\Screenshots\LogInfoDelete.png" />
+    <None Remove="Images\Screenshots\LogInfoEdit.png" />
+    <None Remove="Images\Screenshots\MenuCreatePDF.png" />
+    <None Remove="Images\Screenshots\MenuCreateSummary.png" />
+    <None Remove="Images\Screenshots\MenuDeleteAll.png" />
+    <None Remove="Images\Screenshots\MenuImportExport.png" />
+    <None Remove="Images\Screenshots\Search.png" />
+    <None Remove="Images\Screenshots\TourDetails.PNG" />
+    <None Remove="Images\Screenshots\ToursCreate.PNG" />
+    <None Remove="Images\Screenshots\ToursDelete.png" />
+    <None Remove="Images\Screenshots\ToursModify.PNG" />
+    <None Remove="Images\Screenshots\Update.png" />
     <None Remove="Images\suche.png" />
   </ItemGroup>
 
@@ -46,6 +59,19 @@
     <Resource Include="Images\icons8-search-49.png" />
     <Resource Include="Images\minus_2.png" />
     <Resource Include="Images\refresh.png" />
+    <Resource Include="Images\Screenshots\LogInfoAdd.png" />
+    <Resource Include="Images\Screenshots\LogInfoDelete.png" />
+    <Resource Include="Images\Screenshots\LogInfoEdit.png" />
+    <Resource Include="Images\Screenshots\MenuCreatePDF.png" />
+    <Resource Include="Images\Screenshots\MenuCreateSummary.png" />
+    <Resource Include="Images\Screenshots\MenuDeleteAll.png" />
+    <Resource Include="Images\Screenshots\MenuImportExport.png" />
+    <Resource Include="Images\Screenshots\Search.png" />
+    <Resource Include="Images\Screenshots\TourDetails.PNG" />
+    <Resource Include="Images\Screenshots\ToursCreate.PNG" />
+    <Resource Include="Images\Screenshots\ToursDelete.png" />
+    <Resource Include="Images\Screenshots\ToursModify.PNG" />
+    <Resource Include="Images\Screenshots\Update.png" />
   </ItemGroup>
 
 </Project>
