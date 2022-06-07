@@ -174,6 +174,22 @@
     <Position X="14.75" Y="8.5" Width="1.5" />
     <TypeIdentifier />
   </Class>
+  <Class Name="Tour_Planner.BL.Exceptions.OpenMapAPI_Exception" Collapsed="true">
+    <Position X="13.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Tour_Planner.BL.Service.TourService" Collapsed="true">
+    <Position X="15.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Tour_Planner.BL.Tour_Documentation.Reporting" Collapsed="true">
+    <Position X="15.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Tour_Planner.BL.ParseResponse" Collapsed="true">
+    <Position X="17.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
   <Interface Name="Tour_Planner.DAL.ITourManager" Collapsed="true">
     <Position X="7.25" Y="10" Width="1.5" />
     <TypeIdentifier />

@@ -18,6 +18,7 @@
     <None Remove="Images\icons8-search-49.png" />
     <None Remove="Images\lupe.png" />
     <None Remove="Images\minus_2.png" />
+    <None Remove="Images\refresh.png" />
     <None Remove="Images\suche.png" />
   </ItemGroup>
 
@@ -44,6 +45,7 @@
     <Resource Include="Images\icons8-plus-24.png" />
     <Resource Include="Images\icons8-search-49.png" />
     <Resource Include="Images\minus_2.png" />
+    <Resource Include="Images\refresh.png" />
   </ItemGroup>
 
 </Project>
