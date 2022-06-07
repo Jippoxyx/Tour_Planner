@@ -32,7 +32,6 @@ namespace Tour_Planner.ViewModels
         ImportTourView importView = new ImportTourView();
         ImportTourViewModel importTourVM = new ImportTourViewModel();
 
-        HelpView helpView = new HelpView();
         HelpViewModel helpViewModel = new HelpViewModel();
 
         OpenMapAPI openMapAPI = new OpenMapAPI();
@@ -169,6 +168,7 @@ namespace Tour_Planner.ViewModels
         {
             menu.helpEvent += (_, e) =>
             {
+                HelpView helpView = new HelpView();
                 helpView.Show();
             };
         }
@@ -425,7 +425,9 @@ namespace Tour_Planner.ViewModels
                                 if ((log.Comment != null && log.Comment.Contains(searchTours, StringComparison.OrdinalIgnoreCase))
                                 || (log.Date != null && log.Date.Contains(searchTours, StringComparison.OrdinalIgnoreCase)))
                                 {
-                                    searchVM.cmbTour.Add(t);                                    //resultTour.Add(t);
+                                    searchVM.cmbTour.Add(t);
+                                    break;
+                                    //resultTour.Add(t);
                                     //_searchVM.cmbTour.Items.Add(t.Title);
                                     //_searchVM.cmbTour.Clear();
                                     //searchVM.cmbTour.Add(t);
